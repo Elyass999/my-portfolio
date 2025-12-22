@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elyasse Grideche | Web Full Stack Developer Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="icon" type="image/x-icon" href="PortLogo.png">
+
+  <!-- Font Awesom -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- GSAP LINKS  -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
+  <script src="https://unpkg.com/split-type"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+  <!-- Email script  -->
+   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <!-- Model 3D Script -->
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+</head>
+<body>
+
+
+<!-- Preloader -->
+<!-- <div id="preloader">
+  <div class="hello">
+    <span>H</span>
+    <span>e</span>
+    <span>l</span>
+    <span>l</span>
+    <span>o</span>
+  </div>
+  <div class="overlay black"></div>
+  <div class="overlay blue"></div>
+</div> -->
+
+  <!-- Main page NavBar --> 
+<nav class="main-nav">
+    <ul class="main-nav-list">
+        <li><a href="#home" class="main-nav-link" data-text="Home">Home</a></li>
+        <li><a href="#projects" class="main-nav-link" data-text="Projects">Projects</a></li>
+        <li><a href="#about" class="main-nav-link" data-text="About">About</a></li>
+        <li><a href="#contact" class="main-nav-link" data-text="Contact">Contact</a></li>
+        
+    </ul>
+</nav>
+
+
+
+
+  <!--Navigation Menu Button-->
+  <div class="menu-btn" id="menuBtn">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  
+  <!-- Navigation Overlay -->
+  <div class="nav-overlay" id="nav">
+    <div class="nav-content">
+      <section>
+        <a href="#" class="flip-link" data-text="Home"></a>
+        <a href="#" class="flip-link" data-text="Projects"></a>
+        <a href="#" class="flip-link" data-text="About"></a>
+        <a href="#" class="flip-link" data-text="Contact"></a>
+        <!-- <video src="Videos/AnimatedBg.webm" autoplay muted loop playsinline style="z-index: -10000;"></video> -->
+      </section>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+<!-- Hero title section -->
+<section class="hero">
+  <!-- <spline-viewer class="model3D" url="https://prod.spline.design/xZKSYbSOeBb-iHGb/scene.splinecode"></spline-viewer> -->
+    <!-- <h1 class="hero-title">
+      Make
+      <div class="ticker-wrapper1">
+        <div class="ticker1">
+          <span>Your Dream Work</span>
+          <span>Your Dream Work</span>
+          <span>Your Dream Work</span>
+        </div>
+      </div>
+    </h1> -->
+  </section>
+
+
+
+  <!-- Hero 2 -->
+<div class="container">
+  
+  <div class="glass-container">
+    <div class="glass-piece glass-1"></div>
+    <div class="glass-piece glass-2"></div>
+    <div class="glass-piece glass-3"></div>
+    <div class="glass-piece glass-4"></div>
+    <div class="glass-piece glass-5"></div>
+    <div class="glass-piece glass-6"></div>
+    <div class="glass-piece glass-7"></div>
+    <div class="glass-piece glass-8"></div>
+  </div>
+    <h1>
+      Hy I'm 
+      <span class="relative" id="text-container">
+          Elyass  
+          <svg class="svg2" viewBox="0 0 286 73" fill="none">
+              <path id="animated-path" d="M142.293 1C106.854 16.8908 6.08202 7.17705 1.23654 43.3756C-2.10604 68.3466 29.5633 73.2652 122.688 71.7518C215.814 70.2384 316.298 70.689 275.761 38.0785C230.14 1.37835 97.0503 24.4575 52.9384 1" />
+          </svg>
+      </span>
+      <br>A Full-stack Developer <br> UI/UX Designer
+    </h1>
+  </div>
+
+
+
+
+<div class="cursor">
+  <span>View Project</span>
+</div>
+
+<!-- starting Sentence -->
+<section class="section gray corner-reveal">
+<section class="starting-text">
+  <p class="fade-text">
+    I'm Elyasse a Mastred Full-Stack Developer with crafting digital <br>experiences from front-end to back-end &
+    Building complete <br> web solutions, from pixel to database
+    We transforming <br> ideas into full-stack web work
+  </p>
+</section>
+
+<!-- Title 2 -->
+<div class="hero-title fill-animation">
+    <span class="title-stroke">My Works</span>
+    <span class="title-filled">My Works</span>
+</div>
+<!-- Custom Cursor Project Hover -->
+
+
+
+<!-- Project Cards Section -->
+
+<div class="projects-cards">
+  <!-- Line in the middle -->
+  <div class="line-container">
+    <div class="line-background"></div>
+    <div class="line-fill"></div>
+  </div>
+
+  <div class="proj-pic">
+    <img src="Projects Pics/Gri-job-mockup.png" alt="Project 1" />
+    <div class="proj-content">
+      <h3>Gri-Job </h3>
+      <p>A modern job board platform where job seekers can browse and apply to opportunities, while employers can post and manage job listings — built with a responsive design for easy use across all devices. </p>
+      <br>
+      <div class="tech-stack">
+        <span>PHP</span>
+        <span>HTML</span>
+        <span>CSS</span>
+        <span>JS</span>
+        <span>MYSQL</span>
+      </div>
+    </div>
+  </div>
+  <div class="proj-pic">
+    <img src=" Projects Pics/project-oriz-mockup.png" alt="Project 2" />
+    <div class="proj-content">
+      <h3>Gri-Job </h3>
+      <p>A modern job board platform where job seekers can browse and apply to opportunities, while employers can post and manage job listings — built with a responsive design for easy use across all devices. </p>
+      <br>
+      <div class="tech-stack">
+        <span>PHP</span>
+        <span>HTML</span>
+        <span>CSS</span>
+        <span>JS</span>
+        <span>MYSQL</span>
+      </div>
+    </div>
+  </div>
+  <div class="proj-pic">
+    <img src="Projects Pics/Travel-Pro-mockup.png" alt="Project 3" />
+    <div class="proj-content">
+      <h3>Gri-Job </h3>
+      <p>A modern job board platform where job seekers can browse and apply to opportunities, while employers can post and manage job listings — built with a responsive design for easy use across all devices. </p>
+      <br>
+      <div class="tech-stack">
+        <span>PHP</span>
+        <span>HTML</span>
+        <span>CSS</span>
+        <span>JS</span>
+        <span>MYSQL</span>
+      </div>
+    </div>
+  </div>
+  <div class="proj-pic">
+    <img src="Projects Pics/Parfemrie-Mockup.png" alt="Project 3" />
+    <div class="proj-content">
+      <h3>Gri-Job </h3>
+      <p>A modern job board platform where job seekers can browse and apply to opportunities, while employers can post and manage job listings — built with a responsive design for easy use across all devices. </p>
+      <br>
+      <div class="tech-stack">
+        <span>PHP</span>
+        <span>HTML</span>
+        <span>CSS</span>
+        <span>JS</span>
+        <span>MYSQL</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- About Section -->
+
+
+  <section class="about">
+    <div class="hero-title fill-animation">
+        <span class="title-stroke">About Me</span>
+        <span class="title-filled">About Me</span>
+    </div>
+    <div class="about-div">
+        <div class="reveal-text about-text" id="revealText">
+          <span class="line">I am a <span>full-stack developer</span> and <span>UI/UX designer</span></span>
+          <span class="line">with diploma of 2 years in digital development.</span>
+          <span class="line">I craft complete digital experiences from</span>
+          <span class="line">pixel-perfect design to powerful, functional code.</span>
+        </div>
+        <div class="about-pic-wrapper">
+            <img class="about-pic" src="Projects Pics/dexter-portfolio-pic1235.png" alt="CALL ME DEXTER">
+            <div class="cursor-message">Yo Wssup There </div>
+        </div>
+    </div>
+  </section>
+</section>
+
+<!-- Skills Section -->
+<div class="hero-title fill-animation">
+    <span class="title-stroke">My Skills</span>
+    <span class="title-filled">My Skills</span>
+</div>
+  <section class="skills-section">
+    <div class="cards-container">
+        <div class="cards-stack">
+            <div class="skill-card" data-index="0" data-level="95">
+                <span class="card-number">01/06</span>
+                <div class="skill-category">Frontend</div>
+                <h3 class="skill-name">HTML & CSS</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">HTML5</span>
+                    <span class="skill-tag">CSS3</span>
+                    <span class="skill-tag">Sass</span>
+                    <span class="skill-tag">Responsive</span>
+                </div>
+                <div class="expertise-bar">
+                    <div class="expertise-label">
+                        <span>Expertise</span>
+                        <span>95%</span>
+                    </div>
+                    <div class="bar-bg">
+                        <div class="bar-fill" style="width: 95%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skill-card" data-index="1" data-level="90">
+                <span class="card-number">02/06</span>
+                <div class="skill-category">Programming</div>
+                <h3 class="skill-name">JavaScript</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">ES6+</span>
+                    <span class="skill-tag">DOM</span>
+                    <span class="skill-tag">APIs</span>
+                    <span class="skill-tag">Async</span>
+                </div>
+                <div class="expertise-bar">
+                    <div class="expertise-label">
+                        <span>Expertise</span>
+                        <span>90%</span>
+                    </div>
+                    <div class="bar-bg">
+                        <div class="bar-fill" style="width: 90%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skill-card" data-index="2" data-level="85">
+                <span class="card-number">03/06</span>
+                <div class="skill-category">Framework</div>
+                <h3 class="skill-name">React</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Hooks</span>
+                    <span class="skill-tag">Context</span>
+                    <span class="skill-tag">Router</span>
+                    <span class="skill-tag">Redux</span>
+                </div>
+                <div class="expertise-bar">
+                    <div class="expertise-label">
+                        <span>Expertise</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="bar-bg">
+                        <div class="bar-fill" style="width: 85%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skill-card" data-index="3" data-level="88">
+                <span class="card-number">04/06</span>
+                <div class="skill-category">Backend</div>
+                <h3 class="skill-name">PHP & Laravel</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">PHP</span>
+                    <span class="skill-tag">Laravel</span>
+                    <span class="skill-tag">Express</span>
+                    <span class="skill-tag">APIs</span>
+                </div>
+                <div class="expertise-bar">
+                    <div class="expertise-label">
+                        <span>Expertise</span>
+                        <span>88%</span>
+                    </div>
+                    <div class="bar-bg">
+                        <div class="bar-fill" style="width: 88%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skill-card" data-index="4" data-level="92">
+                <span class="card-number">05/06</span>
+                <div class="skill-category">Database</div>
+                <h3 class="skill-name">MySQL</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">SQL</span>
+                    <span class="skill-tag">Queries</span>
+                    <span class="skill-tag">Design</span>
+                    <span class="skill-tag">Optimization</span>
+                </div>
+                <div class="expertise-bar">
+                    <div class="expertise-label">
+                        <span>Expertise</span>
+                        <span>92%</span>
+                    </div>
+                    <div class="bar-bg">
+                        <div class="bar-fill" style="width: 92%"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skill-card" data-index="5" data-level="87">
+                <span class="card-number">06/06</span>
+                <div class="skill-category">Animation</div>
+                <h3 class="skill-name">GSAP</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">ScrollTrigger</span>
+                    <span class="skill-tag">Timeline</span>
+                    <span class="skill-tag">Tweens</span>
+                    <span class="skill-tag">3D</span>
+                </div>
+                <div class="expertise-bar">
+                    <div class="expertise-label">
+                        <span>Expertise</span>
+                        <span>87%</span>
+                    </div>
+                    <div class="bar-bg">
+                        <div class="bar-fill" style="width: 87%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Ticker Section -->
+ <!-- <section class="ticker-section">
+    <div class="ticker" data-duration="20">
+      <div class="ticker-wrap">
+          <div class="ticker-text">Let's collaborate • Drop me a line at <span class="accent">ilyassgridech0@gmail.com</span> • Available for <span class="accent">freelance projects</span> • Ready to create something amazing •</div>
+      </div>
+    </div>
+    
+    <div class="ticker" data-duration="10">
+      <div class="ticker-wrap">
+          <div class="ticker-text">Connect with me <span class="accent">@ElyassGri</span> • Open to new <span class="accent">opportunities</span> • Let's build something <span class="accent">incredible</span> together •</div>
+      </div>
+    </div>   
+  </section> -->
+
+  <!-- Services Section : -->
+    <div class="hero-title fill-animation">
+        <span class="title-stroke">My Services</span>
+        <span class="title-filled">My Services</span>
+    </div>
+    <section class="services-section">
+    <div class="svg-drawing-container">
+        <svg viewBox="0 0 4000 1000" preserveAspectRatio="none" width="100%" height="100%">
+            <path id="drawing-path" d="M0,500 C500,-150 1000,1150 1500,500 C2000,-150 2500,1150 3000,500 C3500,-150 4000,1150 4500,500" />
+        </svg>
+    </div>
+
+    <div class="horizontal-track">
+        <div class="service-card">
+            <span class="card-number">// 01</span>
+            <div class="card-content">
+                <h2>Web Development</h2>
+                <p>Digital environments that react to your presence.</p>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <span class="card-number">// 02</span>
+            <div class="card-content">
+                <h2>Web Designe</h2>
+                <p>Stripping away the noise to reveal core essence.</p>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <span class="card-number">// 03</span>
+            <div class="card-content">
+                <h2>UI/UX Development</h2>
+                <p>Blurred lines between interface and art.</p>
+            </div>
+        </div>
+
+        <div class="service-card">
+            <span class="card-number">// 04</span>
+            <div class="card-content">
+                <h2>Video Editing</h2>
+                <p>Modern standards for high-performance sites.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact me section  -->
+    <div class="hero-title fill-animation">
+        <span class="title-stroke">Let's get in touch</span>
+        <span class="title-filled">Let's get in touch</span>
+    </div>
+    <section class="contact-section">
+    <div class="form-wrapper">
+        <p class="section-subtitle">Drop me a message and I'll get back to you within 24 hours</p>
+
+        <div class="deco-line deco-line-1"></div>
+        <div class="deco-line deco-line-2"></div>
+        <div class="deco-line deco-line-3"></div>
+
+        <form class="contact-form" id="contactForm">
+            <div class="form-group" data-index="0">
+                <label for="name">Your Name</label>
+                <div class="input-wrapper">
+                    <input 
+                        type="text" 
+                        id="name" 
+                        name="name" 
+                        placeholder="your name"
+                        required
+                    >
+                </div>
+            </div>
+
+            <div class="form-group" data-index="1">
+                <label for="email">Email Address</label>
+                <div class="input-wrapper">
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        placeholder="name@example.com"
+                        required
+                    >
+                </div>
+            </div>
+
+            <div class="form-group" data-index="2">
+                <label for="message">Your Message</label>
+                <div class="input-wrapper">
+                    <textarea 
+                        id="message" 
+                        name="message" 
+                        placeholder="Tell me about your project..."
+                        maxlength="500"
+                        required
+                    ></textarea>
+                    <span class="char-count">0 / 500</span>
+                </div>
+            </div>
+
+            <div class="submit-wrapper">
+                <button type="submit" class="submit-btn">
+                    <span>Send Message</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</section>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <!-- spline -->
+   <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.57/build/spline-viewer.js"></script>
+
+</body>
+
+<footer>
+  <div class="footer-container">
+    <h1 id="wavy-text">ELYASSE</h1>
+  </div>
+</footer>
+
+</html>
