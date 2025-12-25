@@ -86,7 +86,6 @@ gsap.to(".corner-reveal", {
 
 //Menu btn :
 const MenuNav = document.querySelector('.menu-btn');
-
 // Hide nav initially
 gsap.set(MenuNav, { 
     x: 0, 
@@ -546,22 +545,81 @@ gsap.to(headingInner1, {
         toggleActions: 'play none none reverse',
     }
 });
-
-  //About Picture scrolling animation
-  const aboutPic = document.querySelectorAll(".about-pic");
-  aboutPic.forEach((card, index) => {
-    gsap.from(card, {
-      x:200,          // enter from right
-      opacity: 0,
-      duration: 1,
-      ease: "power3.out",
+// Animate reveal text lines from bottom (no wavy effect)
+gsap.utils.toArray('.reveal-text .line-inner').forEach((lineInner, index) => {
+  gsap.fromTo(lineInner,
+    {
+      yPercent: 100,
+      opacity: 0
+    },
+    {
+      yPercent: 0,
+      opacity: 1,
+      duration: 0.8,
+      ease: 'power3.out',
+      delay: index * 0.15,
       scrollTrigger: {
-        trigger: card,
-        start: "top 90%",
-        toggleActions: "play none none reverse"
+        trigger: '.reveal-text',
+        start: 'top 75%',
+        toggleActions: 'play none none none'
       }
-    });
-  });
+    }
+  );
+});
+  //About Section-Animation :
+
+gsap.registerPlugin(ScrollTrigger);
+const aboutSection = document.getElementById('aboutSection');
+
+// Set initial state - bigger square
+gsap.set(aboutSection, {
+  width: '150vmin',
+  height: '150vmin',
+  borderRadius: '50px',
+  overflow: 'hidden',
+  background: 'linear-gradient(135deg, #000000, #0a0a0a)',
+  scale: 0.9,
+  opacity: 0.7
+});
+
+// Expansion animation - optimized
+gsap.to(aboutSection, {
+  width: '100%',
+  height: 'auto',
+  minHeight: '100vh',
+  borderRadius: '0px',
+  scale: 1,
+  opacity: 1,
+  background: '#000000',
+  ease: 'power2.inOut',
+  scrollTrigger: {
+    trigger: aboutSection,
+    start: 'top 80%',
+    end: 'top 20%',
+    scrub: 1,
+    invalidateOnRefresh: true
+  }
+});
+
+// Image expansion animation with section
+gsap.set('.about-pic', {
+  scale: 0.6,
+  borderRadius: '30%',
+  opacity: 0.5
+});
+
+gsap.to('.about-pic', {
+  scale: 1,
+  borderRadius: '12px',
+  opacity: 1,
+  ease: 'power2.inOut',
+  scrollTrigger: {
+    trigger: aboutSection,
+    start: 'top 70%',
+    end: 'top 20%',
+    scrub: 1
+  }
+});
 
   // Animated cursore in lieft of pic :
   const wrapper = document.querySelector('.about-pic-wrapper');
@@ -1025,7 +1083,7 @@ form.addEventListener('submit', function(e) {
 
 
 
-  const heroTitles = document.querySelectorAll('.fill-animation');
+const heroTitles = document.querySelectorAll('.fill-animation');
 heroTitles.forEach((heroTitle) => {
     const filledText = heroTitle.querySelector('.title-filled');
 
@@ -1089,5 +1147,71 @@ heroTitles.forEach((heroTitle) => {
     });
 });
 
-// Footer
+//Independent about-title script for a special case 
+
+const aboutTitles = document.querySelectorAll('.about-animation');
+aboutTitles.forEach((aboutTitle) => {
+    const filledText = aboutTitle.querySelector('.about-filled');
+
+    gsap.set(filledText, { 
+        clipPath: 'inset(100% 0 0 0)'
+    });
+
+    const timeline = gsap.timeline({
+        scrollTrigger: {
+            trigger: aboutTitle,
+            start: 'top 75%',
+            end: 'top 25%',
+            scrub: 1,
+        }
+    });
+
+    timeline.to(filledText, {
+        clipPath: 'inset(80% 0 0 0)',
+        duration: 0.15,
+        ease: 'power1.in'
+    })
+    .to(filledText, {
+        clipPath: 'inset(75% 0 0 0)',
+        duration: 0.1,
+        ease: 'sine.inOut'
+    })
+    .to(filledText, {
+        clipPath: 'inset(60% 0 0 0)',
+        duration: 0.15,
+        ease: 'power1.in'
+    })
+    .to(filledText, {
+        clipPath: 'inset(55% 0 0 0)',
+        duration: 0.1,
+        ease: 'sine.inOut'
+    })
+    .to(filledText, {
+        clipPath: 'inset(40% 0 0 0)',
+        duration: 0.15,
+        ease: 'power1.in'
+    })
+    .to(filledText, {
+        clipPath: 'inset(35% 0 0 0)',
+        duration: 0.1,
+        ease: 'sine.inOut'
+    })
+    .to(filledText, {
+        clipPath: 'inset(20% 0 0 0)',
+        duration: 0.15,
+        ease: 'power1.in'
+    })
+    .to(filledText, {
+        clipPath: 'inset(15% 0 0 0)',
+        duration: 0.1,
+        ease: 'sine.inOut'
+    })
+    .to(filledText, {
+        clipPath: 'inset(0% 0 0 0)',
+        duration: 0.1,
+        ease: 'power2.out'
+    });
+});
+
+
 
