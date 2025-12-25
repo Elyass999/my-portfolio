@@ -70,9 +70,23 @@
         <a href="#" class="flip-link" data-text="Projects"></a>
         <a href="#" class="flip-link" data-text="About"></a>
         <a href="#" class="flip-link" data-text="Contact"></a>
-        <!-- <video src="Videos/AnimatedBg.webm" autoplay muted loop playsinline style="z-index: -10000;"></video> -->
       </section>
+      <!-- Glassmorphism background video -->
+
     </div>
+          <video 
+          src="glasse.mp4" 
+          autoplay 
+          muted 
+          loop 
+          playsinline 
+          preload="auto"
+          class="nav-overlay-video"
+          aria-hidden="true"
+          >
+      </video>
+
+
   </div>
 
 
@@ -115,7 +129,7 @@
     <h1>
       Hy I'm 
       <span class="relative" id="text-container">
-          Elyass  
+          Elyasse 
           <svg class="svg2" viewBox="0 0 286 73" fill="none">
               <path id="animated-path" d="M142.293 1C106.854 16.8908 6.08202 7.17705 1.23654 43.3756C-2.10604 68.3466 29.5633 73.2652 122.688 71.7518C215.814 70.2384 316.298 70.689 275.761 38.0785C230.14 1.37835 97.0503 24.4575 52.9384 1" />
           </svg>
@@ -123,8 +137,6 @@
       <br>A Full-stack Developer <br> UI/UX Designer
     </h1>
   </div>
-
-
 
 
 <div class="cursor">
@@ -224,24 +236,32 @@
 <!-- About Section -->
 
 
-  <section class="about">
-    <div class="hero-title fill-animation">
-        <span class="title-stroke">About Me</span>
-        <span class="title-filled">About Me</span>
-    </div>
-    <div class="about-div">
-        <div class="reveal-text about-text" id="revealText">
-          <span class="line">I am a <span>full-stack developer</span> and <span>UI/UX designer</span></span>
-          <span class="line">with diploma of 2 years in digital development.</span>
-          <span class="line">I craft complete digital experiences from</span>
-          <span class="line">pixel-perfect design to powerful, functional code.</span>
-        </div>
-        <div class="about-pic-wrapper">
-            <img class="about-pic" src="Projects Pics/dexter-portfolio-pic1235.png" alt="CALL ME DEXTER">
-            <div class="cursor-message">Yo Wssup There </div>
-        </div>
-    </div>
-  </section>
+<section class="about" id="aboutSection">
+  <div class="about-title about-animation">
+      <span class="about-stroke">About Me</span>
+      <span class="about-filled">About Me</span>
+  </div>
+  <div class="about-div">
+      <div class="about-pic-wrapper">
+          <img class="about-pic" src="Port-Pict1.png" alt="CALL ME DEXTER">
+          <div class="cursor-message">Yo Wssup There</div>
+      </div>
+      <div class="reveal-text about-text" id="revealText">
+        <span class="line">
+          <span class="line-inner">I am a <span>full-stack developer</span> and <span>UI/UX designer</span></span>
+        </span>
+        <span class="line">
+          <span class="line-inner">with diploma of 2 years in digital development.</span>
+        </span>
+        <span class="line">
+          <span class="line-inner">I craft complete digital experiences with love</span>
+        </span>
+        <span class="line">
+          <span class="line-inner">pixel-perfect design to powerful, functional code.</span>
+        </span>
+      </div>
+  </div>
+</section>
 </section>
 
 <!-- Skills Section -->
@@ -420,7 +440,7 @@
         <div class="service-card">
             <span class="card-number">// 02</span>
             <div class="card-content">
-                <h2>Web Designe</h2>
+                <h2>Web Designer</h2>
                 <p>Stripping away the noise to reveal core essence.</p>
             </div>
         </div>
@@ -514,9 +534,42 @@
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <!-- spline -->
    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.57/build/spline-viewer.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+
+
+
+<script>
+  (function () {
+    emailjs.init("Wcriya1I3vWKTIXPv");
+  })();
+
+  const form = document.getElementById("contactForm");
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    emailjs.sendForm(
+      "service_0pkad0r",
+      "template_52r3cwu",
+      this
+    ).then(
+      function () {
+        alert("Message sent successfully!");
+        form.reset();
+      },
+      function (error) {
+        alert("Failed to send message. Please try again.");
+        console.error(error);
+      }
+    );
+  });
+</script>
+
+
+
 
 </body>
-
 <footer>
   <div class="footer-container">
     <h1 id="wavy-text">ELYASSE</h1>
