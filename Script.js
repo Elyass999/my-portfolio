@@ -114,81 +114,6 @@ window.addEventListener('scroll', () => {
     }
 });
 
-
-// GLASSES ANIMATION 
-gsap.registerPlugin(ScrollTrigger);
-
-        // Mouse tracking for 3D parallax effect
-        let mouseX = 0;
-        let mouseY = 0;
-        let targetMouseX = 0;
-        let targetMouseY = 0;
-
-        document.addEventListener('mousemove', (e) => {
-            targetMouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-            targetMouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-        });
-
-        // Smooth mouse tracking
-        gsap.ticker.add(() => {
-            mouseX += (targetMouseX - mouseX) * 0.05;
-            mouseY += (targetMouseY - mouseY) * 0.05;
-        });
-
-        // Floating animation for glass pieces
-        const glassPieces = document.querySelectorAll('.glass-piece');
-
-        glassPieces.forEach((piece, index) => {
-            const depth = (index + 1) * 8;
-            const maxMove = 30;
-
-            // Random floating animation
-            gsap.to(piece, {
-                y: `${Math.random() * 50 - 25}`,
-                x: `${Math.random() * 30 - 15}`,
-                rotation: `+=${Math.random() * 20 - 10}`,
-                duration: 3 + Math.random() * 2,
-                repeat: -1,
-                yoyo: true,
-                ease: "sine.inOut",
-                delay: index * 0.2
-            });
-
-            // 3D parallax effect - react to cursor position only
-            gsap.ticker.add(() => {
-                const xMove = Math.max(-maxMove, Math.min(maxMove, mouseX * depth));
-                const yMove = Math.max(-maxMove, Math.min(maxMove, mouseY * depth));
-                const rotateX = Math.max(-15, Math.min(15, mouseY * 15));
-                const rotateY = Math.max(-15, Math.min(15, mouseX * -15));
-
-                gsap.set(piece, {
-                    x: xMove,
-                    y: yMove,
-                    rotateX: rotateX,
-                    rotateY: rotateY,
-                });
-            });
-
-            // Calculate random direction for EACH piece to spread across screen
-            const xDirection = Math.random() > 0.5 ? 1 : -1;
-            const yDirection = Math.random() > 0.5 ? 1 : -1;
-            const xDistance = xDirection * (window.innerWidth / 2 + 300);
-            const yDistance = yDirection * (window.innerHeight / 2 + 300);
-
-            // Spread out and fade on scroll
-            gsap.to(piece, {
-                x: xDistance,
-                y: yDistance,
-                rotation: `+=${Math.random() * 360 - 180}`,
-                opacity: 0,
-                scrollTrigger: {
-                    trigger: ".container",
-                    start: "top 20%",
-                    end: "top 100%",
-                    scrub: 1,
-                }
-            });
-        });
 // Preloader :
 const tll = gsap.timeline({ defaults: { ease: "power3.out" } });
 // Step 1: Stagger "Hello"
@@ -412,43 +337,68 @@ const navItems = document.querySelectorAll(".nav-content ul li");
         });
       });
     });
+  document.querySelectorAll(".hover-link").forEach(link => {
 
-    //SVG Animation:
-    document.addEventListener('DOMContentLoaded', function() {
-    const path = document.getElementById('animated-path');
-    // Get the total length of the path
-    const pathLength = path.getTotalLength();
-    
-    // Set initial state
-    gsap.set(path, {
-        strokeDasharray: pathLength,
-        strokeDashoffset: pathLength
+    // split text into spans
+    const title = link.querySelector("h2");
+    title.innerHTML = title.textContent
+      .split("")
+      .map(c => `<span class="char">${c}</span>`)
+      .join("");
+
+    // image
+    const img = document.createElement("img");
+    img.src = link.dataset.img;
+    img.className = "hover-img";
+    link.appendChild(img);
+
+    const chars = link.querySelectorAll(".char");
+    const arrow = link.querySelector(".arrow");
+
+    link.addEventListener("mouseenter", () => {
+      gsap.to(img, { scale: 1, rotate: 12, duration: 0.5, ease: "power3.out" });
+      gsap.to(arrow, { x: 0, opacity: 1, duration: 0.4, ease: "power3.out" });
+
+      gsap.to(chars, {
+        x: 16,
+        stagger: 0.03,
+        duration: 0.4,
+        ease: "power3.out"
+      });
     });
-    // Create the animation
-    gsap.to(path, {
-        strokeDashoffset: 0,
-        duration: 3,
-        ease: "none",
-        repeat: -1,
-        yoyo: true,
-        scrollTrigger: {
-            trigger: "#text-container",
-            start: "top 80%",
-            toggleActions: "play none none none"
-        }
+
+    link.addEventListener("mouseleave", () => {
+      gsap.to(img, { scale: 0, rotate: -12, duration: 0.4 });
+      gsap.to(arrow, { x: "25%", opacity: 0, duration: 0.3 });
+
+      gsap.to(chars, {
+        x: 0,
+        stagger: 0.02,
+        duration: 0.3
+      });
     });
-});
+
+    link.addEventListener("mousemove", e => {
+      const rect = link.getBoundingClientRect();
+      gsap.to(img, {
+        left: e.clientX - rect.left,
+        top: e.clientY - rect.top,
+        duration: 0.3,
+        ease: "power3.out"
+      });
+    });
+  });
 
     // Text Starting animation script :
     gsap.registerPlugin(ScrollTrigger);
     document.querySelectorAll(".fade-text").forEach((element) => {
-    const text = new SplitType(element, { types: "chars" });
+    const text = new SplitType(element, { types: "words, chars" });    
     const scrollConfig = {
-        trigger: element,
-        start: "top 80%",
-        end: "top 20%",
-        scrub: true,
-        toggleActions: "play play reverse reverse",
+      trigger: element,
+      start: "top 80%",
+      end: "top 20%",
+      scrub: true,
+      toggleActions: "play play reverse reverse",
     };
 
     gsap.fromTo(
@@ -972,41 +922,6 @@ messageInput.addEventListener('input', function() {
         charCount.style.color = '#444';
     }
 });
-
-
-// Form submit animation
-const form = document.getElementById('contactForm');
-form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const btn = this.querySelector('.submit-btn');
-    
-    gsap.to(btn, {
-        scale: 0.95,
-        duration: 0.1,
-        yoyo: true,
-        repeat: 1,
-        onComplete: () => {
-            // Add your form submission logic here
-            alert('Form submitted! (This is just a demo)');
-        }
-    });
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     // Fliping Links Hovering Script V1:
     const navItems1 = document.querySelectorAll(".nav-content1 ul li");

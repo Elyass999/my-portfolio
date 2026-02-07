@@ -204,34 +204,6 @@
 .main-nav-link .bottom-text span {
     display: inline-block;
 }
-
-  /* Fliping Nav Links */
-  .flip-link {
-    position: relative;
-    bottom: 9rem;
-    right: 15rem;
-    display: block;
-    font-size: clamp(2.5rem, 8vw, 6rem);
-    font-weight: 900;
-    color: black;
-    overflow: hidden;
-    line-height: 1.3;
-    cursor: pointer;
-  }
-
-  .flip-link div {
-    position: absolute;
-    inset: 0;
-    white-space: nowrap;
-  }
-
-  .flip-link .front {
-    position: relative;
-  }
-
-  .flip-link span {
-    display: inline-block;
-  }
   
   /* Nav Overlay */
   .nav-overlay {
@@ -245,27 +217,61 @@
     z-index: 100;
     pointer-events: none; /* disable clicks when hidden */
   }
-
+  /* Nav Content */
   .nav-overlay.open {
     pointer-events: auto;
   }
-
-  .nav-content {
-    position: absolute;
-    top: 50%;
-    left: 20%;
-    transform: translateY(-50%);
-    color: #fff;
+  .sec-nav {
+    padding: 3rem 1rem;
   }
-  .nav-overlay-video {
+  .container-nav {
+    max-width: 9000px;
+    margin: auto;
+  }
+  .hover-link {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem 0;
+    border-bottom: 2px solid #404040;
+    cursor: pointer;
+    overflow: hidden;
+  }
+  .hover-link:hover {
+    border-color: white;
+  }
+  .text h2 {
+    margin: 0;
+    font-size: clamp(6.5rem, 5vw, 4rem);
+    font-weight: 800;
+    color: #000000;
+  }
+  .hover-link:hover h2 {
+    color: white;
+  }
+  .char {
+    display: inline-block;
+  }
+
+  .hover-link:hover .sub {
+    color: white;
+  }
+  .hover-img {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
+    width: 260px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 12px;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0) rotate(-12deg);
     z-index: -1;
   }
+  .arrow {
+    font-size: 3rem;
+    opacity: 0;
+    transform: translateX(25%);
+  }
+
   /* 3D Model */
   /* .model3D {
     position: absolute;
@@ -275,6 +281,32 @@
     width: 70%;
     height: 70%;
     z-index: -99999;
+    border-radius: 2000px;
+  }
+
+  @media (max-width: 1400px) {
+    .model3D {
+      width: 60%;
+      height: 60%;
+      transform: translate(-80%, -50%) rotateY(180deg);
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .model3D {
+      width: 50%;
+      height: 50%;
+      transform: translate(-70%, -50%) rotateY(180deg);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .model3D {
+      width: 80%;
+      height: 80%;
+      transform: translate(-50%, -50%) rotateY(180deg);
+      opacity: 0.6;
+    }
   } */
 
   /* Heros Section (1 code for all heros) */
@@ -324,152 +356,6 @@
     }
   } */
   
-
-   /* Glass pieces */
-  .glass-container {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-  }
-
-  .glass-piece {
-      position: absolute;
-      background: linear-gradient(145deg, 
-          rgba(255, 255, 255, 0.12) 0%, 
-          rgba(255, 255, 255, 0.04) 40%,
-          rgba(180, 180, 180, 0.08) 100%);
-      backdrop-filter: blur(5px) saturate(150%);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-left: 2px solid rgba(255, 255, 255, 0.3);
-      border-top: 2px solid rgba(255, 255, 255, 0.3);
-      box-shadow: 
-          0 20px 60px rgba(0, 0, 0, 0.3),
-          0 10px 30px rgba(0, 0, 0, 0.2),
-          inset 5px 5px 20px rgba(255, 255, 255, 0.08),
-          inset -5px -5px 20px rgba(0, 0, 0, 0.15),
-          0 0 40px rgba(255, 255, 255, 0.05);
-      transform-style: preserve-3d;
-      transition: transform 0.1s ease-out;
-      filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.25));
-  }
-
-  .glass-piece::before {
-      content: '';
-      position: absolute;
-      top: -5%;
-      left: -5%;
-      right: 50%;
-      bottom: 50%;
-      background: 
-          radial-gradient(ellipse at 20% 20%, 
-              rgba(255, 255, 255, 0.075) 0%, 
-              rgba(255, 255, 255, 0.059) 30%, 
-              transparent 90%);
-      transform: translateZ(10px);
-      filter: blur(4px);
-  }
-
-  .glass-piece::after {
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      background: 
-          linear-gradient
-          linear-gradient(45deg, 
-              transparent 80%, 
-              rgba(255, 255, 255, 0) 90%, 
-              transparent 90%);
-      transform: translateZ(3px);
-  }
-
-  /* Different shapes and sizes - Nexus-style broken glass shards */
-  .glass-1 { 
-      width: 180px; 
-      height: 240px; 
-      top: -18%; 
-      left: 10%;
-      transform: rotate(25deg) rotateX(15deg) rotateY(-10deg) translateZ(40px);
-      clip-path: polygon(25% 0%, 75% 8%, 100% 35%, 90% 70%, 100% 95%, 60% 100%, 20% 88%, 0% 50%, 8% 20%);
-      transform-style: preserve-3d;
-      perspective: 1000px;
-      box-shadow: 
-          0 40px 80px rgba(0, 0, 0, 0.4),
-          0 20px 40px rgba(0, 0, 0, 0.3),
-          0 0 0 1px rgba(255, 255, 255, 0.1),
-          inset 0 0 30px rgba(255, 255, 255, 0.05);
-      filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.5));
-  }
-  
-  .glass-2 { 
-      width: 140px; 
-      height: 200px; 
-      top: 58%; 
-      right: 23%;
-      transform: rotate(-12deg);
-      clip-path: polygon(10% 15%, 65% 0%, 100% 25%, 95% 60%, 90% 100%, 40% 95%, 0% 70%, 5% 35%);
-  }
-  
-  .glass-3 { 
-      width: 120px; 
-      height: 170px; 
-      top: -10%; 
-      right: 8%;
-      transform: rotate(52deg);
-      clip-path: polygon(30% 5%, 80% 0%, 100% 40%, 85% 75%, 95% 100%, 45% 90%, 5% 70%, 0% 35%, 15% 12%);
-  }
-  
-  .glass-4 { 
-    z-index: -999;
-      width: 200px; 
-      height: 150px; 
-      bottom: 12%; 
-      left: 30%;
-      transform: rotate(-28deg);
-      clip-path: polygon(20% 0%, 60% 8%, 100% 30%, 85% 70%, 90% 100%, 50% 95%, 15% 85%, 0% 45%, 10% 15%);
-  }
-  
-  .glass-5 { 
-      width: 100px; 
-      height: 145px; 
-      top: 3%; 
-      right: 38%;
-      transform: rotate(65deg);
-      clip-path: polygon(15% 8%, 70% 0%, 100% 35%, 90% 70%, 85% 100%, 35% 92%, 0% 65%, 5% 30%);
-  }
-  
-  .glass-6 { 
-      width: 160px; 
-      height: 190px; 
-      bottom: 22%; 
-      right: 12%;
-      transform: rotate(-42deg);
-      clip-path: polygon(28% 5%, 80% 12%, 100% 45%, 85% 80%, 75% 100%, 25% 90%, 0% 55%, 8% 25%);
-  }
-
-  .glass-7 { 
-      width: 130px; 
-      height: 165px; 
-      top: 42%; 
-      left: 3%;
-      transform: rotate(18deg);
-      clip-path: polygon(18% 10%, 70% 0%, 100% 35%, 92% 70%, 88% 100%, 35% 88%, 5% 60%, 0% 30%);
-  }
-
-  .glass-8 { 
-      width: 110px; 
-      height: 140px; 
-      bottom: 32%; 
-      left: 22%;
-      transform: rotate(-58deg);
-      clip-path: polygon(22% 5%, 72% 10%, 100% 48%, 85% 82%, 78% 100%, 28% 92%, 0% 58%, 8% 25%);
-  }
-
   /* Content after hero */
   .content-section {
       min-height: 100vh;
@@ -491,12 +377,11 @@
       text-align: center;
   }
 
-
   /* Hero 2 */
   .container {
     transform: translateX(-1rem) translateY(-35rem);
     text-align: center;
-    font-size: 3rem; /* text-5xl equivalent */
+    font-size: 4rem; /* text-5xl equivalent */
   }
 
   .relative {
@@ -504,27 +389,10 @@
     display: inline-block;
   }
 
-  .svg2 {
-    position: absolute;
-    left: -1.5rem; /* -left-2 equivalent */
-    right: -0.5rem; /* -right-2 equivalent */
-    top: -0.2rem; /* -top-2 equivalent */
-    bottom: 0;
-    transform: translateY(0.25rem); /* translate-y-1 equivalent */
-    width: calc(120% + 1rem);
-    height: auto;
-  }
-
-  #animated-path {
-    stroke: #facc15; /* yellow-400 equivalent */
-    stroke-width: 3;
-    fill: none;
-  }
-
   /* Starting Text */
   .fade-text {
-    transform: translateY(-19rem);
-    font-size: 3rem;
+    transform: translateY(-23rem);
+    font-size: 3.5rem;
     margin: 0;
     text-align: center;
   }
@@ -539,7 +407,7 @@
 
   @media (max-width: 768px) {
     .fade-text {
-    transform: translateY(-15rem);
+    transform: translateY(-45rem);
     font-size: 2rem;
     }
   }
@@ -867,7 +735,7 @@
   left: 0;
   padding: 10px 14px;
   background: #0b0f14;
-  color: #b7ff00;
+  color: #ebebeb;
   font-family: "Fira Code", "JetBrains Mono", monospace;
   font-size: 0.8rem;
   font-weight: 500;
@@ -879,9 +747,9 @@
   z-index: 10;
   transform: translate(-50%, -50%);
   box-shadow:
-    0 0 0 1px rgba(238, 255, 0, 0.25),
+    0 0 0 1px rgba(73, 73, 72, 0.25),
     0 10px 30px rgba(0, 0, 0, 0.45);
-  text-shadow: 0 0 6px rgba(221, 255, 0, 0.6);
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
 }
 
 /* CMD blinking cursor */
@@ -889,7 +757,7 @@
   content: "|";
   margin-left: 6px;
   animation: blink 1s steps(1) infinite;
-  color: #ddff00;
+  color: #ffffff;
 }
 
 @keyframes blink {
@@ -1577,9 +1445,7 @@ textarea::placeholder {
     padding: 0 1.5rem;
   }
 
-  .svg2 {
-    width: calc(115% + 1rem);
-  }
+
 
   .fade-text {
     font-size: 2rem;
@@ -2252,26 +2118,21 @@ textarea::placeholder {
     top: 1rem;
     right: 1rem;
   }
-
   .flip-link {
     font-size: clamp(1rem, 4.5vw, 2rem);
     right: 1.5rem;
     bottom: 2.5rem;
   }
-
   .container {
     transform: translateX(0) translateY(-10rem);
   }
-
   .container h1 {
     font-size: clamp(0.9rem, 2.8vw, 1.3rem);
   }
-
   .fade-text {
     font-size: 0.9rem;
     transform: translateY(-7rem);
   }
-
   .hero-title {
     font-size: clamp(2rem, 7vw, 5rem);
   }
