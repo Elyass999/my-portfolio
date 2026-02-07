@@ -29,7 +29,7 @@
 
 
 <!-- Preloader -->
-<div id="preloader">
+<!-- <div id="preloader">
   <div class="hello">
     <span>H</span>
     <span>e</span>
@@ -39,7 +39,7 @@
   </div>
   <div class="overlay black"></div>
   <div class="overlay blue"></div>
-</div>
+</div> -->
 
   <!-- Main page NavBar --> 
 <nav class="main-nav">
@@ -64,74 +64,51 @@
   
   <!-- Navigation Overlay -->
   <div class="nav-overlay" id="nav">
-    <div class="nav-content">
-      <section>
-        <a href="#" class="flip-link" data-text="Home"></a>
-        <a href="#" class="flip-link" data-text="Projects"></a>
-        <a href="#" class="flip-link" data-text="About"></a>
-        <a href="#" class="flip-link" data-text="Contact"></a>
-      </section>
-      <!-- Glassmorphism background video -->
-      <video 
-          src="glasse.mp4" 
-          autoplay 
-          muted 
-          loop 
-          playsinline 
-          preload="auto"
-          class="nav-overlay-video"
-          aria-hidden="true"
-          >
-      </video>
-    </div>
+    <section class="sec-nav">
+      <div class="container-nav">
 
+        <div class="hover-link" data-img="https://freepngimg.com/save/98220-meme-angry-face-free-transparent-image-hq/820x580">
+          <div class="text">
+            <h2>Home</h2>
+          </div>
+          <div class="arrow"><i class="fa-solid fa-arrow-right"></i></div>
+        </div>
 
+        <div class="hover-link" data-img="https://static.vecteezy.com/system/resources/thumbnails/044/876/360/small/cat-with-glasses-meme-sticker-tshirt-illustration-free-png.png">
+          <div class="text">
+            <h2>Prjects</h2>
+          </div>
+          <div class="arrow"><i class="fa-solid fa-arrow-right"></i></div>
+        </div>
+
+        <div class="hover-link" data-img="https://static.thenounproject.com/png/105262-200.png">
+          <div class="text">
+            <h2>About</h2>
+          </div>
+          <div class="arrow"><i class="fa-solid fa-arrow-right"></i></div>
+        </div>
+
+        <div class="hover-link" data-img="https://i.redd.it/1o8zqjm9bqc81.png">
+          <div class="text">
+            <h2>Contact</h2>
+          </div>
+          <div class="arrow"><i class="fa-solid fa-arrow-right"></i></div>
+        </div>
+      </div>
+    </section>
   </div>
-
-
-
-
-
-
 
 
 <!-- Hero title section -->
 <section class="hero">
-  <!-- <spline-viewer class="model3D" url="https://prod.spline.design/xZKSYbSOeBb-iHGb/scene.splinecode"></spline-viewer> -->
-    <!-- <h1 class="hero-title">
-      Make
-      <div class="ticker-wrapper1">
-        <div class="ticker1">
-          <span>Your Dream Work</span>
-          <span>Your Dream Work</span>
-          <span>Your Dream Work</span>
-        </div>
-      </div>
-    </h1> -->
-  </section>
-
-
+</section>
 
   <!-- Hero 2 -->
 <div class="container">
-  
-  <div class="glass-container">
-    <div class="glass-piece glass-1"></div>
-    <div class="glass-piece glass-2"></div>
-    <div class="glass-piece glass-3"></div>
-    <div class="glass-piece glass-4"></div>
-    <div class="glass-piece glass-5"></div>
-    <div class="glass-piece glass-6"></div>
-    <div class="glass-piece glass-7"></div>
-    <div class="glass-piece glass-8"></div>
-  </div>
     <h1>
       Hy I'm 
       <span class="relative" id="text-container">
           Elyasse 
-          <svg class="svg2" viewBox="0 0 286 73" fill="none">
-              <path id="animated-path" d="M142.293 1C106.854 16.8908 6.08202 7.17705 1.23654 43.3756C-2.10604 68.3466 29.5633 73.2652 122.688 71.7518C215.814 70.2384 316.298 70.689 275.761 38.0785C230.14 1.37835 97.0503 24.4575 52.9384 1" />
-          </svg>
       </span>
       <br>A Full-stack Developer <br> UI/UX Designer
     </h1>
@@ -146,9 +123,9 @@
 <section class="section gray corner-reveal">
 <section class="starting-text">
   <p class="fade-text">
-    I'm Elyasse a Mastred Full-Stack Developer with crafting digital <br>experiences from front-end to back-end &
-    Building complete <br> web solutions, from pixel to database
-    We transforming <br> ideas into full-stack web work
+    I'm Elyasse a Mastred Full-Stack Developer with crafting digital experiences from front-end to back-end &
+    Building complete web solutions, from pixel to database
+    We transforming ideas into full-stack web work
   </p>
 </section>
 
@@ -159,10 +136,7 @@
 </div>
 <!-- Custom Cursor Project Hover -->
 
-
-
-<!-- Project Cards Section -->
-
+<!-- Project Cards Section -->  
 <div class="projects-cards">
   <!-- Line in the middle -->
   <div class="line-container">
@@ -533,9 +507,42 @@
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <!-- spline -->
    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.57/build/spline-viewer.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+
+
+
+<script>
+  (function () {
+    emailjs.init("Wcriya1I3vWKTIXPv");
+  })();
+
+  const form = document.getElementById("contactForm");
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    emailjs.sendForm(
+      "service_0pkad0r",
+      "template_52r3cwu",
+      this
+    ).then(
+      function () {
+        alert("Message sent successfully!");
+        form.reset();
+      },
+      function (error) {
+        alert("Failed to send message. Please try again.");
+        console.error(error);
+      }
+    );
+  });
+</script>
+
+
+
 
 </body>
-
 <footer>
   <div class="footer-container">
     <h1 id="wavy-text">ELYASSE</h1>
