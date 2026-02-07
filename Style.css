@@ -389,10 +389,34 @@
     display: inline-block;
   }
 
+<<<<<<< HEAD
   /* Starting Text */
   .fade-text {
     transform: translateY(-23rem);
     font-size: 3.5rem;
+=======
+  .svg2 {
+    position: absolute;
+    left: -1.5rem; /* -left-2 equivalent */
+    right: -0.5rem; /* -right-2 equivalent */
+    top: -0.2rem; /* -top-2 equivalent */
+    bottom: 0;
+    transform: translateY(0.25rem); /* translate-y-1 equivalent */
+    width: calc(120% + 1rem);
+    height: auto;
+  }
+
+  #animated-path {
+    stroke: #facc15; /* yellow-400 equivalent */
+    stroke-width: 3;
+    fill: none;
+  }
+
+  /* Starting Text */
+  .fade-text {
+    transform: translateY(-19rem);
+    font-size: 3rem;
+>>>>>>> 41c9b044058cf465acf42b4ce2257d13aa1e9544
     margin: 0;
     text-align: center;
   }
@@ -735,7 +759,11 @@
   left: 0;
   padding: 10px 14px;
   background: #0b0f14;
+<<<<<<< HEAD
   color: #ebebeb;
+=======
+  color: #b7ff00;
+>>>>>>> 41c9b044058cf465acf42b4ce2257d13aa1e9544
   font-family: "Fira Code", "JetBrains Mono", monospace;
   font-size: 0.8rem;
   font-weight: 500;
@@ -747,9 +775,15 @@
   z-index: 10;
   transform: translate(-50%, -50%);
   box-shadow:
+<<<<<<< HEAD
     0 0 0 1px rgba(73, 73, 72, 0.25),
     0 10px 30px rgba(0, 0, 0, 0.45);
   text-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
+=======
+    0 0 0 1px rgba(238, 255, 0, 0.25),
+    0 10px 30px rgba(0, 0, 0, 0.45);
+  text-shadow: 0 0 6px rgba(221, 255, 0, 0.6);
+>>>>>>> 41c9b044058cf465acf42b4ce2257d13aa1e9544
 }
 
 /* CMD blinking cursor */
@@ -757,7 +791,11 @@
   content: "|";
   margin-left: 6px;
   animation: blink 1s steps(1) infinite;
+<<<<<<< HEAD
   color: #ffffff;
+=======
+  color: #ddff00;
+>>>>>>> 41c9b044058cf465acf42b4ce2257d13aa1e9544
 }
 
 @keyframes blink {
@@ -1445,7 +1483,13 @@ textarea::placeholder {
     padding: 0 1.5rem;
   }
 
+<<<<<<< HEAD
 
+=======
+  .svg2 {
+    width: calc(115% + 1rem);
+  }
+>>>>>>> 41c9b044058cf465acf42b4ce2257d13aa1e9544
 
   .fade-text {
     font-size: 2rem;
@@ -2118,21 +2162,41 @@ textarea::placeholder {
     top: 1rem;
     right: 1rem;
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 41c9b044058cf465acf42b4ce2257d13aa1e9544
   .flip-link {
     font-size: clamp(1rem, 4.5vw, 2rem);
     right: 1.5rem;
     bottom: 2.5rem;
   }
+<<<<<<< HEAD
   .container {
     transform: translateX(0) translateY(-10rem);
   }
   .container h1 {
     font-size: clamp(0.9rem, 2.8vw, 1.3rem);
   }
+=======
+
+  .container {
+    transform: translateX(0) translateY(-10rem);
+  }
+
+  .container h1 {
+    font-size: clamp(0.9rem, 2.8vw, 1.3rem);
+  }
+
+>>>>>>> 41c9b044058cf465acf42b4ce2257d13aa1e9544
   .fade-text {
     font-size: 0.9rem;
     transform: translateY(-7rem);
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 41c9b044058cf465acf42b4ce2257d13aa1e9544
   .hero-title {
     font-size: clamp(2rem, 7vw, 5rem);
   }
@@ -2252,6 +2316,7 @@ textarea::placeholder {
     color: black;
   }
 }
+<<<<<<< HEAD
 
 
 
@@ -2268,3 +2333,5 @@ textarea::placeholder {
 
 
 
+=======
+>>>>>>> 41c9b044058cf465acf42b4ce2257d13aa1e9544
