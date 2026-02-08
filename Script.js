@@ -1,19 +1,6 @@
 
 
-//gary section anm :
-gsap.registerPlugin(ScrollTrigger);
-gsap.to(".corner-reveal", {
-  borderTopLeftRadius: 2,
-  borderTopRightRadius: 2,
-  
-  ease: "none",
-  scrollTrigger: {
-    trigger: ".corner-reveal",
-    start: "top 40%",
-    end: "top 10%",
-    scrub: true
-  }
-});
+
 
 
 //Menu btn :
@@ -47,33 +34,129 @@ window.addEventListener('scroll', () => {
 });
 
 // Preloader :
-const tll = gsap.timeline({ defaults: { ease: "power3.out" } });
-// Step 1: Stagger "Hello"
+const tll = gsap.timeline({ defaults: { ease: "power4.out" } });
+
+// 1. Text entrance (Preloader)
 tll.to("#preloader .hello span", {
   y: 0,
   opacity: 1,
-  duration: 0.4,
-  stagger: 0.1
+  duration: 0.5,
+  stagger: 0.08
 })
 
-// Step 2: Slide black panel up
+// 2. The Panel "Sweep" 
 .to(".overlay.black", {
   x: "-100%",
-  duration: 0.3
-})
+  duration: 0.6,
+  ease: "expo.inOut"
+}, "+=0.2") // Brief pause to let user read "Hello"
 
-// Step 3: Slide blue panel up (0.5s after black starts)
 .to(".overlay.blue", {
   y: "-100%",
-  duration: 0.3
-}, "+=0.5")
+  duration: 0.6,
+  ease: "expo.inOut"
+}, "-=0.4") // Starts while black is still moving
 
-// Step 4: Move whole preloader away
 .to("#preloader", {
   x: "-100%",
-  duration: 0.3,
-  ease: "power2.inOut"
+  duration: 0.7,
+  ease: "expo.inOut"
+}, "-=0.4") // Moves the container away early to reveal content
+
+
+
+
+//Appearing element 
+window.addEventListener('DOMContentLoaded', () => {
+  const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+  // 1. Reveal the Nav items one by one
+  tl.fromTo(".main-nav-list li", 
+      { y: -50, opacity: 0 }, 
+      { y: 0, opacity: 1, duration: 2, stagger: 0.1 }
+  )
+
+  // 2. Animate the main heading text
+  const tll = gsap.timeline({ defaults: { ease: "power4.out" } });
+
+// --- Your existing Preloader Sequence ---
+tll.to("#preloader .hello span", {
+  y: 0, opacity: 1, duration: 0.4, stagger: 0.1
 })
+.to(".overlay.black", { x: "-100%", duration: 0.3 })
+.to(".overlay.blue", { y: "-100%", duration: 0.3 }, "+=0.5")
+.to("#preloader", { x: "-100%", duration: 0.3, ease: "power2.inOut" })
+
+// --- NEW Content Reveal Logic ---
+.fromTo(".main-nav-list li", 
+  { 
+    y: -40,              // Start slightly higher for more "travel"
+    opacity: 0, 
+    rotationX: -90,      // Start completely flat (invisible in 3D space)
+    scale: 0.8,          // Small to large effect
+    filter: "blur(10px)" // Soft entry
+  }, 
+  { 
+    y: 0, 
+    opacity: 1, 
+    rotationX: 0, 
+    scale: 1,
+    filter: "blur(0px)",
+    duration: 1.2, 
+    stagger: {
+      each: 0.1,
+      from: "end"        // Reverses stagger: right-most link animates first (modern trend)
+    },
+    ease: "expo.out"     // Ultra-smooth deceleration
+  },
+  "-=0.4"                
+)
+
+.fromTo("h1", 
+  { 
+    y: 70, 
+    opacity: 0, 
+    rotationX: -30, // Tilts the text away
+    skewX: 10,      // Cinematic slant
+    filter: "blur(15px)" // Starts blurry
+  }, 
+  { 
+    y: 0, 
+    opacity: 1, 
+    rotationX: 0, 
+    skewX: 0, 
+    filter: "blur(0px)", 
+    duration: 1.6, 
+    ease: "expo.out" 
+  }, 
+  "-=0.6" // Heavy overlap for "smooth" feel
+)
+
+.fromTo("#text-container", 
+  { 
+    scale: 0.7, 
+    color: "#3498db" // Optional: Start with a highlight color
+  }, 
+  { 
+    scale: 1, 
+    color: "inherit", // Fade back to original color
+    duration: 1, 
+    ease: "back.out(2)" 
+  },
+  "-=1" // Happens while h1 is still settling
+)
+    
+  // 3. Special "Pop" for your name
+  .fromTo("#text-container", 
+      { scale: 0.8, opacity: 0 }, 
+      { scale: 1, opacity: 1, duration: 0.8,  },
+      "-=0.8"
+  );
+});
+
+
+
+
+
 
 
 // Main navbar elemnts script :
