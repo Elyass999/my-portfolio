@@ -486,32 +486,10 @@ section.hero {
   display: inline-block;
 }
 
-/* Starting Text */
-.fade-text {
-  font-size: 3.5rem;
-  margin: 0;
-  text-align: center;
-  padding: 4rem 2rem;
-}
 
 /* Responsive tweaks for Starting Text */
-@media (max-width: 1024px) {
-  .fade-text {
-    font-size: 2.5rem;
-  }
-}
 
-@media (max-width: 768px) {
-  .fade-text {
-    font-size: 2rem;
-  }
-}
 
-@media (max-width: 480px) {
-  .fade-text {
-    font-size: 1.5rem;
-  }
-}
 
 /* Title 1 */
 .title1 {
@@ -1621,10 +1599,7 @@ textarea::placeholder {
     padding: 0 2rem;
   }
 
-  .fade-text {
-    font-size: 2.5rem;
-    transform: translateY(-17rem);
-  }
+
 
   .projects-cards {
     grid-template-columns: repeat(2, 1fr);
@@ -1670,12 +1645,6 @@ textarea::placeholder {
   }
 
 
-
-  .fade-text {
-    font-size: 2rem;
-    transform: translateY(-14rem);
-    padding: 0 1rem;
-  }
 
   .hero-title {
     font-size: clamp(4rem, 12vw, 10rem);
@@ -1783,12 +1752,7 @@ textarea::placeholder {
     display: block;
   }
 
-  .fade-text {
-    font-size: 1.5rem;
-    transform: translateY(-12rem);
-    padding: 0 1rem;
-    line-height: 1.6;
-  }
+
 
   /* Responsive Hero2 & Button */
   .hero2 {
@@ -1976,16 +1940,8 @@ textarea::placeholder {
     line-height: 1.4;
   }
 
-  .fade-text {
-    font-size: 1.2rem;
-    transform: translateY(-10rem);
-    padding: 0 0.5rem;
-    line-height: 1.5;
-  }
 
-  .fade-text br {
-    display: none;
-  }
+
 
   .hero-title {
     font-size: clamp(3rem, 9vw, 7rem);
@@ -2225,10 +2181,6 @@ textarea::placeholder {
     display: block;
   }
 
-  .fade-text {
-    font-size: 1rem;
-    transform: translateY(-8rem);
-  }
 
   .hero-title {
     font-size: clamp(2.5rem, 8vw, 6rem);
@@ -2355,11 +2307,6 @@ textarea::placeholder {
     font-size: clamp(0.9rem, 2.8vw, 1.3rem);
   }
 
-  .fade-text {
-    font-size: 0.9rem;
-    transform: translateY(-7rem);
-  }
-
   .hero-title {
     font-size: clamp(2rem, 7vw, 5rem);
   }
@@ -2428,9 +2375,6 @@ textarea::placeholder {
     transform: translateX(0) translateY(-8rem);
   }
 
-  .fade-text {
-    transform: translateY(-6rem);
-  }
 
   .about-pic-wrapper {
     max-width: 50%;

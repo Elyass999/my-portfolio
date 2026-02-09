@@ -433,39 +433,6 @@ document.querySelectorAll(".hover-link").forEach(link => {
   });
 });
 
-// Text Starting animation script :
-gsap.registerPlugin(ScrollTrigger);
-document.querySelectorAll(".fade-text").forEach((element) => {
-  const text = new SplitType(element, { types: "chars" });
-
-  // Create a timeline so everything is synced to one ScrollTrigger
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: element,
-      start: "top 85%", // Starts slightly later for better UX
-      end: "top 30%",
-      scrub: 1,         // Smooth scrubbing (adds a little 'catch-up' delay)
-    },
-  });
-
-  tl.fromTo(
-    text.chars,
-    {
-      opacity: 0,
-      filter: "blur(10px)",   // Initial blurry state
-      y: 20,                  // Slight lift-up effect
-      color: "#000000"
-    },
-    {
-      opacity: 1,
-      filter: "blur(0px)",    // Clear state
-      y: 0,
-      color: "#ffffffff",       // Transition to red
-      stagger: 0.05,          // Increased stagger for better visual flow
-      ease: "power2.out"
-    }
-  );
-});
 
 // Hero Sticky reveal animation
 gsap.registerPlugin(ScrollTrigger);
