@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,9 @@
   <link rel="icon" type="image/x-icon" href="PortLogo.png">
 
   <!-- Font Awesom -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- GSAP LINKS  -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -18,18 +21,19 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
   <!-- Email script  -->
-   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <!-- Swiper CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <!-- Model 3D Script -->
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
 </head>
+
 <body>
 
 
-<!-- Preloader -->
-<div id="preloader">
+  <!-- Preloader -->
+  <div id="preloader">
   <div class="hello">
     <span>H</span>
     <span>e</span>
@@ -41,19 +45,16 @@
   <div class="overlay blue"></div>
 </div>
 
-  <!-- Main page NavBar --> 
-<nav class="main-nav">
+  <!-- Main page NavBar -->
+  <nav class="main-nav">
     <ul class="main-nav-list">
-        <li><a href="#home" class="main-nav-link" data-text="Home">Home</a></li>
-        <li><a href="#projects" class="main-nav-link" data-text="Projects">Projects</a></li>
-        <li><a href="#about" class="main-nav-link" data-text="About">About</a></li>
-        <li><a href="#contact" class="main-nav-link" data-text="Contact">Contact</a></li>
-        
+      <li><a href="#home" class="main-nav-link" data-text="Home">Home</a></li>
+      <li><a href="#projects" class="main-nav-link" data-text="Projects">Projects</a></li>
+      <li><a href="#about" class="main-nav-link" data-text="About">About</a></li>
+      <li><a href="#contact" class="main-nav-link" data-text="Contact">Contact</a></li>
+
     </ul>
-</nav>
-
-
-
+  </nav>
 
   <!--Navigation Menu Button-->
   <div class="menu-btn" id="menuBtn">
@@ -61,20 +62,22 @@
     <span></span>
     <span></span>
   </div>
-  
+
   <!-- Navigation Overlay -->
   <div class="nav-overlay" id="nav">
     <section class="sec-nav">
       <div class="container-nav">
 
-        <div class="hover-link" data-img="https://freepngimg.com/save/98220-meme-angry-face-free-transparent-image-hq/820x580">
+        <div class="hover-link"
+          data-img="https://freepngimg.com/save/98220-meme-angry-face-free-transparent-image-hq/820x580">
           <div class="text">
             <h2>Home</h2>
           </div>
           <div class="arrow"><i class="fa-solid fa-arrow-right"></i></div>
         </div>
 
-        <div class="hover-link" data-img="https://static.vecteezy.com/system/resources/thumbnails/044/876/360/small/cat-with-glasses-meme-sticker-tshirt-illustration-free-png.png">
+        <div class="hover-link"
+          data-img="https://static.vecteezy.com/system/resources/thumbnails/044/876/360/small/cat-with-glasses-meme-sticker-tshirt-illustration-free-png.png">
           <div class="text">
             <h2>Prjects</h2>
           </div>
@@ -99,285 +102,331 @@
   </div>
 
 
-<!-- Hero title section -->
-<section class="hero">
-</section>
+  <!-- Hero title section -->
+  <div class="hero-section-wrapper">
+    <section class="hero">
+    </section>
 
-  <!-- Hero 2 -->
-<div class="container">
-    <h1>
-      Hy I'm 
-      <span class="relative" id="text-container">
-          Elyasse 
-      </span>
-      <br>A Full-stack Developer <br> UI/UX Designer
-    </h1>
-  </div>
-
-
-<div class="cursor">
-  <span>View Project</span>
-</div>
-
-
-<!-- starting Sentence -->
-<section class="section gray">
-  
-<section class="starting-text">
-  <p class="fade-text">
-    I'm Elyasse a Mastred Full-Stack Developer with crafting digital experiences from front-end to back-end &
-    Building complete web solutions, from pixel to database
-    We transforming ideas into full-stack web work
-  </p>
-</section>
-
-<!-- Title 2 -->
-<div class="hero-title fill-animation">
-    <span class="title-stroke">My Works</span>
-    <span class="title-filled">My Works</span>
-</div>
-<!-- Custom Cursor Project Hover -->
-
-<!-- Project Cards Section -->  
-<div class="projects-cards">
-  <!-- Line in the middle -->
-  <div class="line-container">
-    <div class="line-background"></div>
-    <div class="line-fill"></div>
-  </div>
-
-  <div class="proj-pic">
-    <img src="Projects Pics/Gri-job-mockup.png" alt="Project 1" />
-    <div class="proj-content">
-      <h3>Gri-Job </h3>
-      <p>A modern job board platform where job seekers can browse and apply to opportunities, while employers can post and manage job listings — built with a responsive design for easy use across all devices. </p>
-      <br>
-      <div class="tech-stack">
-        <span>PHP</span>
-        <span>HTML</span>
-        <span>CSS</span>
-        <span>JS</span>
-        <span>MYSQL</span>
-      </div>
+    <!-- Hero 2 -->
+    <div class="hero2">
+      <h1>
+        Hi ! I'm
+        <span class="relative" id="text-container">
+          Elyasse
+        </span>
+        <br>A Full-stack Developer <br> UI/UX Designer
+      </h1>
+      <a href="#projects" class="magnetic-btn">
+        <span class="btn-text">My Works</span>
+        <span class="btn-fill"></span>
+      </a>
     </div>
   </div>
-  <div class="proj-pic">
-    <img src=" Projects Pics/project-oriz-mockup.png" alt="Project 2" />
-    <div class="proj-content">
-      <h3>Gri-Job </h3>
-      <p>A modern job board platform where job seekers can browse and apply to opportunities, while employers can post and manage job listings — built with a responsive design for easy use across all devices. </p>
-      <br>
-      <div class="tech-stack">
-        <span>PHP</span>
-        <span>HTML</span>
-        <span>CSS</span>
-        <span>JS</span>
-        <span>MYSQL</span>
-      </div>
-    </div>
-  </div>
-  <div class="proj-pic">
-    <img src="Projects Pics/Travel-Pro-mockup.png" alt="Project 3" />
-    <div class="proj-content">
-      <h3>Gri-Job </h3>
-      <p>A modern job board platform where job seekers can browse and apply to opportunities, while employers can post and manage job listings — built with a responsive design for easy use across all devices. </p>
-      <br>
-      <div class="tech-stack">
-        <span>PHP</span>
-        <span>HTML</span>
-        <span>CSS</span>
-        <span>JS</span>
-        <span>MYSQL</span>
-      </div>
-    </div>
-  </div>
-  <div class="proj-pic">
-    <img src="Projects Pics/Parfemrie-Mockup.png" alt="Project 3" />
-    <div class="proj-content">
-      <h3>Gri-Job </h3>
-      <p>A modern job board platform where job seekers can browse and apply to opportunities, while employers can post and manage job listings — built with a responsive design for easy use across all devices. </p>
-      <br>
-      <div class="tech-stack">
-        <span>PHP</span>
-        <span>HTML</span>
-        <span>CSS</span>
-        <span>JS</span>
-        <span>MYSQL</span>
-      </div>
-    </div>
-  </div>
-</div>
 
-<!-- About Section -->
+  <div class="cursor">
+    <span>View Project</span>
+  </div>
 
 
-<section class="about" id="aboutSection">
-  <div class="about-title about-animation">
-      <span class="about-stroke">About Me</span>
-      <span class="about-filled">About Me</span>
-  </div>
-  <div class="about-div">
-      <div class="about-pic-wrapper">
+
+  <!-- starting Sentence -->
+  <section class="section gray">
+    <section class="starting-text">
+
+      <p class="fade-text">
+        I'm Elyasse a Mastred Full-Stack Developer with <br /> crafting digital experiences from front-end to back-end
+        Building complete web solutions,from pixel to database
+        I transforme ideas into full-stack web work
+      </p>
+    </section>
+
+    <!-- Title 2 -->
+    <div class="hero-title fill-animation">
+      <span class="title-stroke">My Works</span>
+      <span class="title-filled">My Works</span>
+    </div>
+    <!-- Custom Cursor Project Hover -->
+
+    <!-- Project Cards Section -->
+    <div class="projects-cards">
+      <div class="neon-drawing-container">
+        <svg viewBox="0 0 1000 3000" preserveAspectRatio="none">
+          <path id="neon-drawing-path" d="M 500 0 L 500 1000 
+             C -500 1300 1500 1450 500 1600 
+             C -500 1800 1500 2000 500 2200 
+             C -500 2400 1500 2600 500 2800 
+             C -200 2900 1200 2950 500 3000">
+          </path>
+        </svg>
+
+      </div>
+      <!-- Line will be handled by the new neon-drawing-container -->
+
+
+      <div class="proj-pic">
+        <div class="proj-img-container">
+          <img src="Projects Pics/Gri-job-mockup.png" alt="Project 1" />
+          <div class="proj-overlay">
+            <h2 class="wavy-name">Gri-Job</h2>
+          </div>
+        </div>
+        <div class="proj-content">
+          <h3>Gri-Job </h3>
+          <p>A modern job board platform where job seekers can browse and apply to opportunities, while employers can
+            post and manage job listings — built with a responsive design for easy use across all devices. </p>
+          <br>
+          <div class="tech-stack">
+            <span>PHP</span>
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>JS</span>
+            <span>MYSQL</span>
+          </div>
+        </div>
+      </div>
+      <div class="proj-pic">
+        <div class="proj-img-container">
+          <img src=" Projects Pics/project-oriz-mockup.png" alt="Project 2" />
+          <div class="proj-overlay">
+            <h2 class="wavy-name">Project Oriz</h2>
+          </div>
+        </div>
+        <div class="proj-content">
+          <h3>Project Oriz</h3>
+          <p>A modern job board platform where job seekers can browse and apply to opportunities, while employers can
+            post and manage job listings — built with a responsive design for easy use across all devices. </p>
+          <br>
+          <div class="tech-stack">
+            <span>PHP</span>
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>JS</span>
+            <span>MYSQL</span>
+          </div>
+        </div>
+      </div>
+      <div class="proj-pic">
+        <div class="proj-img-container">
+          <img src="Projects Pics/Travel-Pro-mockup.png" alt="Project 3" />
+          <div class="proj-overlay">
+            <h2 class="wavy-name">Travel Pro</h2>
+          </div>
+        </div>
+        <div class="proj-content">
+          <h3>Travel Pro</h3>
+          <p>A modern job board platform where job seekers can browse and apply to opportunities, while employers can
+            post and manage job listings — built with a responsive design for easy use across all devices. </p>
+          <br>
+          <div class="tech-stack">
+            <span>PHP</span>
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>JS</span>
+            <span>MYSQL</span>
+          </div>
+        </div>
+      </div>
+      <div class="proj-pic">
+        <div class="proj-img-container">
+          <img src="Projects Pics/Parfemrie-Mockup.png" alt="Project 3" />
+          <div class="proj-overlay">
+            <h2 class="wavy-name">Parfemrie</h2>
+          </div>
+        </div>
+        <div class="proj-content">
+          <h3>Parfemrie</h3>
+          <p>A modern job board platform where job seekers can browse and apply to opportunities, while employers can
+            post and manage job listings — built with a responsive design for easy use across all devices. </p>
+          <br>
+          <div class="tech-stack">
+            <span>PHP</span>
+            <span>HTML</span>
+            <span>CSS</span>
+            <span>JS</span>
+            <span>MYSQL</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- About Section -->
+
+
+    <section class="about" id="aboutSection">
+      <div class="about-title about-animation">
+        <span class="about-stroke">About Me</span>
+        <span class="about-filled">About Me</span>
+      </div>
+      <div class="about-div">
+        <div class="about-pic-wrapper">
           <img class="about-pic" src="Projects Pics/Port-Pict1.png" alt="CALL ME DEXTER">
           <div class="cursor-message">Yo Wssup There</div>
-      </div>
-      <div class="reveal-text about-text" id="revealText">
-        <span class="line">
-          <span class="line-inner">I am a <span>full-stack developer</span> and <span>UI/UX designer</span></span>
-        </span>
-        <span class="line">
-          <span class="line-inner">with diploma of 2 years in digital development.</span>
-        </span>
-        <span class="line">
-          <span class="line-inner">I craft complete digital experiences with love</span>
-        </span>
-        <span class="line">
-          <span class="line-inner">pixel-perfect design to powerful, functional code.</span>
-        </span>
-      </div>
-  </div>
-</section>
-</section>
-
-<!-- Skills Section -->
-<div class="hero-title fill-animation">
-    <span class="title-stroke">My Skills</span>
-    <span class="title-filled">My Skills</span>
-</div>
-  <section class="skills-section">
-    <div class="cards-container">
-        <div class="cards-stack">
-            <div class="skill-card" data-index="0" data-level="95">
-                <span class="card-number">01/06</span>
-                <div class="skill-category">Frontend</div>
-                <h3 class="skill-name">HTML & CSS</h3>
-                <div class="skill-tags">
-                    <span class="skill-tag">HTML5</span>
-                    <span class="skill-tag">CSS3</span>
-                    <span class="skill-tag">Sass</span>
-                    <span class="skill-tag">Responsive</span>
-                </div>
-                <div class="expertise-bar">
-                    <div class="expertise-label">
-                        <span>Expertise</span>
-                        <span>95%</span>
-                    </div>
-                    <div class="bar-bg">
-                        <div class="bar-fill" style="width: 95%"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="skill-card" data-index="1" data-level="90">
-                <span class="card-number">02/06</span>
-                <div class="skill-category">Programming</div>
-                <h3 class="skill-name">JavaScript</h3>
-                <div class="skill-tags">
-                    <span class="skill-tag">ES6+</span>
-                    <span class="skill-tag">DOM</span>
-                    <span class="skill-tag">APIs</span>
-                    <span class="skill-tag">Async</span>
-                </div>
-                <div class="expertise-bar">
-                    <div class="expertise-label">
-                        <span>Expertise</span>
-                        <span>90%</span>
-                    </div>
-                    <div class="bar-bg">
-                        <div class="bar-fill" style="width: 90%"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="skill-card" data-index="2" data-level="85">
-                <span class="card-number">03/06</span>
-                <div class="skill-category">Framework</div>
-                <h3 class="skill-name">React</h3>
-                <div class="skill-tags">
-                    <span class="skill-tag">Hooks</span>
-                    <span class="skill-tag">Context</span>
-                    <span class="skill-tag">Router</span>
-                    <span class="skill-tag">Redux</span>
-                </div>
-                <div class="expertise-bar">
-                    <div class="expertise-label">
-                        <span>Expertise</span>
-                        <span>85%</span>
-                    </div>
-                    <div class="bar-bg">
-                        <div class="bar-fill" style="width: 85%"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="skill-card" data-index="3" data-level="88">
-                <span class="card-number">04/06</span>
-                <div class="skill-category">Backend</div>
-                <h3 class="skill-name">PHP & Laravel</h3>
-                <div class="skill-tags">
-                    <span class="skill-tag">PHP</span>
-                    <span class="skill-tag">Laravel</span>
-                    <span class="skill-tag">Express</span>
-                    <span class="skill-tag">APIs</span>
-                </div>
-                <div class="expertise-bar">
-                    <div class="expertise-label">
-                        <span>Expertise</span>
-                        <span>88%</span>
-                    </div>
-                    <div class="bar-bg">
-                        <div class="bar-fill" style="width: 88%"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="skill-card" data-index="4" data-level="92">
-                <span class="card-number">05/06</span>
-                <div class="skill-category">Database</div>
-                <h3 class="skill-name">MySQL</h3>
-                <div class="skill-tags">
-                    <span class="skill-tag">SQL</span>
-                    <span class="skill-tag">Queries</span>
-                    <span class="skill-tag">Design</span>
-                    <span class="skill-tag">Optimization</span>
-                </div>
-                <div class="expertise-bar">
-                    <div class="expertise-label">
-                        <span>Expertise</span>
-                        <span>92%</span>
-                    </div>
-                    <div class="bar-bg">
-                        <div class="bar-fill" style="width: 92%"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="skill-card" data-index="5" data-level="87">
-                <span class="card-number">06/06</span>
-                <div class="skill-category">Animation</div>
-                <h3 class="skill-name">GSAP</h3>
-                <div class="skill-tags">
-                    <span class="skill-tag">ScrollTrigger</span>
-                    <span class="skill-tag">Timeline</span>
-                    <span class="skill-tag">Tweens</span>
-                    <span class="skill-tag">3D</span>
-                </div>
-                <div class="expertise-bar">
-                    <div class="expertise-label">
-                        <span>Expertise</span>
-                        <span>87%</span>
-                    </div>
-                    <div class="bar-bg">
-                        <div class="bar-fill" style="width: 87%"></div>
-                    </div>
-                </div>
-            </div>
         </div>
-    </div>
-</section>
+        <div class="reveal-text about-text" id="revealText">
+          <span class="line">
+            <span class="line-inner">I am a <span>full-stack developer</span> and <span>UI/UX designer</span></span>
+          </span>
+          <span class="line">
+            <span class="line-inner">with diploma of 2 years in digital development.</span>
+          </span>
+          <span class="line">
+            <span class="line-inner">I craft complete digital experiences with love</span>
+          </span>
+          <span class="line">
+            <span class="line-inner">pixel-perfect design to powerful, functional code.</span>
+          </span>
+        </div>
+      </div>
+    </section>
+  </section>
 
-<!-- Ticker Section -->
- <!-- <section class="ticker-section">
+  <!-- Skills Section Wrapper -->
+  <div class="skills-wrapper">
+    <div class="skills-wave">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+        <path id="skills-wave-path" d="M0,120 C480,120 960,120 1440,120 L1440,120 L0,120 Z"></path>
+      </svg>
+    </div>
+
+    <div class="hero-title fill-animation">
+      <span class="title-stroke">My Skills</span>
+      <span class="title-filled">My Skills</span>
+    </div>
+    <section class="skills-section">
+      <div class="cards-container">
+        <div class="cards-stack">
+          <div class="skill-card" data-index="0" data-level="95">
+            <span class="card-number">01/06</span>
+            <div class="skill-category">Frontend</div>
+            <h3 class="skill-name">HTML & CSS</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">HTML5</span>
+              <span class="skill-tag">CSS3</span>
+              <span class="skill-tag">Sass</span>
+              <span class="skill-tag">Responsive</span>
+            </div>
+            <div class="expertise-bar">
+              <div class="expertise-label">
+                <span>Expertise</span>
+                <span>95%</span>
+              </div>
+              <div class="bar-bg">
+                <div class="bar-fill" style="width: 95%"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="skill-card" data-index="1" data-level="90">
+            <span class="card-number">02/06</span>
+            <div class="skill-category">Programming</div>
+            <h3 class="skill-name">JavaScript</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">ES6+</span>
+              <span class="skill-tag">DOM</span>
+              <span class="skill-tag">APIs</span>
+              <span class="skill-tag">Async</span>
+            </div>
+            <div class="expertise-bar">
+              <div class="expertise-label">
+                <span>Expertise</span>
+                <span>90%</span>
+              </div>
+              <div class="bar-bg">
+                <div class="bar-fill" style="width: 90%"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="skill-card" data-index="2" data-level="85">
+            <span class="card-number">03/06</span>
+            <div class="skill-category">Framework</div>
+            <h3 class="skill-name">React</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">Hooks</span>
+              <span class="skill-tag">Context</span>
+              <span class="skill-tag">Router</span>
+              <span class="skill-tag">Redux</span>
+            </div>
+            <div class="expertise-bar">
+              <div class="expertise-label">
+                <span>Expertise</span>
+                <span>85%</span>
+              </div>
+              <div class="bar-bg">
+                <div class="bar-fill" style="width: 85%"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="skill-card" data-index="3" data-level="88">
+            <span class="card-number">04/06</span>
+            <div class="skill-category">Backend</div>
+            <h3 class="skill-name">PHP & Laravel</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">PHP</span>
+              <span class="skill-tag">Laravel</span>
+              <span class="skill-tag">Express</span>
+              <span class="skill-tag">APIs</span>
+            </div>
+            <div class="expertise-bar">
+              <div class="expertise-label">
+                <span>Expertise</span>
+                <span>88%</span>
+              </div>
+              <div class="bar-bg">
+                <div class="bar-fill" style="width: 88%"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="skill-card" data-index="4" data-level="92">
+            <span class="card-number">05/06</span>
+            <div class="skill-category">Database</div>
+            <h3 class="skill-name">MySQL</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">SQL</span>
+              <span class="skill-tag">Queries</span>
+              <span class="skill-tag">Design</span>
+              <span class="skill-tag">Optimization</span>
+            </div>
+            <div class="expertise-bar">
+              <div class="expertise-label">
+                <span>Expertise</span>
+                <span>92%</span>
+              </div>
+              <div class="bar-bg">
+                <div class="bar-fill" style="width: 92%"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="skill-card" data-index="5" data-level="87">
+            <span class="card-number">06/06</span>
+            <div class="skill-category">Animation</div>
+            <h3 class="skill-name">GSAP</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">ScrollTrigger</span>
+              <span class="skill-tag">Timeline</span>
+              <span class="skill-tag">Tweens</span>
+              <span class="skill-tag">3D</span>
+            </div>
+            <div class="expertise-bar">
+              <div class="expertise-label">
+                <span>Expertise</span>
+                <span>87%</span>
+              </div>
+              <div class="bar-bg">
+                <div class="bar-fill" style="width: 87%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Ticker Section -->
+  <!-- <section class="ticker-section">
     <div class="ticker" data-duration="20">
       <div class="ticker-wrap">
           <div class="ticker-text">Let's collaborate • Drop me a line at <span class="accent">ilyassgridech0@gmail.com</span> • Available for <span class="accent">freelance projects</span> • Ready to create something amazing •</div>
@@ -392,114 +441,98 @@
   </section> -->
 
   <!-- Services Section : -->
-    <div class="hero-title fill-animation">
-        <span class="title-stroke">My Services</span>
-        <span class="title-filled">My Services</span>
-    </div>
-    <section class="services-section">
+  <div class="hero-title fill-animation">
+    <span class="title-stroke">My Services</span>
+    <span class="title-filled">My Services</span>
+  </div>
+  <section class="services-section">
     <div class="svg-drawing-container">
-        <svg viewBox="0 0 4000 1000" preserveAspectRatio="none" width="100%" height="100%">
-            <path id="drawing-path" d="M0,500 C500,-150 1000,1150 1500,500 C2000,-150 2500,1150 3000,500 C3500,-150 4000,1150 4500,500" />
-        </svg>
+      <svg viewBox="0 0 4000 1000" preserveAspectRatio="none" width="100%" height="100%">
+        <path id="drawing-path"
+          d="M0,500 C500,-150 1000,1150 1500,500 C2000,-150 2500,1150 3000,500 C3500,-150 4000,1150 4500,500" />
+      </svg>
     </div>
 
     <div class="horizontal-track">
-        <div class="service-card">
-            <span class="card-number">// 01</span>
-            <div class="card-content">
-                <h2>Web Development</h2>
-                <p>Digital environments that react to your presence.</p>
-            </div>
+      <div class="service-card">
+        <span class="card-number">// 01</span>
+        <div class="card-content">
+          <h2>Web Development</h2>
+          <p>Digital environments that react to your presence.</p>
         </div>
+      </div>
 
-        <div class="service-card">
-            <span class="card-number">// 02</span>
-            <div class="card-content">
-                <h2>Web Designer</h2>
-                <p>Stripping away the noise to reveal core essence.</p>
-            </div>
+      <div class="service-card">
+        <span class="card-number">// 02</span>
+        <div class="card-content">
+          <h2>Web Designer</h2>
+          <p>Stripping away the noise to reveal core essence.</p>
         </div>
+      </div>
 
-        <div class="service-card">
-            <span class="card-number">// 03</span>
-            <div class="card-content">
-                <h2>UI/UX Development</h2>
-                <p>Blurred lines between interface and art.</p>
-            </div>
+      <div class="service-card">
+        <span class="card-number">// 03</span>
+        <div class="card-content">
+          <h2>UI/UX Development</h2>
+          <p>Blurred lines between interface and art.</p>
         </div>
+      </div>
 
-        <div class="service-card">
-            <span class="card-number">// 04</span>
-            <div class="card-content">
-                <h2>Video Editing</h2>
-                <p>Modern standards for high-performance sites.</p>
-            </div>
+      <div class="service-card">
+        <span class="card-number">// 04</span>
+        <div class="card-content">
+          <h2>Video Editing</h2>
+          <p>Modern standards for high-performance sites.</p>
         </div>
+      </div>
     </div>
-</section>
+  </section>
 
-<!-- Contact me section  -->
-    <div class="hero-title fill-animation">
-        <span class="title-stroke">Let's get in touch</span>
-        <span class="title-filled">Let's get in touch</span>
-    </div>
-    <section class="contact-section">
+  <!-- Contact me section  -->
+  <div class="hero-title fill-animation">
+    <span class="title-stroke">Let's get in touch</span>
+    <span class="title-filled">Let's get in touch</span>
+  </div>
+  <section class="contact-section">
     <div class="form-wrapper">
-        <p class="section-subtitle">Drop me a message and I'll get back to you within 24 hours</p>
+      <p class="section-subtitle">Drop me a message and I'll get back to you within 24 hours</p>
 
-        <div class="deco-line deco-line-1"></div>
-        <div class="deco-line deco-line-2"></div>
-        <div class="deco-line deco-line-3"></div>
+      <div class="deco-line deco-line-1"></div>
+      <div class="deco-line deco-line-2"></div>
+      <div class="deco-line deco-line-3"></div>
 
-        <form class="contact-form" id="contactForm">
-            <div class="form-group" data-index="0">
-                <label for="name">Your Name</label>
-                <div class="input-wrapper">
-                    <input 
-                        type="text" 
-                        id="name" 
-                        name="name" 
-                        placeholder="your name"
-                        required
-                    >
-                </div>
-            </div>
+      <form class="contact-form" id="contactForm">
+        <div class="form-group" data-index="0">
+          <label for="name">Your Name</label>
+          <div class="input-wrapper">
+            <input type="text" id="name" name="name" placeholder="your name" required>
+          </div>
+        </div>
 
-            <div class="form-group" data-index="1">
-                <label for="email">Email Address</label>
-                <div class="input-wrapper">
-                    <input 
-                        type="email" 
-                        id="email" 
-                        name="email" 
-                        placeholder="name@example.com"
-                        required
-                    >
-                </div>
-            </div>
+        <div class="form-group" data-index="1">
+          <label for="email">Email Address</label>
+          <div class="input-wrapper">
+            <input type="email" id="email" name="email" placeholder="name@example.com" required>
+          </div>
+        </div>
 
-            <div class="form-group" data-index="2">
-                <label for="message">Your Message</label>
-                <div class="input-wrapper">
-                    <textarea 
-                        id="message" 
-                        name="message" 
-                        placeholder="Tell me about your project..."
-                        maxlength="500"
-                        required
-                    ></textarea>
-                    <span class="char-count">0 / 500</span>
-                </div>
-            </div>
+        <div class="form-group" data-index="2">
+          <label for="message">Your Message</label>
+          <div class="input-wrapper">
+            <textarea id="message" name="message" placeholder="Tell me about your project..." maxlength="500"
+              required></textarea>
+            <span class="char-count">0 / 500</span>
+          </div>
+        </div>
 
-            <div class="submit-wrapper">
-                <button type="submit" class="submit-btn">
-                    <span>Send Message</span>
-                </button>
-            </div>
-        </form>
+        <div class="submit-wrapper">
+          <button type="submit" class="submit-btn">
+            <span>Send Message</span>
+          </button>
+        </div>
+      </form>
     </div>
-</section>
+  </section>
 
   <!-- Scripts -->
   <script src="Script.js"></script>
@@ -508,38 +541,38 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <!-- spline -->
-   <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.57/build/spline-viewer.js"></script>
-   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.57/build/spline-viewer.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
 
 
 
-<script>
-  (function () {
-    emailjs.init("Wcriya1I3vWKTIXPv");
-  })();
+  <script>
+    (function () {
+      emailjs.init("Wcriya1I3vWKTIXPv");
+    })();
 
-  const form = document.getElementById("contactForm");
+    const form = document.getElementById("contactForm");
 
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
 
-    emailjs.sendForm(
-      "service_0pkad0r",
-      "template_52r3cwu",
-      this
-    ).then(
-      function () {
-        alert("Message sent successfully!");
-        form.reset();
-      },
-      function (error) {
-        alert("Failed to send message. Please try again.");
-        console.error(error);
-      }
-    );
-  });
-</script>
+      emailjs.sendForm(
+        "service_0pkad0r",
+        "template_52r3cwu",
+        this
+      ).then(
+        function () {
+          alert("Message sent successfully!");
+          form.reset();
+        },
+        function (error) {
+          alert("Failed to send message. Please try again.");
+          console.error(error);
+        }
+      );
+    });
+  </script>
 
 
 
