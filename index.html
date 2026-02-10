@@ -31,9 +31,18 @@
 
 <body>
 
+  <div class="page-transition">
+    <div class="transition-panel"></div>
+    <div class="transition-panel"></div>
+    <div class="transition-panel"></div>
+    <div class="transition-panel"></div>
+    <div class="transition-panel"></div>
+    <div class="transition-text">HOME</div>
+  </div>
+
 
   <!-- Preloader -->
-  <!-- <div id="preloader">
+  <div id="preloader">
     <div class="hello">
       <span>H</span>
       <span>e</span>
@@ -43,13 +52,13 @@
     </div>
     <div class="overlay black"></div>
     <div class="overlay blue"></div>
-  </div> -->
+  </div>
 
   <!-- Main page NavBar -->
   <nav class="main-nav">
     <ul class="main-nav-list">
       <li><a href="#home" class="main-nav-link" data-text="Home">Home</a></li>
-      <li><a href="#projects" class="main-nav-link" data-text="Projects">Projects</a></li>
+      <li><a href="works.html" class="main-nav-link" data-text="Works">Works</a></li>
       <li><a href="#about" class="main-nav-link" data-text="About">About</a></li>
       <li><a href="#contact" class="main-nav-link" data-text="Contact">Contact</a></li>
 
@@ -58,13 +67,22 @@
 
   <!--Navigation Menu Button-->
   <div class="menu-btn" id="menuBtn">
-    <span></span>
-    <span></span>
-    <span></span>
+    <div class="menu-btn-inner">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
   </div>
 
   <!-- Navigation Overlay -->
   <div class="nav-overlay" id="nav">
+    <div class="nav-panels">
+      <div class="nav-panel"></div>
+      <div class="nav-panel"></div>
+      <div class="nav-panel"></div>
+      <div class="nav-panel"></div>
+      <div class="nav-panel"></div>
+    </div>
     <section class="sec-nav">
       <div class="container-nav">
 
@@ -76,13 +94,13 @@
           <div class="arrow"><i class="fa-solid fa-arrow-right"></i></div>
         </div>
 
-        <div class="hover-link"
+        <a href="works.html" class="hover-link"
           data-img="https://static.vecteezy.com/system/resources/thumbnails/044/876/360/small/cat-with-glasses-meme-sticker-tshirt-illustration-free-png.png">
           <div class="text">
-            <h2>Prjects</h2>
+            <h2>Works</h2>
           </div>
           <div class="arrow"><i class="fa-solid fa-arrow-right"></i></div>
-        </div>
+        </a>
 
         <div class="hover-link" data-img="https://static.thenounproject.com/png/105262-200.png">
           <div class="text">
@@ -96,6 +114,17 @@
             <h2>Contact</h2>
           </div>
           <div class="arrow"><i class="fa-solid fa-arrow-right"></i></div>
+        </div>
+      </div>
+      <div class="nav-footer">
+        <div class="nav-socials">
+          <a href="#">GitHub</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">X (Twitter)</a>
+        </div>
+        <div class="nav-contact">
+          <p>Get in touch:</p>
+          <a href="mailto:hello@elyasse.com">hello@elyasse.com</a>
         </div>
       </div>
     </section>
@@ -129,7 +158,7 @@
         </span>
         <br>A Full-stack Developer <br> UI/UX Designer
       </h1>
-      <a href="#projects" class="magnetic-btn">
+      <a href="works.html" class="magnetic-btn">
         <span class="btn-text">My Works</span>
         <span class="btn-fill"></span>
       </a>

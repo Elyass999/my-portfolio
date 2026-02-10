@@ -34,175 +34,191 @@ window.addEventListener('scroll', () => {
 
   if (currentScroll > 200) {
     gsap.to(MenuNav, {
-      y: 0,
       opacity: 1,
-      duration: 0.2,
+      pointerEvents: "auto",
+      duration: 0.3,
       ease: "power2.out"
     });
   } else {
     gsap.to(MenuNav, {
-      x: 0,
       opacity: 0,
-      duration: 0.2,
+      pointerEvents: "none",
+      duration: 0.3,
       ease: "power2.in"
     });
   }
 });
 
-// Preloader :
-const tll = gsap.timeline({ defaults: { ease: "power4.out" } });
+// Magnetic Menu Button Effect
+if (MenuNav) {
+  MenuNav.addEventListener('mousemove', (e) => {
+    const rect = MenuNav.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
 
-// 1. Text entrance (Preloader)
-tll.to("#preloader .hello span", {
-  y: 0,
-  opacity: 1,
-  duration: 0.5,
-  stagger: 0.08
-})
+    gsap.to(MenuNav, {
+      x: x * 0.4,
+      y: y * 0.4,
+      duration: 0.4,
+      ease: "power2.out"
+    });
 
-  // 2. The Panel "Sweep" 
-  .to(".overlay.black", {
-    x: "-100%",
-    duration: 0.6,
-    ease: "expo.inOut"
-  }, "+=0.2") // Brief pause to let user read "Hello"
+    gsap.to(MenuNav.querySelector('.menu-btn-inner'), {
+      x: x * 0.2,
+      y: y * 0.2,
+      duration: 0.4,
+      ease: "power2.out"
+    });
+  });
 
-  .to(".overlay.blue", {
-    y: "-100%",
-    duration: 0.6,
-    ease: "expo.inOut"
-  }, "-=0.4") // Starts while black is still moving
-
-  .to("#preloader", {
-    x: "-100%",
-    duration: 0.7,
-    ease: "expo.inOut"
-  }, "-=0.4") // Moves the container away early to reveal content
+  MenuNav.addEventListener('mouseleave', () => {
+    gsap.to([MenuNav, MenuNav.querySelector('.menu-btn-inner')], {
+      x: 0,
+      y: 0,
+      duration: 0.6,
+      ease: "elastic.out(1, 0.3)"
+    });
+  });
+}
 
 
+// Preloader and Content Reveal Logic
+window.addEventListener('load', () => {
+  const hasVisited = sessionStorage.getItem('visited');
+  const preloader = document.querySelector('#preloader');
+  const mainTimeline = gsap.timeline({ defaults: { ease: "power4.out" } });
 
+  if (!hasVisited && preloader) {
+    // --- FIRST VISIT: Play Full Preloader ---
+    mainTimeline
+      .to("#preloader .hello span", {
+        y: 0, opacity: 1, duration: 0.5, stagger: 0.08
+      })
+      .to(".overlay.black", {
+        x: "-100%", duration: 0.6, ease: "expo.inOut"
+      }, "+=0.3")
+      .to(".overlay.blue", {
+        y: "-100%", duration: 0.6, ease: "expo.inOut"
+      }, "-=0.4")
+      .to("#preloader", {
+        x: "-100%", duration: 0.7, ease: "expo.inOut"
+      }, "-=0.4");
 
-// Appearing element 
-window.addEventListener('DOMContentLoaded', () => {
-  const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
-  // 1. Reveal the Nav items one by one
-  tl.fromTo(".main-nav-list li",
-    { y: -50, opacity: 0 },
-    { y: 0, opacity: 1, duration: 2, stagger: 0.1 }
-  )
+    sessionStorage.setItem('visited', 'true');
+  } else {
+    // --- RETURNING VISIT: Hide Preloader Immediately ---
+    if (preloader) {
+      gsap.set(preloader, { display: 'none' });
+    }
+  }
 
-  // 2. Animate the main heading text
-  const tll = gsap.timeline({ defaults: { ease: "power4.out" } });
-
-  // --- Your existing Preloader Sequence ---
-  tll.to("#preloader .hello span", {
-    y: 0, opacity: 1, duration: 0.4, stagger: 0.1
-  })
-    .to(".overlay.black", { x: "-100%", duration: 0.3 })
-    .to(".overlay.blue", { y: "-100%", duration: 0.3 }, "+=0.5")
-    .to("#preloader", { x: "-100%", duration: 0.3, ease: "power2.inOut" })
-
-    // --- NEW Content Reveal Logic ---
+  // --- SHARED REVEAL ANIMATIONS (Nav, Title, Socials) ---
+  mainTimeline
     .fromTo(".main-nav-list li",
+      { y: -40, opacity: 0, rotationX: -90, scale: 0.8, filter: "blur(10px)" },
       {
-        y: -40,              // Start slightly higher for more "travel"
-        opacity: 0,
-        rotationX: -90,      // Start completely flat (invisible in 3D space)
-        scale: 0.8,          // Small to large effect
-        filter: "blur(10px)" // Soft entry
+        y: 0, opacity: 1, rotationX: 0, scale: 1, filter: "blur(0px)",
+        duration: 1.2, stagger: { each: 0.1, from: "end" }, ease: "expo.out"
       },
-      {
-        y: 0,
-        opacity: 1,
-        rotationX: 0,
-        scale: 1,
-        filter: "blur(0px)",
-        duration: 1.2,
-        stagger: {
-          each: 0.1,
-          from: "end"        // Reverses stagger: right-most link animates first (modern trend)
-        },
-        ease: "expo.out"     // Ultra-smooth deceleration
-      },
-      "-=0.4"
+      hasVisited ? 0 : "-=0.4"
     )
-
     .fromTo("h1",
-      {
-        y: 70,
-        opacity: 0,
-        rotationX: -30, // Tilts the text away
-        skewX: 10,      // Cinematic slant
-        filter: "blur(15px)" // Starts blurry
-      },
-      {
-        y: 0,
-        opacity: 1,
-        rotationX: 0,
-        skewX: 0,
-        filter: "blur(0px)",
-        duration: 1.6,
-        ease: "expo.out"
-      },
-      "-=0.6" // Heavy overlap for "smooth" feel
+      { y: 70, opacity: 0, rotationX: -30, skewX: 10, filter: "blur(15px)", scale: 1.1 },
+      { y: 0, opacity: 1, rotationX: 0, skewX: 0, filter: "blur(0px)", scale: 1, duration: 1.6 },
+      "-=0.6"
     )
-
-    .fromTo("#text-container",
-      {
-        scale: 0.7,
-        color: "#3498db" // Optional: Start with a highlight color
-      },
-      {
-        scale: 1,
-        color: "inherit", // Fade back to original color
-        duration: 1,
-        ease: "back.out(2)"
-      },
-      "-=1" // Happens while h1 is still settling
-    )
-
-    // 3. Special "Pop" for your name
     .fromTo("#text-container",
       { scale: 0.8, opacity: 0 },
       { scale: 1, opacity: 1, duration: 0.8 },
       "-=0.8"
     )
-
-    // 4. Reveal the Magnetic Button
     .fromTo(".magnetic-btn",
-      {
-        y: 40,
-        opacity: 0,
-        scale: 0.8,
-        filter: "blur(10px)",
-        rotationX: -45
-      },
-      {
-        y: 0,
-        opacity: 1,
-        scale: 1,
-        filter: "blur(0px)",
-        rotationX: 0,
-        duration: 1.2,
-        ease: "expo.out"
-      },
-      "-=0.6" // Starts while the name is popping
+      { y: 40, opacity: 0, scale: 0.8, filter: "blur(10px)", rotationX: -45 },
+      { y: 0, opacity: 1, scale: 1, filter: "blur(0px)", rotationX: 0, duration: 1.2 },
+      "-=0.6"
     )
+    .to(".sidebar-line", { scaleY: 1, duration: 1.2 }, "-=0.8")
+    .to(".social-icon", { y: 0, opacity: 1, duration: 0.8, stagger: 0.15 }, "-=0.6");
 
-    // 5. Reveal the Social Sidebar (Detailed)
-    .to(".sidebar-line", {
-      scaleY: 1,
-      duration: 1.2,
-      ease: "power3.inOut"
-    }, "-=0.8")
-    .to(".social-icon", {
-      y: 0,
-      opacity: 1,
+  // --- Page Entrance Transition (Panels going down) ---
+  const transitionPanels = document.querySelectorAll('.transition-panel');
+  const transitionText = document.querySelector('.transition-text');
+
+  if (transitionPanels.length > 0) {
+    gsap.to(transitionPanels, {
+      scaleY: 0,
       duration: 0.8,
-      stagger: 0.15,
-      ease: "back.out(1.7)"
-    }, "-=0.6");
+      stagger: { each: 0.1, from: "end" },
+      ease: "expo.inOut"
+    });
+
+    if (transitionText) {
+      gsap.to(transitionText, {
+        opacity: 0,
+        y: -50,
+        duration: 0.4
+      });
+    }
+  }
 });
+
+
+// Link transition handling
+document.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', (e) => {
+    const href = link.getAttribute('href');
+    if (href && !href.startsWith('#') && !href.includes('mailto:') && !href.startsWith('tel:')) {
+      const target = link.getAttribute('target');
+      if (target === '_blank') return;
+
+      e.preventDefault();
+      const transitionPanels = document.querySelectorAll('.transition-panel');
+      const transitionText = document.querySelector('.transition-text');
+
+      if (transitionPanels.length > 0) {
+        // Set dynamic text based on destination
+        if (transitionText) {
+          if (href.includes('works.html')) {
+            transitionText.textContent = "WORKS";
+          } else if (href.includes('index.html')) {
+            transitionText.textContent = "HOME";
+          } else {
+            transitionText.textContent = "ELYASSE";
+          }
+        }
+
+        const tl = gsap.timeline({
+          onComplete: () => {
+            window.location.href = href;
+          }
+        });
+
+        gsap.set(".page-transition", { pointerEvents: "auto" });
+
+        // 1. Panels Scale Up
+        tl.to(transitionPanels, {
+          scaleY: 1,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: "expo.inOut"
+        })
+          // 2. Text Reveal
+          .to(transitionText, {
+            opacity: 1,
+            y: 0,
+            duration: 0.4,
+            ease: "power2.out"
+          }, "-=0.2")
+          // 3. Briefly show text
+          .to({}, { duration: 0.2 })
+        // Redirect happens in onComplete
+      } else {
+        window.location.href = href;
+      }
+    }
+  });
+});
+
 
 
 
@@ -284,57 +300,91 @@ mainNavLinks.forEach(navLink => {
 //Overlay nav section elements 
 const menuBtn = document.getElementById("menuBtn");
 const nav = document.getElementById("nav");
-const navItems = document.querySelectorAll(".nav-content ul li");
-
-function getBtnCenter() {
-  const rect = menuBtn.getBoundingClientRect();
-  return {
-    x: rect.left + rect.width / 2,
-    y: rect.top + rect.height / 2
-  };
-}
+const navPanels = document.querySelectorAll(".nav-panel");
+const containerNav = document.querySelector(".container-nav");
+const hoverLinks = document.querySelectorAll(".hover-link");
+const navFooter = document.querySelector(".nav-footer");
 
 let isOpen = false;
-menuBtn.addEventListener("click", () => {
-  const { x, y } = getBtnCenter();
 
+menuBtn.addEventListener("click", () => {
   if (!isOpen) {
+    // OPEN MENU
     menuBtn.classList.add("active");
     nav.classList.add("open");
 
-    gsap.to(nav, {
-      clipPath: `circle(150% at ${x}px ${y}px)`,
-      duration: 0.8,
-      ease: "power3.inOut"
+    const tlOpen = gsap.timeline();
+
+    // Set alternating transform origins for a more dynamic "shutter" effect
+    navPanels.forEach((panel, i) => {
+      gsap.set(panel, { transformOrigin: i % 2 === 0 ? "top" : "bottom" });
     });
 
-    gsap.to(navItems, {
-      opacity: 1,
-      x: 0,
+    tlOpen.to(navPanels, {
+      scaleY: 1,
+      duration: 0.8,
       stagger: 0.1,
-      duration: 0.5,
-      ease: "power3.out",
-      delay: 0.2
+      ease: "expo.inOut"
     });
+
+    tlOpen.to(containerNav, {
+      opacity: 1,
+      duration: 0.4,
+      ease: "power2.out"
+    }, "-=0.4");
+
+    tlOpen.fromTo(hoverLinks,
+      { y: 50, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: "power3.out" },
+      "-=0.3"
+    );
+
+    tlOpen.to(navFooter, {
+      opacity: 1,
+      y: 0,
+      duration: 0.5,
+      ease: "power3.out"
+    }, "-=0.4");
 
     isOpen = true;
   } else {
+    // CLOSE MENU
     menuBtn.classList.remove("active");
 
-    gsap.to(navItems, {
-      opacity: 0,
-      x: -50,
-      stagger: 0.05,
-      duration: 0.3,
-      ease: "power3.in"
+    const tlClose = gsap.timeline({
+      onComplete: () => {
+        nav.classList.remove("open");
+      }
     });
 
-    gsap.to(nav, {
-      clipPath: `circle(0% at ${x}px ${y}px)`,
-      duration: 0.8,
-      ease: "power3.inOut",
-      onComplete: () => nav.classList.remove("open")
+    tlClose.to(navFooter, {
+      opacity: 0,
+      y: 20,
+      duration: 0.3
     });
+
+    tlClose.to(hoverLinks, {
+      y: -30,
+      opacity: 0,
+      duration: 0.4,
+      stagger: 0.05,
+      ease: "power3.in"
+    }, "-=0.2");
+
+    tlClose.to(containerNav, {
+      opacity: 0,
+      duration: 0.3
+    }, "-=0.2");
+
+    tlClose.to(navPanels, {
+      scaleY: 0,
+      duration: 0.8,
+      stagger: {
+        each: 0.1,
+        from: "end"
+      },
+      ease: "expo.inOut"
+    }, "-=0.3");
 
     isOpen = false;
   }
@@ -487,7 +537,7 @@ heroTimeline.to(".hero-section-wrapper", {
 
 //View Project Cursor 1 :
 const cursor = document.querySelector(".cursor");
-const cards = document.querySelectorAll(".proj-pic");
+const cards = document.querySelectorAll(".proj-pic, .work-img-wrapper");
 
 // Hide cursor on touch devices
 if ('ontouchstart' in window === false) {

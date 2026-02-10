@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Works | Elyasse Grideche</title>
+    <link rel="stylesheet" href="Style.css">
+    <style>
+        /* Specific styles for Works page to avoid massive separate file */
+        .works-page {
+            background: #000;
+            overflow-x: hidden;
+            background-size: 40px 40px;
+        }
+
+        /* Page Transition Styles are now handled in Style.css */
+        .works-hero {
+            height: 90vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .works-hero .hero-title {
+            left: 0;
+            transform: none;
+            position: relative;
+            margin: 0;
+        }
+
+        .hero-bg-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20vw;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.02);
+            white-space: nowrap;
+            z-index: -1;
+            pointer-events: none;
+            line-height: 1;
+        }
+
+        .works-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem 100px;
+        }
+
+        .work-item {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-bottom: 15vw;
+            position: relative;
+        }
+
+        .work-item:nth-child(even) {
+            align-items: flex-end;
+        }
+
+        .work-img-wrapper {
+            width: 70%;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+            border-radius: 24px;
+            position: relative;
+            cursor: pointer;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+            background: #000;
+        }
+
+        .work-img-wrapper::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0);
+            transition: background 0.4s ease;
+            pointer-events: none;
+        }
+
+        .work-img-wrapper:hover::after {
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .work-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.1s ease;
+            transform: scale(1.1);
+        }
+
+        .work-img-wrapper:hover img {
+            transform: scale(1.15);
+        }
+
+        .work-info {
+            width: 40%;
+            padding: 2rem;
+            background: rgba(21, 21, 21, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: absolute;
+            bottom: -50px;
+            right: 0;
+            z-index: 2;
+        }
+
+        .work-item:nth-child(even) .work-info {
+            left: 0;
+            right: auto;
+        }
+
+        .work-category {
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+        }
+
+        .work-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-family: "Bebas Neue", sans-serif;
+        }
+
+        .work-desc {
+            font-size: 1.1rem;
+            color: #ccc;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            text-transform: none;
+        }
+
+        .work-tech {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .work-tech span {
+            padding: 6px 18px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .work-tech span:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        @media (max-width: 992px) {
+            .work-img-wrapper {
+                width: 100%;
+            }
+
+            .work-info {
+                width: 90%;
+                position: relative;
+                bottom: 0;
+                margin-top: -50px;
+                margin-left: 5%;
+            }
+
+            .work-item:nth-child(even) .work-info {
+                margin-left: 0;
+                margin-right: 5%;
+            }
+        }
+
+        /* Reusing some animations from Style.css */
+        .cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, rgba(229, 233, 233, 0.25), rgba(104, 105, 106, 0));
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 0 1px rgba(78, 81, 81, 0.4),
+                0 0 20px rgba(39, 40, 41, 0.35),
+                0 0 40px rgba(255, 255, 255, 0.283);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            transform: translate(-50%, -50%) scale(0);
+            z-index: 1000;
+            color: #000000;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: transform 0.15s cubic-bezier(.25, 1, .5, 1),
+                opacity 0.2s ease,
+                background 0.3s ease;
+        }
+    </style>
+    </style>
+
+    <!-- GSAP LINKS  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
+    <script src="https://unpkg.com/split-type"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body class="works-page">
+
+    <div class="page-transition">
+        <div class="transition-panel"></div>
+        <div class="transition-panel"></div>
+        <div class="transition-panel"></div>
+        <div class="transition-panel"></div>
+        <div class="transition-panel"></div>
+        <div class="transition-text">WORKS</div>
+    </div>
+
+    <!-- Main page NavBar -->
+    <nav class="main-nav">
+        <ul class="main-nav-list">
+            <li><a href="index.html#home" class="main-nav-link" data-text="Home">Home</a></li>
+            <li><a href="works.html" class="main-nav-link" data-text="Works">Works</a></li>
+            <li><a href="index.html#about" class="main-nav-link" data-text="About">About</a></li>
+            <li><a href="index.html#contact" class="main-nav-link" data-text="Contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="menu-btn" id="menuBtn">
+        <div class="menu-btn-inner">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <!-- Navigation Overlay -->
+    <div class="nav-overlay" id="nav">
+        <div class="nav-panels">
+            <div class="nav-panel"></div>
+            <div class="nav-panel"></div>
+            <div class="nav-panel"></div>
+            <div class="nav-panel"></div>
+            <div class="nav-panel"></div>
+        </div>
+        <section class="sec-nav">
+            <div class="container-nav">
+                <a href="index.html#home" class="hover-link"
+                    data-img="https://freepngimg.com/save/98220-meme-angry-face-free-transparent-image-hq/820x580">
+                    <div class="text">
+                        <h2>Home</h2>
+                    </div>
+                    <div class="arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                </a>
+                <a href="works.html" class="hover-link"
+                    data-img="https://static.vecteezy.com/system/resources/thumbnails/044/876/360/small/cat-with-glasses-meme-sticker-tshirt-illustration-free-png.png">
+                    <div class="text">
+                        <h2>Works</h2>
+                    </div>
+                    <div class="arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                </a>
+                <a href="index.html#about" class="hover-link"
+                    data-img="https://static.thenounproject.com/png/105262-200.png">
+                    <div class="text">
+                        <h2>About</h2>
+                    </div>
+                    <div class="arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                </a>
+                <a href="index.html#contact" class="hover-link" data-img="https://i.redd.it/1o8zqjm9bqc81.png">
+                    <div class="text">
+                        <h2>Contact</h2>
+                    </div>
+                    <div class="arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                </a>
+            </div>
+            <div class="nav-footer">
+                <div class="nav-socials">
+                    <a href="#">GitHub</a>
+                    <a href="#">LinkedIn</a>
+                    <a href="#">X (Twitter)</a>
+                </div>
+                <div class="nav-contact">
+                    <p>Get in touch:</p>
+                    <a href="mailto:hello@elyasse.com">hello@elyasse.com</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <section class="works-hero">
+        <div class="hero-bg-text">CREATIVE WORKS</div>
+        <div class="hero-title fill-animation">
+            <span class="title-stroke">MY WORKS</span>
+            <span class="title-filled">MY WORKS</span>
+        </div>
+    </section>
+
+    <div class="works-container">
+        <!-- Project 1 -->
+        <div class="work-item">
+            <div class="work-img-wrapper" data-cursor="View">
+                <img src="Projects Pics/Gri-job-mockup.png" alt="Gri-Job">
+            </div>
+            <div class="work-info">
+                <div class="work-category">Web Development / 2024</div>
+                <h2 class="work-title">
+                    <span>G</span><span>r</span><span>i</span><span>-</span><span>J</span><span>o</span><span>b</span>
+                </h2>
+                <p class="work-desc">A professional job matching ecosystem. Built with a focus on performance and
+                    intuitive user experience. Featuring advanced filtering, real-time notifications, and employer
+                    dashboards.</p>
+                <div class="work-tech">
+                    <span>PHP 8.2</span>
+                    <span>JavaScript (ES6+)</span>
+                    <span>MySQL</span>
+                    <span>Tailwind CSS</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="work-item">
+            <div class="work-img-wrapper" data-cursor="View">
+                <img src="Projects Pics/project-oriz-mockup.png" alt="Project Oriz">
+            </div>
+            <div class="work-info">
+                <div class="work-category">Product Design / 2023</div>
+                <h2 class="work-title">
+                    <span>P</span><span>r</span><span>o</span><span>j</span><span>e</span><span>c</span><span>t</span>
+                    <span>O</span><span>r</span><span>i</span><span>z</span>
+                </h2>
+                <p class="work-desc">A SaaS platform designed to streamline team collaboration. It offers a
+                    revolutionary way to manage tasks and projects with a clean, distraction-free interface.</p>
+                <div class="work-tech">
+                    <span>React</span>
+                    <span>Next.js</span>
+                    <span>GSAP</span>
+                    <span>Firebase</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="work-item">
+            <div class="work-img-wrapper" data-cursor="View">
+                <img src="Projects Pics/Travel-Pro-mockup.png" alt="Travel Pro">
+            </div>
+            <div class="work-info">
+                <div class="work-category">E-Commerce / 2024</div>
+                <h2 class="work-title">
+                    <span>T</span><span>r</span><span>a</span><span>v</span><span>e</span><span>l</span>
+                    <span>P</span><span>r</span><span>o</span>
+                </h2>
+                <p class="work-desc">An immersive travel booking experience. Utilizing high-quality imagery and smooth
+                    transitions to provide users with a sense of adventure even before they pack their bags.</p>
+                <div class="work-tech">
+                    <span>Vue.js</span>
+                    <span>Node.js</span>
+                    <span>MongoDB</span>
+                    <span>SCSS</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="work-item">
+            <div class="work-img-wrapper" data-cursor="View">
+                <img src="Projects Pics/Parfemrie-Mockup.png" alt="Parfemrie">
+            </div>
+            <div class="work-info">
+                <div class="work-category">Luxury Branding / 2023</div>
+                <h2 class="work-title">
+                    <span>P</span><span>a</span><span>r</span><span>f</span><span>e</span><span>m</span><span>r</span><span>i</span><span>e</span>
+                </h2>
+                <p class="work-desc">A premium showcase for fine fragrances. The design reflects the elegance and
+                    sophistication of the products, with subtle micro-interactions and pixel-perfect layouts.</p>
+                <div class="work-tech">
+                    <span>Laravel</span>
+                    <span>Vue</span>
+                    <span>Stripe</span>
+                    <span>PostgreSQL</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cursor">
+        <span>View Project</span>
+    </div>
+
+    <footer style="padding: 100px 0; border-top: 1px solid rgba(255,255,255,0.1);">
+        <div class="footer-container" style="text-align: center;">
+            <h1 id="wavy-text" style="font-size: 10vw;">ELYASSE</h1>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="Script.js"></script>
+    <script>
+        // Custom logic for works page scrolling and animations
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Cinematic Hero Entrance Animation
+        const heroTl = gsap.timeline({ defaults: { ease: "expo.out" } });
+
+        heroTl
+            .from(".hero-bg-text", {
+                y: 100,
+                opacity: 0,
+                duration: 1.5,
+                scale: 0.8,
+                filter: "blur(20px)"
+            })
+            .from(".hero-title", {
+                y: 50,
+                opacity: 0,
+                duration: 1.2,
+                scale: 0.9,
+                letterSpacing: "-0.1em"
+            }, "-=1.2")
+            .from(".title-stroke", {
+                opacity: 0,
+                duration: 1
+            }, "-=0.8");
+
+        // Cinematic Individual work item animations
+        document.querySelectorAll('.work-item').forEach((item, i) => {
+            const imgWrapper = item.querySelector('.work-img-wrapper');
+            const info = item.querySelector('.work-info');
+            const title = item.querySelector('.work-title');
+            const techTags = item.querySelectorAll('.work-tech span');
+            const titleChars = title.querySelectorAll('span');
+
+            const itemTl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: item,
+                    start: "top 90%",
+                    toggleActions: "play none none reverse"
+                }
+            });
+
+            // 1. Reveal Image with Clip-Path and Scale
+            itemTl.fromTo(imgWrapper,
+                {
+                    clipPath: "inset(100% 0% 0% 0%)",
+                    y: 100,
+                    scale: 1.1,
+                    opacity: 0
+                },
+                {
+                    clipPath: "inset(0% 0% 0% 0%)",
+                    y: 0,
+                    scale: 1,
+                    opacity: 1,
+                    duration: 1.2,
+                    ease: "expo.out"
+                }
+            );
+
+            // 2. Reveal Info Card
+            itemTl.from(info, {
+                x: i % 2 === 0 ? 50 : -50,
+                y: 50,
+                opacity: 0,
+                duration: 1,
+                ease: "power3.out"
+            }, "-=0.8");
+
+            // 3. Stagger Title Characters
+            if (titleChars.length > 0) {
+                itemTl.from(titleChars, {
+                    y: 20,
+                    opacity: 0,
+                    stagger: 0.02,
+                    duration: 0.5,
+                    ease: "power2.out"
+                }, "-=0.7");
+            }
+
+            // 4. Stagger Tech Tags
+            if (techTags.length > 0) {
+                itemTl.from(techTags, {
+                    y: 10,
+                    opacity: 0,
+                    stagger: 0.05,
+                    duration: 0.4,
+                    ease: "power2.out"
+                }, "-=0.5");
+            }
+        });
+
+        // Hero fill animation (Improved for Works page)
+        gsap.to(".title-filled", {
+            clipPath: "inset(0% 0% 0% 0%)",
+            ease: "none",
+            scrollTrigger: {
+                trigger: ".works-hero",
+                start: "top top",
+                end: "bottom center",
+                scrub: 0.5
+            }
+        });
+
+        // Parallax for background text
+        gsap.to(".hero-bg-text", {
+            xPercent: -20,
+            scrollTrigger: {
+                trigger: ".works-hero",
+                start: "top top",
+                end: "bottom top",
+                scrub: true
+            }
+        });
+    </script>
+</body>
+
+</html>
