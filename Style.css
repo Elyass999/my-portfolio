@@ -22,15 +22,16 @@ body {
 /* Heros section style for all  */
 
 .hero-title {
-  font-size: clamp(5rem, 15vw, 12rem);
+  font-size: clamp(4rem, 12vw, 12rem);
   font-weight: 900;
-  letter-spacing: -5px;
+  letter-spacing: -3px;
   line-height: 1;
   position: relative;
   display: inline-block;
   text-align: center;
   left: 50%;
   transform: translateX(-50%);
+  white-space: nowrap;
 }
 
 .title-stroke {
@@ -44,6 +45,7 @@ body {
   position: absolute;
   top: 0;
   left: 0;
+  right: 0;
   color: #fff;
   -webkit-text-fill-color: #fff;
   display: block;
@@ -94,7 +96,7 @@ h1 {
 /* Hello text */
 .hello span {
   display: inline-block;
-  font-size: 7rem;
+  font-size: clamp(3rem, 15vw, 7rem);
   font-weight: 900;
   opacity: 0;
   transform: translateY(100%);
@@ -273,7 +275,7 @@ nav-overlay .menu-btn.active span:nth-child(2) {
 
 .text h2 {
   margin: 0;
-  font-size: clamp(6.5rem, 5vw, 4rem);
+  font-size: clamp(3rem, 10vw, 7rem);
   font-weight: 800;
   color: #ffffff;
 }
@@ -823,14 +825,11 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  /* Changed from left: 50% */
   right: 0;
-  /* Added */
   color: #fff;
   -webkit-text-fill-color: #fff;
   display: block;
   clip-path: inset(100% 0 0 0);
-  /* Removed transform: translateX(-50%) */
 }
 
 .about-div {
@@ -1221,10 +1220,22 @@ body {
   pointer-events: none;
 }
 
+.mobile-svg {
+  display: none;
+}
+
 #drawing-path {
   fill: none;
   stroke: #FFEA00;
   stroke-width: 45;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 2px rgba(255, 234, 0, 0.5));
+}
+
+#mobile-drawing-path {
+  fill: none;
+  stroke: #FFEA00;
+  stroke-width: 8;
   stroke-linecap: round;
   filter: drop-shadow(0 0 2px rgba(255, 234, 0, 0.5));
 }
@@ -1553,14 +1564,15 @@ textarea::placeholder {
 #wavy-text {
   color: #fff;
   font-family: 'Arial Black', sans-serif;
-  font-size: clamp(10rem, 12vw, 17rem);
-  letter-spacing: 5px;
+  font-size: clamp(3rem, 15vw, 17rem);
+  letter-spacing: 2px;
   margin: 0;
   display: block;
   overflow: hidden;
   /* Critical for the reveal effect */
   line-height: 1;
   text-align: center;
+  white-space: nowrap;
 }
 
 #wavy-text .char {
@@ -1683,8 +1695,9 @@ textarea::placeholder {
   }
 
   .skill-card {
-    width: 220%;
-    padding: 50px 40px;
+    width: 100%;
+    max-width: 90vw;
+    padding: 40px 30px;
   }
 
   .skill-name {
@@ -1711,17 +1724,7 @@ textarea::placeholder {
   }
 
   .main-nav {
-    padding: 1.5rem;
-  }
-
-  .main-nav-list {
-    gap: 1.5rem;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .main-nav-link {
-    font-size: 1rem;
+    display: none;
   }
 
   .flip-link {
@@ -1758,6 +1761,12 @@ textarea::placeholder {
   .hero2 {
     transform: translateY(-2rem);
     gap: 1.5rem;
+    padding: 0 1rem;
+  }
+
+  .hero2 h1 {
+    font-size: clamp(1.8rem, 8vw, 2.5rem);
+    line-height: 1.2;
   }
 
   .magnetic-btn {
@@ -1943,9 +1952,17 @@ textarea::placeholder {
 
 
 
-  .hero-title {
-    font-size: clamp(3rem, 9vw, 7rem);
-    letter-spacing: -3px;
+  .hero-title,
+  .about-title {
+    font-size: clamp(2rem, 10vw, 4rem);
+    letter-spacing: -1px;
+    width: 100%;
+    padding: 0 1rem;
+    white-space: nowrap;
+    display: block;
+    left: 0;
+    transform: none;
+    text-align: center;
   }
 
   .section.gray {
@@ -1959,6 +1976,9 @@ textarea::placeholder {
 
   .proj-pic {
     border-radius: 15px;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 500px;
   }
 
   .proj-pic img {
@@ -2017,81 +2037,120 @@ textarea::placeholder {
   }
 
   .cards-container {
-    height: 60vh;
-  }
+    .cards-stack {
+      height: 400px;
+      max-width: 90vw;
+    }
 
-  .skill-card {
-    width: 160%;
-    padding: 30px 20px;
-    border-radius: 15px;
-  }
+    .skill-card {
+      width: 100%;
+      transform: translate(-50%, -50%) scale(1);
+      padding: 25px 20px;
+      border-radius: 15px;
+    }
 
-  .card-number {
-    font-size: 0.85rem;
-    top: 15px;
-    right: 20px;
-  }
+    .card-number {
+      font-size: 0.85rem;
+      top: 15px;
+      right: 20px;
+    }
 
-  .skill-category {
-    font-size: 0.75rem;
-    margin-bottom: 15px;
-  }
+    .skill-category {
+      font-size: 0.75rem;
+      margin-bottom: 15px;
+    }
 
-  .skill-name {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-  }
+    .skill-name {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
 
-  .skill-tags {
-    gap: 6px;
-    margin-bottom: 20px;
-  }
+    .skill-tags {
+      gap: 6px;
+      margin-bottom: 20px;
+    }
 
-  .skill-tag {
-    padding: 6px 12px;
-    font-size: 0.75rem;
-  }
+    .skill-tag {
+      padding: 6px 12px;
+      font-size: 0.75rem;
+    }
 
-  .expertise-bar {
-    margin-top: 20px;
-  }
+    .expertise-bar {
+      margin-top: 20px;
+    }
 
-  .bar-bg {
-    height: 6px;
+    .bar-bg {
+      height: 6px;
+    }
   }
 
   .services-section {
     height: auto;
+    padding: 4rem 0;
   }
 
   .horizontal-track {
     flex-direction: column;
     height: auto;
+    width: 100%;
+    display: flex;
   }
 
   .service-card {
-    width: 95vw;
+    width: 80vw;
     height: auto;
-    min-height: 70vh;
-    padding: 10vw 5vw;
+    min-height: 60vh;
+    padding: 15vw 5vw;
+    border-left: none;
+    display: flex !important;
+    flex-direction: column;
+    position: relative;
+    flex-shrink: 1;
   }
 
-  .card-number {
+  .service-card:nth-child(odd) {
+    align-self: flex-start;
+    text-align: left;
+  }
+
+  .service-card:nth-child(even) {
+    align-self: flex-end;
+    text-align: right;
+  }
+
+  .service-card .card-number {
     font-size: 1.2rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
+    position: static;
+    color: #FFEA00;
   }
 
-  .card-content h2 {
-    font-size: clamp(1.8rem, 7vw, 4rem);
+  .service-card .card-content h2 {
+    font-size: clamp(1.8rem, 10vw, 3.5rem);
+    line-height: 1.1;
   }
 
-  .card-content p {
+  .service-card .card-content p {
     font-size: 1rem;
-    max-width: 100%;
+    max-width: 250px;
+    opacity: 0.8;
+    margin-top: 1rem;
   }
 
-  #drawing-path {
-    stroke-width: 30;
+  .service-card:nth-child(even) .card-content p {
+    margin-left: auto;
+  }
+
+  .desktop-svg {
+    display: none;
+  }
+
+  .mobile-svg {
+    display: block;
+  }
+
+  #mobile-drawing-path {
+    stroke-width: 6;
   }
 
   .contact-section {
@@ -2133,10 +2192,11 @@ textarea::placeholder {
   }
 
   #wavy-text {
-    font-size: clamp(6rem, 10vw, 12rem);
-    letter-spacing: 5px;
+    font-size: clamp(3rem, 12vw, 8rem);
+    letter-spacing: 2px;
   }
 }
+
 
 /* Small Phones (480px and below) */
 @media (max-width: 480px) {
@@ -2182,9 +2242,16 @@ textarea::placeholder {
   }
 
 
-  .hero-title {
-    font-size: clamp(2.5rem, 8vw, 6rem);
-    letter-spacing: -2px;
+  .hero-title,
+  .about-title {
+    font-size: clamp(1.5rem, 8vw, 2.5rem);
+    letter-spacing: -1px;
+    white-space: nowrap;
+    display: block;
+    width: 100%;
+    left: 0;
+    transform: none;
+    text-align: center;
   }
 
   .projects-cards {
@@ -2271,7 +2338,9 @@ textarea::placeholder {
   }
 
   #wavy-text {
-    font-size: clamp(5rem, 9vw, 10rem);
+    font-size: clamp(2.2rem, 12vw, 5rem);
+    letter-spacing: 1px;
+    white-space: nowrap;
   }
 
   /* Hide custom cursor on mobile */
@@ -2307,8 +2376,15 @@ textarea::placeholder {
     font-size: clamp(0.9rem, 2.8vw, 1.3rem);
   }
 
-  .hero-title {
-    font-size: clamp(2rem, 7vw, 5rem);
+  .hero-title,
+  .about-title {
+    font-size: clamp(1.2rem, 10vw, 2.2rem);
+    white-space: nowrap;
+    display: block;
+    width: 100%;
+    left: 0;
+    transform: none;
+    text-align: center;
   }
 
   .proj-pic img {
@@ -2361,7 +2437,9 @@ textarea::placeholder {
   }
 
   #wavy-text {
-    font-size: clamp(4rem, 8vw, 8rem);
+    font-size: clamp(1.8rem, 14vw, 4rem);
+    letter-spacing: 0px;
+    white-space: nowrap;
   }
 }
 

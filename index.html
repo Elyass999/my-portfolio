@@ -33,17 +33,17 @@
 
 
   <!-- Preloader -->
-  <div id="preloader">
-  <div class="hello">
-    <span>H</span>
-    <span>e</span>
-    <span>l</span>
-    <span>l</span>
-    <span>o</span>
-  </div>
-  <div class="overlay black"></div>
-  <div class="overlay blue"></div>
-</div>
+  <!-- <div id="preloader">
+    <div class="hello">
+      <span>H</span>
+      <span>e</span>
+      <span>l</span>
+      <span>l</span>
+      <span>o</span>
+    </div>
+    <div class="overlay black"></div>
+    <div class="overlay blue"></div>
+  </div> -->
 
   <!-- Main page NavBar -->
   <nav class="main-nav">
@@ -438,9 +438,13 @@
   </div>
   <section class="services-section">
     <div class="svg-drawing-container">
-      <svg viewBox="0 0 4000 1000" preserveAspectRatio="none" width="100%" height="100%">
+      <svg class="desktop-svg" viewBox="0 0 4000 1000" preserveAspectRatio="none" width="100%" height="100%">
         <path id="drawing-path"
           d="M0,500 C500,-150 1000,1150 1500,500 C2000,-150 2500,1150 3000,500 C3500,-150 4000,1150 4500,500" />
+      </svg>
+      <svg class="mobile-svg" viewBox="0 0 100 1000" preserveAspectRatio="none" width="100%" height="100%">
+        <path id="mobile-drawing-path"
+          d="M50,0 C100,0 0,150 50,250 C100,350 0,400 50,500 C100,600 0,650 50,750 C100,850 0,900 50,1000" />
       </svg>
     </div>
 

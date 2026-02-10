@@ -12,7 +12,6 @@ gsap.ticker.lagSmoothing(0);
 
 //Menu btn :
 const MenuNav = document.querySelector('.menu-btn');
-// Hide nav initially
 gsap.set(MenuNav, {
   x: 0,
   opacity: 0
@@ -22,7 +21,6 @@ window.addEventListener('scroll', () => {
   const currentScroll = window.pageYOffset;
 
   if (currentScroll > 200) {
-    // Show nav when scrolled past 200px
     gsap.to(MenuNav, {
       y: 0,
       opacity: 1,
@@ -30,7 +28,6 @@ window.addEventListener('scroll', () => {
       ease: "power2.out"
     });
   } else {
-    // Hide nav when back at top
     gsap.to(MenuNav, {
       x: 0,
       opacity: 0,
@@ -775,49 +772,119 @@ ticker.forEach((ticker, index) => {
 
 // services script container
 gsap.registerPlugin(ScrollTrigger);
-window.onload = () => {
+
+function initServices() {
   const track = document.querySelector(".horizontal-track");
   const path = document.querySelector("#drawing-path");
+  const mobilePath = document.querySelector("#mobile-drawing-path");
 
-  if (track && path) {
-    const pathLength = path.getTotalLength();
+  if (!track || !path || !mobilePath) return;
 
-    // Hide path initially
-    gsap.set(path, {
-      strokeDasharray: pathLength,
-      strokeDashoffset: pathLength
-    });
+  const pathLength = path.getTotalLength();
+  const mobilePathLength = mobilePath.getTotalLength();
 
-    // Create the pin and scroll timeline
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".services-section",
-        pin: true,           // Stick the section to the screen
-        start: "top top",    // Start when top hits top
-        // Duration is equal to the width of the cards
-        end: () => "+=" + track.offsetWidth,
-        scrub: 1,            // Link animation to scroll
-        invalidateOnRefresh: true,
-        anticipatePin: 1
-      }
-    });
+  // Hide paths initially
+  gsap.set(path, {
+    strokeDasharray: pathLength,
+    strokeDashoffset: pathLength
+  });
+  gsap.set(mobilePath, {
+    strokeDasharray: mobilePathLength,
+    strokeDashoffset: mobilePathLength
+  });
 
-    // 1. Move cards to the left
-    tl.to(track, {
-      x: () => -(track.scrollWidth - window.innerWidth),
-      ease: "none"
-    });
+  // Create the pin and scroll timeline with matchMedia
+  ScrollTrigger.matchMedia({
+    // Desktop and Tablet: Horizontal scroll
+    "(min-width: 601px)": function () {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".services-section",
+          pin: true,
+          start: "top top",
+          end: () => "+=" + track.offsetWidth,
+          scrub: 1,
+          invalidateOnRefresh: true,
+          anticipatePin: 1
+        }
+      });
 
-    // 2. Draw the line (starts at same time as card movement)
-    tl.to(path, {
-      strokeDashoffset: 0,
-      ease: "none"
-    }, 0);
-  }
+      tl.to(track, {
+        x: () => -(track.scrollWidth - window.innerWidth),
+        ease: "none"
+      });
+
+      tl.to(path, {
+        strokeDashoffset: 0,
+        ease: "none"
+      }, 0);
+    },
+
+    // Mobile: Vertical layout with snaking line
+    "(max-width: 600px)": function () {
+      // Snaking path drawing animation
+      gsap.to(mobilePath, {
+        strokeDashoffset: 0,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".services-section",
+          start: "top 10%",
+          end: "bottom 90%",
+          scrub: 1
+        }
+      });
+
+      // Add wavy entry animations for alternating service cards
+      document.querySelectorAll('.service-card').forEach((card, i) => {
+        const isEven = (i + 1) % 2 === 0;
+
+        gsap.from(card, {
+          y: 100,
+          x: isEven ? 50 : -50, // Appear from their respective sides
+          rotation: isEven ? 5 : -5, // Wavy tilt
+          opacity: 0,
+          duration: 1.2,
+          ease: "power4.out",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 90%",
+            toggleActions: "play none none reverse"
+          }
+        });
+
+        // Inner content wavy stagger
+        const h2 = card.querySelector('h2');
+        const p = card.querySelector('p');
+        const num = card.querySelector('.card-number');
+
+        gsap.from([num, h2, p], {
+          y: 30,
+          opacity: 0,
+          stagger: 0.1,
+          duration: 0.8,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 85%"
+          }
+        });
+      });
+
+      // Reset track position if it was previously set
+      gsap.set(track, { x: 0 });
+    }
+  });
 
   // Refresh ScrollTrigger to catch any layout shifts
   ScrollTrigger.refresh();
-};
+}
+
+// Initialize on load and also immediately if DOM is ready
+if (document.readyState === 'complete') {
+  initServices();
+} else {
+  window.addEventListener('load', initServices);
+}
 
 
 // contact me section:
@@ -1181,7 +1248,7 @@ aboutTitles.forEach((aboutTitle) => {
 // Magnetic Button Logic
 const magneticBtn = document.querySelector('.magnetic-btn');
 
-if (magneticBtn) {
+if (magneticBtn && !('ontouchstart' in window)) {
   const btnFill = magneticBtn.querySelector('.btn-fill');
   const btnText = magneticBtn.querySelector('.btn-text');
 
@@ -1267,18 +1334,23 @@ if (magneticBtn) {
       delay: 0.1
     });
   });
+}
 
-  // Click Reaction
+if (magneticBtn) {
+  const btnFill = magneticBtn.querySelector('.btn-fill');
+  // Click Reaction (Always active for feedback)
   magneticBtn.addEventListener('mousedown', () => {
     gsap.to(magneticBtn, {
       scale: 0.85,
       duration: 0.1,
       ease: "power2.out"
     });
-    gsap.to(btnFill, {
-      backgroundColor: "#e0e0e0",
-      duration: 0.1
-    });
+    if (btnFill) {
+      gsap.to(btnFill, {
+        backgroundColor: "#e0e0e0",
+        duration: 0.1
+      });
+    }
   });
 
   magneticBtn.addEventListener('mouseup', () => {
@@ -1287,10 +1359,12 @@ if (magneticBtn) {
       duration: 0.6,
       ease: "elastic.out(1, 0.3)"
     });
-    gsap.to(btnFill, {
-      backgroundColor: "#fff",
-      duration: 0.2
-    });
+    if (btnFill) {
+      gsap.to(btnFill, {
+        backgroundColor: "#fff",
+        duration: 0.2
+      });
+    }
   });
 }
 
