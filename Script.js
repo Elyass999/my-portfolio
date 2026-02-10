@@ -17,6 +17,18 @@ gsap.set(MenuNav, {
   opacity: 0
 });
 
+gsap.set(".social-sidebar", {
+  opacity: 1 // Keep container visible, we'll animate children
+});
+gsap.set(".sidebar-line", {
+  scaleY: 0,
+  transformOrigin: "top"
+});
+gsap.set(".social-icon", {
+  y: -20,
+  opacity: 0
+});
+
 window.addEventListener('scroll', () => {
   const currentScroll = window.pageYOffset;
 
@@ -175,7 +187,21 @@ window.addEventListener('DOMContentLoaded', () => {
         ease: "expo.out"
       },
       "-=0.6" // Starts while the name is popping
-    );
+    )
+
+    // 5. Reveal the Social Sidebar (Detailed)
+    .to(".sidebar-line", {
+      scaleY: 1,
+      duration: 1.2,
+      ease: "power3.inOut"
+    }, "-=0.8")
+    .to(".social-icon", {
+      y: 0,
+      opacity: 1,
+      duration: 0.8,
+      stagger: 0.15,
+      ease: "back.out(1.7)"
+    }, "-=0.6");
 });
 
 
@@ -877,6 +903,35 @@ function initServices() {
 
   // Refresh ScrollTrigger to catch any layout shifts
   ScrollTrigger.refresh();
+}
+
+// Magnetic Social Icons
+const socialIcons = document.querySelectorAll('.social-icon');
+
+if (socialIcons.length > 0 && !('ontouchstart' in window)) {
+  socialIcons.forEach(icon => {
+    icon.addEventListener('mousemove', (e) => {
+      const rect = icon.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+
+      gsap.to(icon, {
+        x: x * 0.4,
+        y: y * 0.4,
+        duration: 0.3,
+        ease: "power2.out"
+      });
+    });
+
+    icon.addEventListener('mouseleave', () => {
+      gsap.to(icon, {
+        x: 0,
+        y: 0,
+        duration: 0.7,
+        ease: "elastic.out(1, 0.3)"
+      });
+    });
+  });
 }
 
 // Initialize on load and also immediately if DOM is ready

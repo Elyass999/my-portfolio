@@ -19,6 +19,71 @@ body {
   text-transform: uppercase;
 }
 
+/* Social Sidebar */
+.social-sidebar {
+  position: absolute;
+  left: 3rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  z-index: 100;
+}
+
+.sidebar-line {
+  width: 1px;
+  height: 100px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.social-icon {
+  color: #fff;
+  font-size: 1.2rem;
+  text-decoration: none;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.social-icon:hover {
+  color: #FFEA00;
+}
+
+@media (max-width: 768px) {
+  .social-sidebar {
+    left: 1.5rem;
+  }
+
+  .sidebar-line {
+    height: 100px;
+  }
+
+  .social-icon {
+    font-size: 1rem;
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .social-sidebar {
+    display: none;
+    /* Hide on very small screens to avoid clutter */
+  }
+}
+
 /* Heros section style for all  */
 
 .hero-title {
@@ -1214,7 +1279,7 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  width: 110%;
+  width: 150%;
   height: 100%;
   z-index: 1;
   pointer-events: none;
