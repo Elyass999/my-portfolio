@@ -1,4 +1,4 @@
-/* Style Importing Section */
+﻿/* Style Importing Section */
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
 * {
@@ -384,26 +384,29 @@ h1 {
   font-weight: 600;
   letter-spacing: 1px;
   padding: 0.5rem 0;
-  overflow: hidden;
   line-height: 1.5;
+  perspective: 1000px;
 }
 
-.main-nav-link .top-text {
-  display: block;
-  overflow: hidden;
+.char-wrapper {
+  position: relative;
+  display: inline-block;
+  transform-style: preserve-3d;
 }
 
-.main-nav-link .bottom-text {
+.char-front,
+.char-back {
+  display: inline-block;
+  backface-visibility: hidden;
+}
+
+.char-back {
   position: absolute;
   top: 0;
   left: 0;
-  display: block;
-  overflow: hidden;
-}
-
-.main-nav-link .top-text span,
-.main-nav-link .bottom-text span {
-  display: inline-block;
+  transform: rotateY(180deg);
+  color: #FFEA00;
+  /* Optional accent color for the back face */
 }
 
 /* Nav Overlay */
@@ -796,7 +799,7 @@ body {
   cursor: none;
 }
 
-/* Enhanced cursor – subtle glow + magnetic easing */
+/* Enhanced cursor â€“ subtle glow + magnetic easing */
 .cursor {
   position: fixed;
   top: 0;
@@ -901,7 +904,7 @@ body {
   background: rgba(216, 216, 216, 0.6);
 }
 
-/* card – glassmorphism + 3-D lift */
+/* card â€“ glassmorphism + 3-D lift */
 .proj-pic {
   flex: 0 0 clamp(280px, 60vw, 800px);
   background: rgba(17, 17, 17, 0.6);
@@ -921,7 +924,7 @@ body {
   box-shadow: 0 20px 50px -10px rgba(255, 255, 255, 0.08);
 }
 
-/* image wrapper – zoom on hover */
+/* image wrapper â€“ zoom on hover */
 .proj-img-container {
   position: relative;
   width: 100%;
@@ -996,7 +999,7 @@ body {
   line-height: 1.5;
 }
 
-/* tech-stack – glowing pills */
+/* tech-stack â€“ glowing pills */
 .tech-stack {
   display: flex;
   flex-wrap: wrap;
@@ -2780,5 +2783,82 @@ textarea::placeholder {
   body {
     background: white;
     color: black;
+  }
+}
+
+/* Hero Animation Elements */
+.hero-anim-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.hero-orb {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 242, 255, 0.4) 0%, rgba(138, 43, 226, 0.4) 40%, rgba(0, 0, 0, 0) 70%);
+  transform: translate(-50%, -50%);
+  filter: blur(50px);
+  opacity: 0.6;
+}
+
+.hero-dashed-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 550px;
+  height: 550px;
+  border: 1px dashed rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.hero-particles .particle {
+  position: absolute;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 1.5rem;
+  font-weight: 300;
+}
+
+.particle.p1 {
+  top: 20%;
+  left: 20%;
+}
+
+.particle.p2 {
+  top: 70%;
+  left: 80%;
+}
+
+.particle.p3 {
+  top: 80%;
+  left: 30%;
+}
+
+.particle.p4 {
+  top: 30%;
+  left: 75%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero-orb {
+    width: 200px;
+    height: 200px;
+  }
+
+  .hero-dashed-circle {
+    width: 350px;
+    height: 350px;
   }
 }

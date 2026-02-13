@@ -1,4 +1,4 @@
-
+﻿
 // Initialize Lenis for smooth scrolling
 const lenis = new Lenis();
 
@@ -228,8 +228,8 @@ document.querySelectorAll('a').forEach(link => {
 
 
 // Main navbar elemnts script :
-const FLIP_DURATION = 0.4;
-const FLIP_STAGGER = 0.04;
+const FLIP_DURATION = 0.5;
+const FLIP_STAGGER = 0.05;
 
 const mainNavLinks = document.querySelectorAll(".main-nav-link");
 
@@ -237,41 +237,38 @@ mainNavLinks.forEach(navLink => {
   const linkText = navLink.getAttribute('data-text') || navLink.textContent.trim();
   navLink.innerHTML = '';
 
-  const topText = document.createElement("div");
-  const bottomText = document.createElement("div");
+  // Create a container for the characters
+  const charsContainer = document.createElement("div");
+  // charsContainer.style.display = "inline-block"; // Ensure it sizes to content
 
-  topText.className = "top-text";
-  bottomText.className = "bottom-text";
+  const charWrappers = [];
 
   linkText.split("").forEach(character => {
-    const topChar = document.createElement("span");
-    topChar.textContent = character === ' ' ? '\u00A0' : character;
+    // Create the wrapper for each character
+    const wrapper = document.createElement("span");
+    wrapper.className = "char-wrapper";
 
-    const bottomChar = document.createElement("span");
-    bottomChar.textContent = character === ' ' ? '\u00A0' : character;
+    // Front Face (Original Character)
+    const frontChar = document.createElement("span");
+    frontChar.className = "char-front";
+    frontChar.textContent = character === ' ' ? '\u00A0' : character;
 
-    topText.appendChild(topChar);
-    bottomText.appendChild(bottomChar);
+    // Back Face (Flipped Character)
+    const backChar = document.createElement("span");
+    backChar.className = "char-back";
+    backChar.textContent = character === ' ' ? '\u00A0' : character;
+
+    wrapper.appendChild(frontChar);
+    wrapper.appendChild(backChar);
+    navLink.appendChild(wrapper);
+
+    charWrappers.push(wrapper);
   });
 
-  navLink.appendChild(topText);
-  navLink.appendChild(bottomText);
-
-  const topChars = topText.querySelectorAll("span");
-  const bottomChars = bottomText.querySelectorAll("span");
-
-  gsap.set(bottomChars, { yPercent: 100 });
-
+  // GSAP Animation and Event Listeners
   navLink.addEventListener("mouseenter", () => {
-    gsap.to(topChars, {
-      yPercent: -100,
-      duration: FLIP_DURATION,
-      ease: "power2.inOut",
-      stagger: FLIP_STAGGER
-    });
-
-    gsap.to(bottomChars, {
-      yPercent: 0,
+    gsap.to(charWrappers, {
+      rotateY: -180,
       duration: FLIP_DURATION,
       ease: "power2.inOut",
       stagger: FLIP_STAGGER
@@ -279,15 +276,8 @@ mainNavLinks.forEach(navLink => {
   });
 
   navLink.addEventListener("mouseleave", () => {
-    gsap.to(topChars, {
-      yPercent: 0,
-      duration: FLIP_DURATION,
-      ease: "power2.inOut",
-      stagger: FLIP_STAGGER
-    });
-
-    gsap.to(bottomChars, {
-      yPercent: 100,
+    gsap.to(charWrappers, {
+      rotateY: 0,
       duration: FLIP_DURATION,
       ease: "power2.inOut",
       stagger: FLIP_STAGGER
@@ -1568,5 +1558,136 @@ window.addEventListener('load', () => {
         toggleActions: "play none none reverse",
       }
     });
+  }
+});
+
+// --- Hero 2 Animation Elements (Orb, Circle, Particles) ---
+document.addEventListener("DOMContentLoaded", () => {
+  // Only run if GSAP is loaded
+  if (typeof gsap === 'undefined') return;
+
+  const hero2 = document.querySelector('.hero2');
+  if (hero2) {
+    const orb = hero2.querySelector('.hero-orb');
+    const dashedCircle = hero2.querySelector('.hero-dashed-circle');
+    const particles = hero2.querySelectorAll('.particle');
+    const animContainer = hero2.querySelector('.hero-anim-container');
+
+    // Initial setup
+    if (animContainer) {
+      gsap.set(animContainer, { transformOrigin: "center center" });
+    }
+
+    // 1. Idle Animations
+    if (orb) {
+      // Pulse
+      gsap.to(orb, {
+        scale: 1.1,
+        opacity: 0.8,
+        duration: 3,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut"
+      });
+      // Float
+      gsap.to(orb, {
+        xPercent: 15, // Relative movement
+        yPercent: -15,
+        duration: 5,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut"
+      });
+      // Rotate colors (hue)
+      gsap.to(orb, {
+        filter: "hue-rotate(360deg) blur(50px)",
+        duration: 20,
+        repeat: -1,
+        ease: "none"
+      });
+    }
+
+    if (dashedCircle) {
+      gsap.to(dashedCircle, {
+        rotation: 360,
+        duration: 40,
+        repeat: -1,
+        ease: "linear"
+      });
+    }
+
+    if (particles.length > 0) {
+      particles.forEach((p, i) => {
+        // Random float
+        gsap.to(p, {
+          x: (Math.random() - 0.5) * 60,
+          y: (Math.random() - 0.5) * 60,
+          rotation: Math.random() * 360,
+          duration: 3 + Math.random() * 2,
+          repeat: -1,
+          yoyo: true,
+          ease: "power1.inOut",
+          delay: Math.random()
+        });
+        // Fade in/out
+        gsap.to(p, {
+          opacity: 0.1 + Math.random() * 0.4,
+          duration: 1.5 + Math.random(),
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut"
+        });
+      });
+    }
+
+    // 2. Interactive Parallax (Mouse Move)
+    const heroWrapper = document.querySelector('.hero-section-wrapper');
+
+    if (heroWrapper && animContainer) {
+      heroWrapper.addEventListener('mousemove', (e) => {
+        const rect = heroWrapper.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5; // -0.5 to 0.5
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+        // Move the whole container slightly against mouse for depth
+        gsap.to(animContainer, {
+          x: x * 30,
+          y: y * 30,
+          duration: 1,
+          ease: "power2.out"
+        });
+
+        // Move orb more for separation
+        if (orb) {
+          gsap.to(orb, {
+            x: x * 60,
+            y: y * 60,
+            duration: 1.2,
+            ease: "power2.out"
+          });
+        }
+
+        // Move dashed circle less
+        if (dashedCircle) {
+          gsap.to(dashedCircle, {
+            x: x * -20, // Inverse direction
+            y: y * -20,
+            rotation: "+=1", // Add spin on move
+            duration: 1,
+            ease: "power2.out"
+          });
+        }
+      });
+
+      // Reset on leave
+      heroWrapper.addEventListener('mouseleave', () => {
+        gsap.to([animContainer, orb, dashedCircle], {
+          x: 0,
+          y: 0,
+          duration: 1.5,
+          ease: "elastic.out(1, 0.5)"
+        });
+      });
+    }
   }
 });
