@@ -237,8 +237,7 @@
         <ul class="main-nav-list">
             <li><a href="index.html#home" class="main-nav-link" data-text="Home">Home</a></li>
             <li><a href="works.html" class="main-nav-link" data-text="Works">Works</a></li>
-            <li><a href="index.html#about" class="main-nav-link" data-text="About">About</a></li>
-            <li><a href="index.html#contact" class="main-nav-link" data-text="Contact">Contact</a></li>
+            <li><a href="about.html" class="main-nav-link" data-text="About">About</a></li>
         </ul>
     </nav>
 
@@ -275,16 +274,9 @@
                     </div>
                     <div class="arrow"><i class="fa-solid fa-arrow-right"></i></div>
                 </a>
-                <a href="index.html#about" class="hover-link"
-                    data-img="https://static.thenounproject.com/png/105262-200.png">
+                <a href="about.html" class="hover-link" data-img="https://static.thenounproject.com/png/105262-200.png">
                     <div class="text">
                         <h2>About</h2>
-                    </div>
-                    <div class="arrow"><i class="fa-solid fa-arrow-right"></i></div>
-                </a>
-                <a href="index.html#contact" class="hover-link" data-img="https://i.redd.it/1o8zqjm9bqc81.png">
-                    <div class="text">
-                        <h2>Contact</h2>
                     </div>
                     <div class="arrow"><i class="fa-solid fa-arrow-right"></i></div>
                 </a>
@@ -404,11 +396,313 @@
         <span>View Project</span>
     </div>
 
-    <footer style="padding: 100px 0; border-top: 1px solid rgba(255,255,255,0.1);">
-        <div class="footer-container" style="text-align: center;">
-            <h1 id="wavy-text" style="font-size: 10vw;">ELYASSE</h1>
-        </div>
-    </footer>
+<footer class="modern-footer">
+  <div class="footer-grid">
+    <!-- Left Column: Socials -->
+    <div class="footer-column footer-left">
+      <h4 class="footer-heading">SOCIALS</h4>
+      <div class="footer-links-list">
+        <a href="https://linkedin.com/in/yourprofile" target="_blank" class="footer-link">
+          <span>Linkedin</span>
+          <i class="fa-solid fa-arrow-up-right"></i>
+        </a>
+        <a href="https://wa.me/yournumber" target="_blank" class="footer-link">
+          <span>Whatsapp</span>
+          <i class="fa-solid fa-arrow-up-right"></i>
+        </a>
+        <a href="https://github.com/yourusername" target="_blank" class="footer-link">
+          <span>Github</span>
+          <i class="fa-solid fa-arrow-up-right"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Center: 3D Model (positioned above name) -->
+    <div class="footer-column footer-center">
+      <div id="threejs-container"></div>
+    </div>
+
+    <!-- Right Column: Info -->
+    <div class="footer-column footer-right">
+      <div class="footer-info-group">
+        <h4 class="footer-heading">LOCAL TIME</h4>
+        <p class="footer-time" id="localTime">12:26 PM UTC-2</p>
+      </div>
+      <div class="footer-info-group">
+        <h4 class="footer-heading">VERSION</h4>
+        <p class="footer-version">2026 © Edition</p>
+        <a href="#home" class="back-to-top-btn">
+          <span>Back to Top</span>
+          <i class="fa-solid fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Large ELYASSE Name with Wavy Animation -->
+  <div class="footer-name-container">
+    <h1 id="wavy-text">ELYASSE</h1>
+  </div>
+</footer>
+
+<script type="module">
+  import * as THREE from 'https://cdn.skypack.dev/three@0.136.0';
+  import { OrbitControls } from 'https://cdn.skypack.dev/three@0.136.0/examples/jsm/controls/OrbitControls.js';
+
+  const container = document.getElementById('threejs-container');
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+  camera.position.set(0, 0, 12);
+
+  // Alpha: true makes the canvas background transparent
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setSize(container.clientWidth, container.clientHeight);
+  renderer.setPixelRatio(window.devicePixelRatio);
+  container.appendChild(renderer.domElement);
+
+  // Hand-drawn "E" Shape for 100% reliability
+  const eShape = new THREE.Shape();
+  eShape.moveTo(-2, 3); eShape.lineTo(2, 3); eShape.lineTo(2, 2); eShape.lineTo(-1, 2);
+  eShape.lineTo(-1, 0.5); eShape.lineTo(1, 0.5); eShape.lineTo(1, -0.5); eShape.lineTo(-1, -0.5);
+  eShape.lineTo(-1, -2); eShape.lineTo(2, -2); eShape.lineTo(2, -3); eShape.lineTo(-2, -3);
+  eShape.closePath();
+
+  const geometry = new THREE.ExtrudeGeometry(eShape, {
+    depth: 1.5,
+    bevelEnabled: true,
+    bevelThickness: 0.3,
+    bevelSize: 0.3,
+    bevelSegments: 10
+  });
+  geometry.center();
+
+  // Metallic Material with Gradient
+  const material = new THREE.MeshStandardMaterial({
+    metalness: 1.0,
+    roughness: 0.15,
+    color: 0xFFEA00
+  });
+
+  const mesh = new THREE.Mesh(geometry, material);
+  scene.add(mesh);
+
+  // Bright Lights for Chrome Reflections
+  const light1 = new THREE.PointLight(0xffffff, 2);
+  light1.position.set(5, 5, 5);
+  scene.add(light1);
+
+  const light2 = new THREE.PointLight(0xffffff, 1);
+  light2.position.set(-5, -5, 5);
+  scene.add(light2);
+
+  const ambient = new THREE.AmbientLight(0xffffff, 0.5);
+  scene.add(ambient);
+
+  const controls = new OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+  controls.enableZoom = false;
+  controls.enablePan = false;
+
+  function animate(time) {
+    time *= 0.001;
+    requestAnimationFrame(animate);
+
+    // Smooth floating animation
+    mesh.rotation.y = Math.sin(time) * 0.3;
+    mesh.position.y = Math.sin(time * 2) * 0.2;
+
+    // Animate light to create moving highlights
+    light1.position.x = Math.sin(time) * 10;
+
+    controls.update();
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  window.addEventListener('resize', () => {
+    const width = container.clientWidth;
+    const height = container.clientHeight;
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+    renderer.setSize(width, height);
+  });
+
+  // Update local time
+  function updateTime() {
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    const displayHours = hours % 12 || 12;
+
+    document.getElementById('localTime').textContent = `${displayHours}:${minutes} ${ampm} UTC-2`;
+  }
+
+  // Footer Elements Scroll Animations
+window.addEventListener('load', () => {
+  // Animate footer grid columns
+  const footerLeft = document.querySelector('.footer-left');
+  const footerCenter = document.querySelector('.footer-center');
+  const footerRight = document.querySelector('.footer-right');
+
+  if (footerLeft) {
+    // Animate social links heading
+    gsap.fromTo('.footer-left .footer-heading',
+      { opacity: 1, y: 0 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: '.modern-footer',
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+          onEnter: () => {
+            gsap.fromTo('.footer-left .footer-heading',
+              { opacity: 0, y: 30 },
+              { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }
+            );
+          }
+        }
+      }
+    );
+
+    // Animate each social link with stagger
+    const footerLinks = document.querySelectorAll('.footer-link');
+    if (footerLinks.length > 0) {
+      gsap.set('.footer-link', { opacity: 1, x: 0 });
+
+      ScrollTrigger.create({
+        trigger: '.modern-footer',
+        start: "top 75%",
+        onEnter: () => {
+          gsap.fromTo('.footer-link',
+            { opacity: 0, x: -50 },
+            {
+              opacity: 1,
+              x: 0,
+              duration: 0.8,
+              stagger: 0.15,
+              ease: "power3.out"
+            }
+          );
+        }
+      });
+    }
+  }
+
+  if (footerCenter) {
+    // Animate 3D model container with scale effect
+    gsap.set('#threejs-container', { opacity: 1, scale: 1, y: 0 });
+
+    ScrollTrigger.create({
+      trigger: '.modern-footer',
+      start: "top 70%",
+      onEnter: () => {
+        gsap.fromTo('#threejs-container',
+          { opacity: 0, scale: 0.7, y: 50 },
+          {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            duration: 1.2,
+            ease: "back.out(1.5)"
+          }
+        );
+      }
+    });
+  }
+
+  if (footerRight) {
+    // Animate right column headings and info
+    gsap.set('.footer-right .footer-heading', { opacity: 1, x: 0 });
+
+    ScrollTrigger.create({
+      trigger: '.modern-footer',
+      start: "top 80%",
+      onEnter: () => {
+        gsap.fromTo('.footer-right .footer-heading',
+          { opacity: 0, x: 50 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: "power3.out"
+          }
+        );
+      }
+    });
+
+    gsap.set('.footer-time, .footer-version', { opacity: 1, x: 0 });
+
+    ScrollTrigger.create({
+      trigger: '.modern-footer',
+      start: "top 75%",
+      onEnter: () => {
+        gsap.fromTo('.footer-time, .footer-version',
+          { opacity: 0, x: 30 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: "power3.out"
+          }
+        );
+      }
+    });
+  }
+
+  // Animate the footer name container (wavy text container)
+  const footerNameContainer = document.querySelector('.footer-name-container');
+  if (footerNameContainer) {
+    gsap.set('.footer-name-container', { opacity: 1, y: 0 });
+
+    ScrollTrigger.create({
+      trigger: '.footer-name-container',
+      start: "top 90%",
+      onEnter: () => {
+        gsap.fromTo('.footer-name-container',
+          { opacity: 0, y: 80 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: "power3.out"
+          }
+        );
+      }
+    });
+  }
+});
+
+
+// Footer Wavy Text Animation
+window.addEventListener('load', () => {
+  const wavyFooter = document.getElementById('wavy-text');
+  if (wavyFooter) {
+    const text = new SplitType(wavyFooter, { types: 'chars' });
+
+    gsap.from(text.chars, {
+      y: 200, // Start deep from the bottom
+      opacity: 0,
+      stagger: 0.05,
+      duration: 1,
+      ease: "power4.out",
+      scrollTrigger: {
+        trigger: wavyFooter,
+        start: "top 95%", // Start when text is just entering
+        toggleActions: "play none none reverse",
+      }
+    });
+  }
+});
+
+  updateTime();
+  setInterval(updateTime, 60000); // Update every minute
+</script>
 
     <!-- Scripts -->
     <script src="Script.js"></script>
@@ -505,9 +799,9 @@
             }
         });
 
-        // Hero fill animation (Improved for Works page)
+        // Hero fill animation (Diagonal corner-to-corner sweep)
         gsap.to(".title-filled", {
-            clipPath: "inset(0% 0% 0% 0%)",
+            clipPath: "polygon(0% 0%, 120% -20%, 100% 100%, -20% 120%)",
             ease: "none",
             scrollTrigger: {
                 trigger: ".works-hero",
