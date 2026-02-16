@@ -1,0 +1,4 @@
+[About Page Logic]
+- Adjusted the `CodeIcon.png` in the ticker section to be vertically centered (`vertical-align: middle`).
+- Added horizontal spacing (`margin: 0 15px;`) to properly separate the words.
+- This creates a cleaner "separator" effect between the text items in the marquee.

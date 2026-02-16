@@ -106,7 +106,7 @@
 
     <!-- About Hero Section -->
     <section class="works-hero">
-      <div class="hero-bg-text">ABOUT ELYASSE</div>
+      <div class="hero-bg-text">About Me</div>
       <div class="hero-title fill-animation">
         <span class="title-stroke">ABOUT ME</span>
         <span class="title-filled">ABOUT ME</span>
@@ -147,12 +147,14 @@
       <div class="about-ticker">
         <div class="ticker-wrap">
           <div class="ticker-text">
-            FULL STACK • <span class="accent">UI/UX DESIGN</span> • PIXEL PERFECT • <span class="accent">STRATEGIC
-              CODE</span> •
-            FULL STACK • <span class="accent">UI/UX DESIGN</span> • PIXEL PERFECT • <span class="accent">STRATEGIC
-              CODE</span> •
+            FULL STACK <span class="accent">UI/UX DESIGN</span> <img src="Icons/CodeIcon.png" width="160"
+              style="vertical-align: middle; margin: 0 15px;"> PIXEL PERFECT <span class="accent">STRATEGIC
+              CODE</span> <img src="Icons/CodeIcon.png" width="160" style="vertical-align: middle; margin: 0 15px;">
+            FULL STACK <span class="accent">UI/UX DESIGN</span> <img src="Icons/CodeIcon.png" width="160"
+              style="vertical-align: middle; margin: 0 15px;"> PIXEL PERFECT <span class="accent">STRATEGIC
+              CODE</span> <img src="Icons/CodeIcon.png" width="160" style="vertical-align: middle; margin: 0 15px;">
           </div>
-        </div>
+        </div>    
       </div>
     </section>
 
@@ -182,7 +184,7 @@
               </div>
             </div>
             <div class="expertise-visual">
-              <div class="visual-box"></div>
+              <div class="visual-box"><img src="Icons/CodeIcon.png" width="260" ></div>
             </div>
           </div>
           <!-- Service 2: From Right -->
@@ -199,7 +201,7 @@
               </div>
             </div>
             <div class="expertise-visual">
-              <div class="visual-box"></div>
+              <div class="visual-box"><img src="Icons/VideoIcon.png" width="260" ></div>
             </div>
           </div>
           <!-- Service 3: From Left -->
@@ -216,7 +218,7 @@
               </div>
             </div>
             <div class="expertise-visual">
-              <div class="visual-box"></div>
+              <div class="visual-box"><img src="Icons/DbIcon.png" width="260" ></div>
             </div>
           </div>
         </div>
@@ -238,311 +240,320 @@
     </section>
   </main>
 
-<footer class="modern-footer">
-  <div class="footer-grid">
-    <!-- Left Column: Socials -->
-    <div class="footer-column footer-left">
-      <h4 class="footer-heading">SOCIALS</h4>
-      <div class="footer-links-list">
-        <a href="https://linkedin.com/in/yourprofile" target="_blank" class="footer-link">
-          <span>Linkedin</span>
-          <i class="fa-solid fa-arrow-up-right"></i>
-        </a>
-        <a href="https://wa.me/yournumber" target="_blank" class="footer-link">
-          <span>Whatsapp</span>
-          <i class="fa-solid fa-arrow-up-right"></i>
-        </a>
-        <a href="https://github.com/yourusername" target="_blank" class="footer-link">
-          <span>Github</span>
-          <i class="fa-solid fa-arrow-up-right"></i>
-        </a>
+  <footer class="modern-footer">
+    <div class="footer-grid">
+      <!-- Left Column: Socials -->
+      <div class="footer-column footer-left">
+        <h4 class="footer-heading">SOCIALS</h4>
+        <div class="footer-links-list">
+          <a href="https://linkedin.com/in/yourprofile" target="_blank" class="footer-link">
+            <span>Linkedin</span>
+            <i class="fa-solid fa-arrow-up-right"></i>
+          </a>
+          <a href="https://wa.me/yournumber" target="_blank" class="footer-link">
+            <span>Whatsapp</span>
+            <i class="fa-solid fa-arrow-up-right"></i>
+          </a>
+          <a href="https://github.com/yourusername" target="_blank" class="footer-link">
+            <span>Github</span>
+            <i class="fa-solid fa-arrow-up-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Center: 3D Model (positioned above name) -->
+      <div class="footer-column footer-center">
+        <div id="threejs-container"></div>
+      </div>
+
+      <!-- Right Column: Info -->
+      <div class="footer-column footer-right">
+        <div class="footer-info-group">
+          <h4 class="footer-heading">LOCAL TIME</h4>
+          <p class="footer-time" id="localTime">12:26 PM UTC-2</p>
+        </div>
+        <div class="footer-info-group">
+          <h4 class="footer-heading">VERSION</h4>
+          <p class="footer-version">2026 © Edition</p>
+          <a href="#home" class="back-to-top-btn">
+            <span>Back to Top</span>
+            <i class="fa-solid fa-arrow-up"></i>
+          </a>
+        </div>
       </div>
     </div>
 
-    <!-- Center: 3D Model (positioned above name) -->
-    <div class="footer-column footer-center">
-      <div id="threejs-container"></div>
+    <!-- Large ELYASSE Name with Wavy Animation -->
+    <div class="footer-name-container">
+      <h1 id="wavy-text">ELYASSE</h1>
     </div>
+  </footer>
 
-    <!-- Right Column: Info -->
-    <div class="footer-column footer-right">
-      <div class="footer-info-group">
-        <h4 class="footer-heading">LOCAL TIME</h4>
-        <p class="footer-time" id="localTime">12:26 PM UTC-2</p>
-      </div>
-      <div class="footer-info-group">
-        <h4 class="footer-heading">VERSION</h4>
-        <p class="footer-version">2026 © Edition</p>
-        <a href="#home" class="back-to-top-btn">
-          <span>Back to Top</span>
-          <i class="fa-solid fa-arrow-up"></i>
-        </a>
-      </div>
-    </div>
-  </div>
+  <script type="module">
+    import * as THREE from 'https://cdn.skypack.dev/three@0.136.0';
+    import { OrbitControls } from 'https://cdn.skypack.dev/three@0.136.0/examples/jsm/controls/OrbitControls.js';
 
-  <!-- Large ELYASSE Name with Wavy Animation -->
-  <div class="footer-name-container">
-    <h1 id="wavy-text">ELYASSE</h1>
-  </div>
-</footer>
+    const container = document.getElementById('threejs-container');
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+    camera.position.set(0, 0, 12);
 
-<script type="module">
-  import * as THREE from 'https://cdn.skypack.dev/three@0.136.0';
-  import { OrbitControls } from 'https://cdn.skypack.dev/three@0.136.0/examples/jsm/controls/OrbitControls.js';
+    // Alpha: true makes the canvas background transparent
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    container.appendChild(renderer.domElement);
 
-  const container = document.getElementById('threejs-container');
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
-  camera.position.set(0, 0, 12);
+    // Hand-drawn "E" Shape for 100% reliability
+    const eShape = new THREE.Shape();
+    eShape.moveTo(-2, 3); eShape.lineTo(2, 3); eShape.lineTo(2, 2); eShape.lineTo(-1, 2);
+    eShape.lineTo(-1, 0.5); eShape.lineTo(1, 0.5); eShape.lineTo(1, -0.5); eShape.lineTo(-1, -0.5);
+    eShape.lineTo(-1, -2); eShape.lineTo(2, -2); eShape.lineTo(2, -3); eShape.lineTo(-2, -3);
+    eShape.closePath();
 
-  // Alpha: true makes the canvas background transparent
-  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-  renderer.setSize(container.clientWidth, container.clientHeight);
-  renderer.setPixelRatio(window.devicePixelRatio);
-  container.appendChild(renderer.domElement);
+    const geometry = new THREE.ExtrudeGeometry(eShape, {
+      depth: 1.5,
+      bevelEnabled: true,
+      bevelThickness: 0.3,
+      bevelSize: 0.3,
+      bevelSegments: 10
+    });
+    geometry.center();
 
-  // Hand-drawn "E" Shape for 100% reliability
-  const eShape = new THREE.Shape();
-  eShape.moveTo(-2, 3); eShape.lineTo(2, 3); eShape.lineTo(2, 2); eShape.lineTo(-1, 2);
-  eShape.lineTo(-1, 0.5); eShape.lineTo(1, 0.5); eShape.lineTo(1, -0.5); eShape.lineTo(-1, -0.5);
-  eShape.lineTo(-1, -2); eShape.lineTo(2, -2); eShape.lineTo(2, -3); eShape.lineTo(-2, -3);
-  eShape.closePath();
+    // Metallic Material with Gradient
+    const material = new THREE.MeshStandardMaterial({
+      metalness: 1.0,
+      roughness: 0.15,
+      color: 0xFFEA00
+    });
 
-  const geometry = new THREE.ExtrudeGeometry(eShape, {
-    depth: 1.5,
-    bevelEnabled: true,
-    bevelThickness: 0.3,
-    bevelSize: 0.3,
-    bevelSegments: 10
-  });
-  geometry.center();
+    const mesh = new THREE.Mesh(geometry, material);
+    scene.add(mesh);
 
-  // Metallic Material with Gradient
-  const material = new THREE.MeshStandardMaterial({
-    metalness: 1.0,
-    roughness: 0.15,
-    color: 0xFFEA00
-  });
+    // Bright Lights for Chrome Reflections
+    const light1 = new THREE.PointLight(0xffffff, 2);
+    light1.position.set(5, 5, 5);
+    scene.add(light1);
 
-  const mesh = new THREE.Mesh(geometry, material);
-  scene.add(mesh);
+    const light2 = new THREE.PointLight(0xffffff, 1);
+    light2.position.set(-5, -5, 5);
+    scene.add(light2);
 
-  // Bright Lights for Chrome Reflections
-  const light1 = new THREE.PointLight(0xffffff, 2);
-  light1.position.set(5, 5, 5);
-  scene.add(light1);
+    const ambient = new THREE.AmbientLight(0xffffff, 0.5);
+    scene.add(ambient);
 
-  const light2 = new THREE.PointLight(0xffffff, 1);
-  light2.position.set(-5, -5, 5);
-  scene.add(light2);
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.enableZoom = false;
+    controls.enablePan = false;
 
-  const ambient = new THREE.AmbientLight(0xffffff, 0.5);
-  scene.add(ambient);
+    function animate(time) {
+      time *= 0.001;
+      requestAnimationFrame(animate);
 
-  const controls = new OrbitControls(camera, renderer.domElement);
-  controls.enableDamping = true;
-  controls.enableZoom = false;
-  controls.enablePan = false;
+      // Smooth floating animation
+      mesh.rotation.y = Math.sin(time) * 0.3;
+      mesh.position.y = Math.sin(time * 2) * 0.2;
 
-  function animate(time) {
-    time *= 0.001;
-    requestAnimationFrame(animate);
+      // Animate light to create moving highlights
+      light1.position.x = Math.sin(time) * 10;
 
-    // Smooth floating animation
-    mesh.rotation.y = Math.sin(time) * 0.3;
-    mesh.position.y = Math.sin(time * 2) * 0.2;
+      controls.update();
+      renderer.render(scene, camera);
+    }
+    animate();
 
-    // Animate light to create moving highlights
-    light1.position.x = Math.sin(time) * 10;
+    window.addEventListener('resize', () => {
+      const width = container.clientWidth;
+      const height = container.clientHeight;
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+      renderer.setSize(width, height);
+    });
 
-    controls.update();
-    renderer.render(scene, camera);
-  }
-  animate();
+    // Update local time
+    function updateTime() {
+      const now = new Date();
+      const hours = now.getHours();
+      const minutes = now.getMinutes().toString().padStart(2, '0');
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      const displayHours = hours % 12 || 12;
 
-  window.addEventListener('resize', () => {
-    const width = container.clientWidth;
-    const height = container.clientHeight;
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
-    renderer.setSize(width, height);
-  });
+      document.getElementById('localTime').textContent = `${displayHours}:${minutes} ${ampm} UTC-2`;
+    }
+    // Footer Elements Scroll Animations
+    window.addEventListener('load', () => {
+      // Animate footer grid columns
+      const footerLeft = document.querySelector('.footer-left');
+      const footerCenter = document.querySelector('.footer-center');
+      const footerRight = document.querySelector('.footer-right');
 
-  // Update local time
-  function updateTime() {
-    const now = new Date();
-    const hours = now.getHours();
-    const minutes = now.getMinutes().toString().padStart(2, '0');
-    const ampm = hours >= 12 ? 'PM' : 'AM';
-    const displayHours = hours % 12 || 12;
+      if (footerLeft) {
+        // Animate social links heading
+        gsap.fromTo('.footer-left .footer-heading',
+          { opacity: 1, y: 0 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: '.modern-footer',
+              start: "top 80%",
+              toggleActions: "play none none reverse",
+              onEnter: () => {
+                gsap.fromTo('.footer-left .footer-heading',
+                  { opacity: 0, y: 30 },
+                  { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }
+                );
+              }
+            }
+          }
+        );
 
-    document.getElementById('localTime').textContent = `${displayHours}:${minutes} ${ampm} UTC-2`;
-  }
-  // Footer Elements Scroll Animations
-window.addEventListener('load', () => {
-  // Animate footer grid columns
-  const footerLeft = document.querySelector('.footer-left');
-  const footerCenter = document.querySelector('.footer-center');
-  const footerRight = document.querySelector('.footer-right');
+        // Animate each social link with stagger
+        const footerLinks = document.querySelectorAll('.footer-link');
+        if (footerLinks.length > 0) {
+          gsap.set('.footer-link', { opacity: 1, x: 0 });
 
-  if (footerLeft) {
-    // Animate social links heading
-    gsap.fromTo('.footer-left .footer-heading',
-      { opacity: 1, y: 0 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: "power3.out",
-        scrollTrigger: {
+          ScrollTrigger.create({
+            trigger: '.modern-footer',
+            start: "top 75%",
+            onEnter: () => {
+              gsap.fromTo('.footer-link',
+                { opacity: 0, x: -50 },
+                {
+                  opacity: 1,
+                  x: 0,
+                  duration: 0.8,
+                  stagger: 0.15,
+                  ease: "power3.out"
+                }
+              );
+            }
+          });
+        }
+      }
+
+      if (footerCenter) {
+        // Animate 3D model container with scale effect
+        gsap.set('#threejs-container', { opacity: 1, scale: 1, y: 0 });
+
+        ScrollTrigger.create({
           trigger: '.modern-footer',
-          start: "top 80%",
-          toggleActions: "play none none reverse",
+          start: "top 70%",
           onEnter: () => {
-            gsap.fromTo('.footer-left .footer-heading',
-              { opacity: 0, y: 30 },
-              { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }
+            gsap.fromTo('#threejs-container',
+              { opacity: 0, scale: 0.7, y: 50 },
+              {
+                opacity: 1,
+                scale: 1,
+                y: 0,
+                duration: 1.2,
+                ease: "back.out(1.5)"
+              }
             );
           }
-        }
+        });
       }
-    );
 
-    // Animate each social link with stagger
-    const footerLinks = document.querySelectorAll('.footer-link');
-    if (footerLinks.length > 0) {
-      gsap.set('.footer-link', { opacity: 1, x: 0 });
+      if (footerRight) {
+        // Animate right column headings and info
+        gsap.set('.footer-right .footer-heading', { opacity: 1, x: 0 });
 
-      ScrollTrigger.create({
-        trigger: '.modern-footer',
-        start: "top 75%",
-        onEnter: () => {
-          gsap.fromTo('.footer-link',
-            { opacity: 0, x: -50 },
-            {
-              opacity: 1,
-              x: 0,
-              duration: 0.8,
-              stagger: 0.15,
-              ease: "power3.out"
+        ScrollTrigger.create({
+          trigger: '.modern-footer',
+          start: "top 80%",
+          onEnter: () => {
+            gsap.fromTo('.footer-right .footer-heading',
+              { opacity: 0, x: 50 },
+              {
+                opacity: 1,
+                x: 0,
+                duration: 0.8,
+                stagger: 0.2,
+                ease: "power3.out"
+              }
+            );
+          }
+        });
+
+        gsap.set('.footer-time, .footer-version', { opacity: 1, x: 0 });
+
+        ScrollTrigger.create({
+          trigger: '.modern-footer',
+          start: "top 75%",
+          onEnter: () => {
+            gsap.fromTo('.footer-time, .footer-version',
+              { opacity: 0, x: 30 },
+              {
+                opacity: 1,
+                x: 0,
+                duration: 0.8,
+                stagger: 0.15,
+                ease: "power3.out"
+              }
+            );
+          }
+        });
+      }
+
+      // Animate the footer name container (wavy text container)
+      const footerNameContainer = document.querySelector('.footer-name-container');
+      if (footerNameContainer) {
+        gsap.set('.footer-name-container', { opacity: 1, y: 0 });
+
+        ScrollTrigger.create({
+          trigger: '.footer-name-container',
+          start: "top 90%",
+          onEnter: () => {
+            gsap.fromTo('.footer-name-container',
+              { opacity: 0, y: 80 },
+              {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power3.out"
+              }
+            );
+          }
+        });
+      }
+    });
+            gsap.to(".hero-bg-text", {
+            xPercent: -20,
+            scrollTrigger: {
+                trigger: ".works-hero",
+                start: "top top",
+                end: "bottom top",
+                scrub: true
             }
-          );
-        }
-      });
-    }
-  }
+        });
 
-  if (footerCenter) {
-    // Animate 3D model container with scale effect
-    gsap.set('#threejs-container', { opacity: 1, scale: 1, y: 0 });
+    // Footer Wavy Text Animation
+    window.addEventListener('load', () => {
+      const wavyFooter = document.getElementById('wavy-text');
+      if (wavyFooter) {
+        const text = new SplitType(wavyFooter, { types: 'chars' });
 
-    ScrollTrigger.create({
-      trigger: '.modern-footer',
-      start: "top 70%",
-      onEnter: () => {
-        gsap.fromTo('#threejs-container',
-          { opacity: 0, scale: 0.7, y: 50 },
-          {
-            opacity: 1,
-            scale: 1,
-            y: 0,
-            duration: 1.2,
-            ease: "back.out(1.5)"
+        gsap.from(text.chars, {
+          y: 200, // Start deep from the bottom
+          opacity: 0,
+          stagger: 0.05,
+          duration: 1,
+          ease: "power4.out",
+          scrollTrigger: {
+            trigger: wavyFooter,
+            start: "top 95%", // Start when text is just entering
+            toggleActions: "play none none reverse",
           }
-        );
-      }
-    });
-  }
-
-  if (footerRight) {
-    // Animate right column headings and info
-    gsap.set('.footer-right .footer-heading', { opacity: 1, x: 0 });
-
-    ScrollTrigger.create({
-      trigger: '.modern-footer',
-      start: "top 80%",
-      onEnter: () => {
-        gsap.fromTo('.footer-right .footer-heading',
-          { opacity: 0, x: 50 },
-          {
-            opacity: 1,
-            x: 0,
-            duration: 0.8,
-            stagger: 0.2,
-            ease: "power3.out"
-          }
-        );
+        });
       }
     });
 
-    gsap.set('.footer-time, .footer-version', { opacity: 1, x: 0 });
-
-    ScrollTrigger.create({
-      trigger: '.modern-footer',
-      start: "top 75%",
-      onEnter: () => {
-        gsap.fromTo('.footer-time, .footer-version',
-          { opacity: 0, x: 30 },
-          {
-            opacity: 1,
-            x: 0,
-            duration: 0.8,
-            stagger: 0.15,
-            ease: "power3.out"
-          }
-        );
-      }
-    });
-  }
-
-  // Animate the footer name container (wavy text container)
-  const footerNameContainer = document.querySelector('.footer-name-container');
-  if (footerNameContainer) {
-    gsap.set('.footer-name-container', { opacity: 1, y: 0 });
-
-    ScrollTrigger.create({
-      trigger: '.footer-name-container',
-      start: "top 90%",
-      onEnter: () => {
-        gsap.fromTo('.footer-name-container',
-          { opacity: 0, y: 80 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            ease: "power3.out"
-          }
-        );
-      }
-    });
-  }
-});
-
-// Footer Wavy Text Animation
-window.addEventListener('load', () => {
-  const wavyFooter = document.getElementById('wavy-text');
-  if (wavyFooter) {
-    const text = new SplitType(wavyFooter, { types: 'chars' });
-
-    gsap.from(text.chars, {
-      y: 200, // Start deep from the bottom
-      opacity: 0,
-      stagger: 0.05,
-      duration: 1,
-      ease: "power4.out",
-      scrollTrigger: {
-        trigger: wavyFooter,
-        start: "top 95%", // Start when text is just entering
-        toggleActions: "play none none reverse",
-      }
-    });
-  }
-});
-
-  updateTime();
-  setInterval(updateTime, 60000); // Update every minute
-</script>
+    updateTime();
+    setInterval(updateTime, 60000); // Update every minute
+  </script>
 
   <script src="Script.js"></script>
 </body>

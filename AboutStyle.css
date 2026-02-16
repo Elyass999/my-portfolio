@@ -49,6 +49,7 @@
     margin: 0;
 }
 
+
 .hero-bg-text {
     position: absolute;
     top: 50%;
@@ -56,9 +57,9 @@
     transform: translate(-50%, -50%);
     font-size: 20vw;
     font-weight: 900;
-    color: rgba(255, 255, 255, 0.02);
+    color: rgba(255, 255, 255, 0.05);
     white-space: nowrap;
-    z-index: -1;
+    z-index: 0;
     pointer-events: none;
     line-height: 1;
 }
@@ -321,11 +322,8 @@
 
 .expertise-visual .visual-box {
     position: absolute;
-    inset: 20%;
-    background: linear-gradient(45deg, #FFEA0022, transparent);
-    border: 1px solid #FFEA0033;
+    inset: 25%;
     border-radius: 20px;
-    transform: rotate(10deg);
 }
 
 .expertise-row::before {
