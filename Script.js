@@ -1,6 +1,11 @@
-
 // Initialize Lenis for smooth scrolling
-const lenis = new Lenis();
+const lenis = new Lenis({
+  lerp: 0.1, // Fixed value for consistent performance,
+  wheelMultiplier: 1,
+  smoothWheel: true,
+  touchMultiplier: 2,
+  smoothTouch: false,
+});
 
 lenis.on('scroll', ScrollTrigger.update);
 
@@ -1328,15 +1333,13 @@ function initServices() {
         const isEven = (i + 1) % 2 === 0;
 
         gsap.from(card, {
-          y: 100,
-          x: isEven ? 50 : -50, // Appear from their respective sides
-          rotation: isEven ? 5 : -5, // Wavy tilt
+          y: 50,
           opacity: 0,
-          duration: 1.2,
-          ease: "power4.out",
+          duration: 1,
+          ease: "power3.out",
           scrollTrigger: {
             trigger: card,
-            start: "top 90%",
+            start: "top 85%",
             toggleActions: "play none none reverse"
           }
         });
