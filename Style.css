@@ -170,12 +170,14 @@ body.is-loading {
 #preloader .hello {
   position: relative;
   display: flex;
-  gap: 0.4em;
-  font-family: 'Bebas Neue', sans-serif;
+  gap: 0.1em;
+  font-family: "Work Sans", sans-serif;
   font-size: clamp(3rem, 12vw, 10rem);
   line-height: 0.9;
   color: #0d0d0d;
-  letter-spacing: 0.02em;
+  letter-spacing: -0.02em;
+  font-weight: 900;
+  text-transform: uppercase;
   z-index: 10;
 }
 
