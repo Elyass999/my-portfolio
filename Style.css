@@ -136,6 +136,7 @@ body {
   -webkit-text-fill-color: #fff;
   display: block;
   clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+  will-change: clip-path;
 }
 
 .section.gray {
@@ -148,68 +149,17 @@ body {
 }
 
 
-/* Preloader */
-#preloader {
-  position: fixed;
-  inset: 0;
-  background: #fff;
-  /* initial white */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-  overflow: hidden;
-}
 
-/* Lock scroll while preloader is visible */
-body.is-loading {
-  overflow: hidden;
-}
 
-/* Preloader content */
-#preloader .hello {
-  position: relative;
-  display: flex;
-  gap: 0.1em;
-  font-family: "Work Sans", sans-serif;
-  font-size: clamp(3rem, 12vw, 10rem);
-  line-height: 0.9;
-  color: #0d0d0d;
-  letter-spacing: -0.02em;
-  font-weight: 900;
-  text-transform: uppercase;
-  z-index: 10;
-}
 
-#preloader .hello span {
-  display: inline-block;
-  transform: translateY(120%);
-  opacity: 0;
-  will-change: transform, opacity;
-}
 
-/* Subtle progress bar under the word */
-#preloader .preloader-progress {
-  position: absolute;
-  bottom: 8vh;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(70vw, 560px);
-  height: 4px;
-  background: rgba(0, 0, 0, 0.08);
-  border-radius: 999px;
-  overflow: hidden;
-  z-index: 10;
-}
 
-#preloader .preloader-progress .bar {
-  width: 0%;
-  height: 100%;
-  background: #FFEA00;
-  /* theme accent used elsewhere */
-  border-radius: inherit;
-  will-change: width;
-}
+
+
+
+
+
+
 
 /* Page Transition Overlay */
 .page-transition {
@@ -315,40 +265,15 @@ h1 {
   }
 }
 
-/* Hello text */
-.hello span {
-  display: inline-block;
-  font-size: clamp(3rem, 15vw, 7rem);
-  font-weight: 900;
-  opacity: 0;
-  transform: translateY(100%);
-  color: #111;
-  z-index: 10;
-  position: relative;
-}
 
-/* Overlays */
-.overlay {
-  position: absolute;
-  bottom: -100%;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 5;
-  will-change: transform;
-}
 
-.overlay.black {
-  background: #000;
-}
 
-.overlay.blue {
-  background: #8f8f8f;
-}
 
-.site-content {
-  opacity: 0;
-}
+
+
+
+
+
 
 
 /* Hamburger Button */
@@ -882,8 +807,15 @@ section.hero {
 }
 
 /* Default: normal cursor */
+html {
+  scroll-behavior: auto !important;
+}
+
 body {
   cursor: auto;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Hide cursor only when hovering a project */
@@ -908,14 +840,10 @@ body {
   align-items: center;
   justify-content: center;
   pointer-events: none;
-  transform: translate(-50%, -50%) scale(0);
-  z-index: 1000;
-  color: #000000;
-  font-size: 14px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  will-change: transform, opacity;
+  will-change: transform, opacity, background;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translate3d(-50%, -50%, 0) scale(0);
   transition: transform 0.15s cubic-bezier(.25, 1, .5, 1),
     opacity 0.2s ease,
     background 0.3s ease;
@@ -1042,50 +970,7 @@ body {
   transform: scale(1.1);
 }
 
-/* In Progress Loader */
-.progress-loader {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: #0a0a0a;
-  z-index: 1;
-}
 
-.loader-circle {
-  width: 60px;
-  height: 60px;
-  border: 3px solid rgba(255, 234, 0, 0.1);
-  border-top: 3px solid #FFEA00;
-  border-radius: 50%;
-  animation: spin 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
-  box-shadow: 0 0 20px rgba(255, 234, 0, 0.3);
-}
-
-.loader-text {
-  margin-top: 1.5rem;
-  font-family: "Work Sans", sans-serif;
-  font-size: 0.8rem;
-  letter-spacing: 4px;
-  color: #FFEA00;
-  text-transform: uppercase;
-  animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 0.6; transform: scale(0.98); }
-  50% { opacity: 1; transform: scale(1.02); }
-}
 
 /* Overlay & Wavy Name */
 .proj-overlay {
@@ -1374,16 +1259,8 @@ body {
 }
 
 /* Skills Style Section */
-.sk-hero {
-  text-align: center;
-  font-size: 7rem;
-  background: linear-gradient(to right, #000000, #f0f0f0);
-  ;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  margin-top: 8rem;
-}
+/* .sk-hero REMOVED */
+
 
 .skills-section {
   min-height: 400vh;

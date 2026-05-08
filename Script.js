@@ -1,10 +1,13 @@
 // Initialize Lenis for smooth scrolling
 const lenis = new Lenis({
-  lerp: 0.1, // Fixed value for consistent performance,
-  wheelMultiplier: 1,
+  duration: 1.2,
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  direction: 'vertical',
+  gestureDirection: 'vertical',
   smoothWheel: true,
+  wheelMultiplier: 1,
   touchMultiplier: 2,
-  smoothTouch: false,
+  infinite: false,
 });
 
 lenis.on('scroll', ScrollTrigger.update);
@@ -14,61 +17,15 @@ gsap.ticker.add((time) => {
 });
 
 gsap.ticker.lagSmoothing(0);
-gsap.config({ force3D: true, nullTargetWarn: false });
-
-// Ensure body doesn't scroll while preloader is visible
-document.body.classList.add('is-loading');
-
-// Enhanced Preloader Animation (modern, smooth, theme-consistent)
-window.addEventListener('load', () => {
-  const preTl = gsap.timeline({ defaults: { ease: "power3.out" } });
-
-  // Animate letters up with stagger
-  preTl.to("#preloader .hello span", {
-    yPercent: -120,
-    opacity: 1,
-    duration: 0.5,
-    stagger: 0.06
-  });
-
-  // Progress bar fill
-  preTl.to("#preloader .preloader-progress .bar", {
-    width: "100%",
-    duration: 0.8,
-    ease: "power2.out"
-  }, "-=0.2");
-
-  // Overlay wipe accents (keep existing black/blue colors)
-  preTl.fromTo("#preloader .overlay.black", {
-    yPercent: 100
-  }, {
-    yPercent: 0,
-    duration: 0.4,
-    ease: "power3.inOut"
-  }, "-=0.4");
-
-  preTl.fromTo("#preloader .overlay.blue", {
-    yPercent: 100
-  }, {
-    yPercent: 0,
-    duration: 0.5,
-    ease: "power3.inOut"
-  }, "-=0.25");
-
-  // Fade and remove preloader, then refresh triggers
-  preTl.to("#preloader", {
-    autoAlpha: 0,
-    duration: 0.4,
-    ease: "power2.inOut",
-    onComplete: () => {
-      gsap.set("#preloader", { display: "none" });
-      document.body.classList.remove('is-loading');
-      if (typeof ScrollTrigger !== "undefined") {
-        ScrollTrigger.refresh();
-      }
-    }
-  });
+gsap.config({ 
+  force3D: true, 
+  nullTargetWarn: false,
+  units: { left: "px", top: "px", rotation: "deg" } 
 });
+
+
+
+
 
 // Footer back-to-top smooth scroll (use Lenis if available)
 document.addEventListener('click', (e) => {
@@ -124,23 +81,24 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined' && docum
   // Hero fill animation (Corner-to-corner diagonal)
   gsap.to(".about-page .title-filled", {
     clipPath: "polygon(0% 0%, 120% -20%, 100% 100%, -20% 120%)",
-    ease: "none",
+    ease: "power2.out",
     scrollTrigger: {
       trigger: ".about-page .works-hero",
       start: "top top",
       end: "bottom center",
-      scrub: 0.5
+      scrub: 1.5
     }
   });
 
   // Parallax for background text
   gsap.to(".about-page .hero-bg-text", {
     xPercent: -10,
+    force3D: true,
     scrollTrigger: {
       trigger: ".about-page .works-hero",
       start: "top top",
       end: "bottom top",
-      scrub: true
+      scrub: 2
     }
   });
 
@@ -408,35 +366,9 @@ if (MenuNav) {
 }
 
 
-// Preloader and Content Reveal Logic
+// Content Reveal Logic (Nav, Title, Socials)
 window.addEventListener('load', () => {
-  const hasVisited = sessionStorage.getItem('visited');
-  const preloader = document.querySelector('#preloader');
   const mainTimeline = gsap.timeline({ defaults: { ease: "power4.out" } });
-
-  if (!hasVisited && preloader) {
-    // --- FIRST VISIT: Play Full Preloader ---
-    mainTimeline
-      .to("#preloader .hello span", {
-        y: 0, opacity: 1, duration: 0.5, stagger: 0.08
-      })
-      .to(".overlay.black", {
-        x: "-100%", duration: 0.6, ease: "expo.inOut"
-      }, "+=0.3")
-      .to(".overlay.blue", {
-        y: "-100%", duration: 0.6, ease: "expo.inOut"
-      }, "-=0.4")
-      .to("#preloader", {
-        x: "-100%", duration: 0.7, ease: "expo.inOut"
-      }, "-=0.4");
-
-    sessionStorage.setItem('visited', 'true');
-  } else {
-    // --- RETURNING VISIT: Hide Preloader Immediately ---
-    if (preloader) {
-      gsap.set(preloader, { display: 'none' });
-    }
-  }
 
   // --- SHARED REVEAL ANIMATIONS (Nav, Title, Socials) ---
   mainTimeline
@@ -445,8 +377,7 @@ window.addEventListener('load', () => {
       {
         y: 0, opacity: 1, rotationX: 0, scale: 1, filter: "blur(0px)",
         duration: 1.2, stagger: { each: 0.1, from: "end" }, ease: "expo.out"
-      },
-      hasVisited ? 0 : "-=0.4"
+      }
     )
     .fromTo("h1, .about-hero-title",
       { y: 70, opacity: 0, rotationX: -30, skewX: 10, filter: "blur(15px)", scale: 1.1 },
@@ -1151,23 +1082,8 @@ pic.addEventListener('mousemove', (e) => {
 });
 
 
-//Skills Hero Scroll Animation Script :
-document.addEventListener("DOMContentLoaded", function () {
-  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-    gsap.registerPlugin(ScrollTrigger);
-    gsap.from(".sk-hero", {
-      opacity: 0,
-      y: -50,
-      duration: 1.5,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: ".sk-hero",
-        start: "top 90%",
-        toggleActions: "play none none none",
-      }
-    });
-  }
-});
+//Skills Hero Scroll Animation Script (REMOVED SPLINE) :
+
 //Skills Cards :
 gsap.registerPlugin(ScrollTrigger);
 

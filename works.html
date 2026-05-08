@@ -304,6 +304,31 @@
     </section>
 
     <div class="works-container">
+        <!-- Project: AURIOX -->
+        <div class="work-item">
+            <div class="work-img-wrapper" data-cursor="View">
+                <img src="Projects Pics/Auriox-Project.jpeg" alt="Auriox">
+            </div>
+            <div class="work-info">
+                <div class="work-category">AI Platform / 2026</div>
+                <h2 class="work-title">
+                    <span>A</span><span>U</span><span>R</span><span>I</span><span>O</span><span>X</span>
+                </h2>
+                <p class="work-desc">AI-POWERED MOCK INTERVIEW PREPARATION PLATFORM BUILT FOR SOFTWARE ENGINEERS AND DEVELOPERS. FEATURES ROLE-SPECIFIC INTERVIEW TRACKS, REAL-TIME AI EVALUATION WITH DETAILED FEEDBACK, BEHAVIORAL AND TECHNICAL INTERVIEW SIMULATION, AI INTERVIEWER PERSONAS, RESUME BUILDER WITH SMART TEMPLATES, RESUME SCANNER, JOB DESCRIPTION ANALYZER, PERFORMANCE ANALYTICS DASHBOARD WITH SKILL RADAR AND WEAKNESS HEATMAP, AND A 24/7 AI MENTOR CHAT — ALL DESIGNED TO TAKE CANDIDATES FROM PREPARATION TO OFFER.</p>
+                <div class="work-tech">
+                    <span>Next.js</span>
+                    <span>TypeScript</span>
+                    <span>Tailwind CSS</span>
+                    <span>Supabase</span>
+                    <span>Prisma</span>
+                    <span>Groq AI</span>
+                    <span>Gemini AI</span>
+                    <span>NextAuth.js</span>
+                    <span>PostgreSQL</span>
+                    <span>Vercel</span>
+                </div>
+            </div>
+        </div>
         <!-- Project 1 -->
         <div class="work-item">
             <div class="work-img-wrapper" data-cursor="View">
@@ -782,23 +807,24 @@ window.addEventListener('load', () => {
         // Hero fill animation (Diagonal corner-to-corner sweep)
         gsap.to(".title-filled", {
             clipPath: "polygon(0% 0%, 120% -20%, 100% 100%, -20% 120%)",
-            ease: "none",
+            ease: "power2.out",
             scrollTrigger: {
                 trigger: ".works-hero",
                 start: "top top",
                 end: "bottom center",
-                scrub: 0.5
+                scrub: 1.2
             }
         });
 
         // Parallax for background text
         gsap.to(".hero-bg-text", {
             xPercent: -20,
+            force3D: true,
             scrollTrigger: {
                 trigger: ".works-hero",
                 start: "top top",
                 end: "bottom top",
-                scrub: true
+                scrub: 1.5
             }
         });
     </script>
