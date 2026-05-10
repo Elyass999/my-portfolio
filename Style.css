@@ -2060,17 +2060,17 @@ textarea::placeholder {
 .back-to-top-btn::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: -100%;
+  top: 100%;
+  left: 0;
   width: 100%;
   height: 100%;
   background: #FFEA00;
-  transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: top 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: -1;
 }
 
 .back-to-top-btn:hover::before {
-  left: 0;
+  top: 0;
 }
 
 .back-to-top-btn:hover {

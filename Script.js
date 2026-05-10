@@ -437,7 +437,6 @@ window.addEventListener('load', () => {
       mainTimeline.to(transitionText, {
         opacity: 0,
         y: -100,
-        filter: "blur(10px)",
         duration: 0.8,
         ease: "power4.in"
       }, "-=1.2");
