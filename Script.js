@@ -27,9 +27,37 @@ gsap.config({
 
 
 
+// Global anchor link smooth scroll (Lenis)
+document.addEventListener('click', (e) => {
+  const target = e.target.closest('a[href^="#"]');
+  if (target) {
+    const href = target.getAttribute('href');
+    if (href === '#') return; // Ignore empty links
+    
+    e.preventDefault();
+    const targetElement = document.querySelector(href);
+    if (targetElement && typeof lenis !== 'undefined') {
+      lenis.scrollTo(targetElement, { offset: -50, duration: 1.2 });
+    }
+  }
+});
+
+// Handle initial hash on page load
+window.addEventListener('load', () => {
+  if (window.location.hash) {
+    const targetElement = document.querySelector(window.location.hash);
+    if (targetElement && typeof lenis !== 'undefined') {
+      // Small timeout to ensure everything is rendered
+      setTimeout(() => {
+        lenis.scrollTo(targetElement, { offset: -50, duration: 1.5 });
+      }, 500);
+    }
+  }
+});
+
 // Footer back-to-top smooth scroll (use Lenis if available)
 document.addEventListener('click', (e) => {
-  const target = e.target.closest('.back-to-top');
+  const target = e.target.closest('.back-to-top-btn');
   if (target) {
     e.preventDefault();
     if (typeof lenis !== 'undefined' && lenis && typeof lenis.scrollTo === 'function') {
@@ -368,26 +396,85 @@ if (MenuNav) {
 
 // Content Reveal Logic (Nav, Title, Socials)
 window.addEventListener('load', () => {
-  const mainTimeline = gsap.timeline({ defaults: { ease: "power4.out" } });
+  const mainTimeline = gsap.timeline({ 
+    defaults: { ease: "power4.out" },
+    onStart: () => {
+      // Ensure smooth start
+      window.scrollTo(0, 0);
+    }
+  });
 
-  // --- SHARED REVEAL ANIMATIONS (Nav, Title, Socials) ---
+  const transitionPanels = document.querySelectorAll('.transition-panel');
+  const transitionText = document.querySelector('.transition-text');
+  const entryFlash = document.querySelector('.entry-flash');
+
+  // 1. Initial State for Hero (hidden/blurred)
+  gsap.set("h1, .hero2, .main-nav", { filter: "blur(20px)", opacity: 0 });
+
+  // 2. THE FLASH & PANEL DROP
+  if (entryFlash) {
+    mainTimeline.to(entryFlash, {
+      opacity: 1,
+      duration: 0.1,
+      ease: "power2.in"
+    })
+    .to(entryFlash, {
+      opacity: 0,
+      duration: 1.2,
+      ease: "power2.out"
+    }, "+=0.1");
+  }
+
+  if (transitionPanels.length > 0) {
+    mainTimeline.to(transitionPanels, {
+      scaleY: 0,
+      duration: 1.2,
+      stagger: { each: 0.1, from: "center" },
+      ease: "expo.inOut"
+    }, "-=1.0");
+
+    if (transitionText) {
+      mainTimeline.to(transitionText, {
+        opacity: 0,
+        y: -100,
+        filter: "blur(10px)",
+        duration: 0.8,
+        ease: "power4.in"
+      }, "-=1.2");
+    }
+  }
+
+  // 3. CINEMATIC CONTENT REVEAL
   mainTimeline
+    .to(".main-nav", {
+      opacity: 1,
+      filter: "blur(0px)",
+      duration: 1.5
+    }, "-=0.5")
     .fromTo(".main-nav-list li",
-      { y: -40, opacity: 0, rotationX: -90, scale: 0.8, filter: "blur(10px)" },
+      { y: -60, opacity: 0, rotationX: -90, scale: 0.5, filter: "blur(20px)" },
       {
         y: 0, opacity: 1, rotationX: 0, scale: 1, filter: "blur(0px)",
-        duration: 1.2, stagger: { each: 0.1, from: "end" }, ease: "expo.out"
-      }
+        duration: 1.5, stagger: { each: 0.08, from: "center" }, ease: "expo.out"
+      },
+      "-=1.2"
     )
-    .fromTo("h1, .about-hero-title",
-      { y: 70, opacity: 0, rotationX: -30, skewX: 10, filter: "blur(15px)", scale: 1.1 },
-      { y: 0, opacity: 1, rotationX: 0, skewX: 0, filter: "blur(0px)", scale: 1, duration: 1.6 },
-      "-=0.6"
+    .to("h1, .hero2", {
+      opacity: 1,
+      filter: "blur(0px)",
+      y: 0,
+      duration: 2,
+      ease: "power4.out"
+    }, "-=1.4")
+    .fromTo("h1",
+      { scale: 1.2, letterSpacing: "10px" },
+      { scale: 1, letterSpacing: "normal", duration: 2, ease: "expo.out" },
+      "-=2"
     )
     .fromTo("#text-container",
-      { scale: 0.8, opacity: 0 },
-      { scale: 1, opacity: 1, duration: 0.8 },
-      "-=0.8"
+      { scale: 0.5, opacity: 0, filter: "blur(10px)" },
+      { scale: 1, opacity: 1, filter: "blur(0px)", duration: 1, ease: "back.out(1.7)" },
+      "-=1.2"
     );
 
   // Drawing line animation
@@ -399,38 +486,17 @@ window.addEventListener('load', () => {
       strokeDashoffset: 0,
       duration: 1.5,
       ease: "power2.inOut"
-    }, "-=0.2");
+    }, "-=0.5");
   }
 
   mainTimeline
     .fromTo(".magnetic-btn",
-      { y: 40, opacity: 0, scale: 0.8, filter: "blur(10px)", rotationX: -45 },
-      { y: 0, opacity: 1, scale: 1, filter: "blur(0px)", rotationX: 0, duration: 1.2 },
-      "-=1"
+      { y: 80, opacity: 0, scale: 0.5, filter: "blur(20px)", rotationX: -90 },
+      { y: 0, opacity: 1, scale: 1, filter: "blur(0px)", rotationX: 0, duration: 1.5, ease: "elastic.out(1, 0.5)" },
+      "-=1.5"
     )
-    .to(".sidebar-line", { scaleY: 1, duration: 1.2 }, "-=0.8")
-    .to(".social-icon", { y: 0, opacity: 1, duration: 0.8, stagger: 0.15 }, "-=0.6");
-
-  // --- Page Entrance Transition (Panels going down) ---
-  const transitionPanels = document.querySelectorAll('.transition-panel');
-  const transitionText = document.querySelector('.transition-text');
-
-  if (transitionPanels.length > 0) {
-    gsap.to(transitionPanels, {
-      scaleY: 0,
-      duration: 0.8,
-      stagger: { each: 0.1, from: "end" },
-      ease: "expo.inOut"
-    });
-
-    if (transitionText) {
-      gsap.to(transitionText, {
-        opacity: 0,
-        y: -50,
-        duration: 0.4
-      });
-    }
-  }
+    .to(".sidebar-line", { scaleY: 1, duration: 1.5, ease: "expo.inOut" }, "-=1.2")
+    .to(".social-icon", { y: 0, opacity: 1, duration: 1, stagger: 0.2, ease: "power4.out" }, "-=1");
 });
 
 
@@ -729,11 +795,9 @@ document.querySelectorAll(".hover-link").forEach(link => {
   img.className = "hover-img";
 
   const chars = link.querySelectorAll(".char");
-  const arrow = link.querySelector(".arrow");
 
   link.addEventListener("mouseenter", () => {
     gsap.to(img, { scale: 1, rotate: 12, duration: 0.5, ease: "power3.out" });
-    gsap.to(arrow, { x: 0, opacity: 1, duration: 0.4, ease: "power3.out" });
 
     gsap.to(chars, {
       x: 16,
@@ -745,7 +809,6 @@ document.querySelectorAll(".hover-link").forEach(link => {
 
   link.addEventListener("mouseleave", () => {
     gsap.to(img, { scale: 0, rotate: -12, duration: 0.4 });
-    gsap.to(arrow, { x: "25%", opacity: 0, duration: 0.3 });
 
     gsap.to(chars, {
       x: 0,
@@ -859,8 +922,8 @@ magneticBtns.forEach(btn => {
     gsap.to(btn, {
       x: x * 0.4,
       y: y * 0.4,
-      duration: 0.4,
-      ease: "power2.out"
+      duration: 0.8,
+      ease: "power3.out"
     });
 
     // Pull the text/inner elements slightly less for parallax feel
@@ -869,8 +932,8 @@ magneticBtns.forEach(btn => {
       gsap.to(children, {
         x: x * 0.2,
         y: y * 0.2,
-        duration: 0.4,
-        ease: "power2.out"
+        duration: 0.8,
+        ease: "power3.out"
       });
     }
   });
@@ -882,17 +945,18 @@ magneticBtns.forEach(btn => {
 
     const fill = btn.querySelector(".btn-fill");
     if (fill) {
-      // Position the fill at the entry point
-      gsap.set(fill, { left: x, top: y });
+      // Ensure fill is a square large enough to cover the button from any entry point
+      const size = Math.max(rect.width, rect.height) * 4;
+      gsap.set(fill, { width: size, height: size, left: x, top: y, xPercent: -50, yPercent: -50 });
 
       gsap.to(fill, {
-        scale: 2.5, // Increased scale to ensure full coverage from any corner
-        duration: 0.6,
-        ease: "power3.out"
+        scale: 2.5,
+        duration: 1.2,
+        ease: "expo.out"
       });
       gsap.to(btn.querySelector(".btn-text"), {
         color: "#000",
-        duration: 0.4
+        duration: 0.6
       });
     }
   });
@@ -906,8 +970,8 @@ magneticBtns.forEach(btn => {
     gsap.to(btn, {
       x: 0,
       y: 0,
-      duration: 1,
-      ease: "elastic.out(1, 0.3)"
+      duration: 1.2,
+      ease: "power4.out"
     });
 
     const children = btn.querySelectorAll(".btn-text, .btn-fill");
@@ -915,8 +979,8 @@ magneticBtns.forEach(btn => {
       gsap.to(children, {
         x: 0,
         y: 0,
-        duration: 1,
-        ease: "elastic.out(1, 0.3)"
+        duration: 1.2,
+        ease: "power4.out"
       });
     }
 
@@ -927,12 +991,12 @@ magneticBtns.forEach(btn => {
         left: x,
         top: y,
         scale: 0,
-        duration: 0.4,
-        ease: "power2.in"
+        duration: 0.8,
+        ease: "expo.inOut"
       });
       gsap.to(btn.querySelector(".btn-text"), {
         color: "#fff",
-        duration: 0.3
+        duration: 0.6
       });
     }
   });
