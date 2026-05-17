@@ -889,21 +889,25 @@ gsap.registerPlugin(ScrollTrigger);
 const neonDrawingPath = document.getElementById('neon-drawing-path');
 if (neonDrawingPath) {
   window.addEventListener('load', () => {
-    const pathLength = neonDrawingPath.getTotalLength();
+    ScrollTrigger.matchMedia({
+      "(min-width: 1025px)": function () {
+        const pathLength = neonDrawingPath.getTotalLength();
 
-    gsap.set(neonDrawingPath, {
-      strokeDasharray: pathLength,
-      strokeDashoffset: pathLength
-    });
+        gsap.set(neonDrawingPath, {
+          strokeDasharray: pathLength,
+          strokeDashoffset: pathLength
+        });
 
-    gsap.to(neonDrawingPath, {
-      strokeDashoffset: 0,
-      ease: "none",
-      scrollTrigger: {
-        trigger: ".projects-cards",
-        start: "top center",
-        end: "bottom -250%", // Extended to cover the About section waves
-        scrub: 1,
+        gsap.to(neonDrawingPath, {
+          strokeDashoffset: 0,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".projects-cards",
+            start: "top center",
+            end: "bottom -250%", // Extended to cover the About section waves
+            scrub: 1,
+          }
+        });
       }
     });
   });
@@ -1970,7 +1974,6 @@ window.addEventListener('load', () => {
 window.addEventListener('load', () => {
   // Animate footer grid columns
   const footerLeft = document.querySelector('.footer-left');
-  const footerCenter = document.querySelector('.footer-center');
   const footerRight = document.querySelector('.footer-right');
 
   if (footerLeft) {
@@ -2020,27 +2023,7 @@ window.addEventListener('load', () => {
     }
   }
 
-  if (footerCenter) {
-    // Animate 3D model container with scale effect
-    gsap.set('#threejs-container', { opacity: 1, scale: 1, y: 0 });
 
-    ScrollTrigger.create({
-      trigger: '.modern-footer',
-      start: "top 70%",
-      onEnter: () => {
-        gsap.fromTo('#threejs-container',
-          { opacity: 0, scale: 0.7, y: 50 },
-          {
-            opacity: 1,
-            scale: 1,
-            y: 0,
-            duration: 1.2,
-            ease: "back.out(1.5)"
-          }
-        );
-      }
-    });
-  }
 
   if (footerRight) {
     // Animate right column headings and info

@@ -1917,8 +1917,8 @@ textarea::placeholder {
 }
 
 .footer-grid {
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  display: flex;
+  justify-content: space-between;
   gap: 40px;
   max-width: 1600px;
   margin: 0 auto 40px;
@@ -1997,25 +1997,7 @@ textarea::placeholder {
   transform: translate(3px, -3px);
 }
 
-/* Center Column - 3D Model */
-.footer-center {
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
 
-#threejs-container {
-  width: 100%;
-  height: 450px;
-  position: relative;
-  margin: 0 auto;
-}
-
-#threejs-container canvas {
-  display: block;
-  width: 100% !important;
-  height: 100% !important;
-}
 
 /* Right Column - Info */
 .footer-right {
@@ -2134,7 +2116,7 @@ textarea::placeholder {
 /* Responsive Design */
 @media (max-width: 1024px) {
   .footer-grid {
-    grid-template-columns: 1fr;
+    flex-direction: column;
     gap: 50px;
     margin-bottom: 30px;
   }
@@ -2143,14 +2125,6 @@ textarea::placeholder {
   .footer-right {
     align-items: flex-start;
     text-align: left;
-  }
-
-  .footer-center {
-    order: -1;
-  }
-
-  #threejs-container {
-    height: 380px;
   }
 
   #wavy-text {
@@ -2170,9 +2144,6 @@ textarea::placeholder {
     margin-bottom: 20px;
   }
 
-  #threejs-container {
-    height: 300px;
-  }
 
   #wavy-text {
     font-size: clamp(3rem, 10vw, 8rem);
@@ -2198,9 +2169,6 @@ textarea::placeholder {
     padding: 40px 15px 15px;
   }
 
-  #threejs-container {
-    height: 220px;
-  }
 
   .footer-heading {
     font-size: 0.65rem;
@@ -2228,9 +2196,6 @@ textarea::placeholder {
 }
 
 @media (max-width: 375px) {
-  #threejs-container {
-    height: 180px;
-  }
 
   #wavy-text {
     font-size: clamp(2rem, 12vw, 4rem);
@@ -2302,12 +2267,7 @@ textarea::placeholder {
   }
 
   .footer-grid {
-    grid-template-columns: 1fr 1.5fr 1fr;
     gap: 20px;
-  }
-
-  #threejs-container {
-    height: 350px;
   }
 
   #wavy-text {
@@ -2357,6 +2317,10 @@ textarea::placeholder {
     grid-template-columns: 1fr;
     gap: 1.5rem;
     padding: 1.5rem 1rem;
+  }
+
+  .neon-drawing-container {
+    display: none !important;
   }
 
   .proj-pic {
