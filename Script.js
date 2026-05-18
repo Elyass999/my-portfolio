@@ -313,10 +313,18 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined' && docum
 
 //Menu btn :
 const MenuNav = document.querySelector('.menu-btn');
-gsap.set(MenuNav, {
-  x: 0,
-  opacity: 0
-});
+if (window.innerWidth > 1024) {
+  gsap.set(MenuNav, {
+    x: 0,
+    opacity: 0
+  });
+} else {
+  gsap.set(MenuNav, {
+    x: 0,
+    opacity: 1,
+    pointerEvents: "auto"
+  });
+}
 
 gsap.set(".social-sidebar", {
   opacity: 1 // Keep container visible, we'll animate children
@@ -331,6 +339,15 @@ gsap.set(".social-icon", {
 });
 
 window.addEventListener('scroll', () => {
+  if (window.innerWidth <= 1024) {
+    gsap.to(MenuNav, {
+      opacity: 1,
+      pointerEvents: "auto",
+      duration: 0.3
+    });
+    return;
+  }
+
   const currentScroll = window.pageYOffset;
 
   if (currentScroll > 200) {
@@ -411,19 +428,7 @@ window.addEventListener('load', () => {
   // 1. Initial State for Hero (hidden/blurred)
   gsap.set("h1, .hero2, .main-nav", { filter: "blur(20px)", opacity: 0 });
 
-  // 2. THE FLASH & PANEL DROP
-  if (entryFlash) {
-    mainTimeline.to(entryFlash, {
-      opacity: 1,
-      duration: 0.1,
-      ease: "power2.in"
-    })
-    .to(entryFlash, {
-      opacity: 0,
-      duration: 1.2,
-      ease: "power2.out"
-    }, "+=0.1");
-  }
+
 
   if (transitionPanels.length > 0) {
     mainTimeline.to(transitionPanels, {
@@ -1151,54 +1156,96 @@ pic.addEventListener('mousemove', (e) => {
 
 //Skills Hero Scroll Animation Script (REMOVED SPLINE) :
 
-//Skills Cards :
+//Skills Cards Awwwards Sticky Cascade Animation:
 gsap.registerPlugin(ScrollTrigger);
 
-const Scards = gsap.utils.toArray('.skill-card');
+const Scards = gsap.utils.toArray('.skills-section .skill-card');
 const totalCards = Scards.length;
 
-Scards.forEach((card, index) => {
-  const isLast = index === totalCards - 1;
+if (Scards.length > 0) {
+  // Helper to animate mastery gauge
+  const animateGauge = (card) => {
+    const fill = card.querySelector('.bar-fill');
+    const counter = card.querySelector('.counter');
+    const target = parseInt(card.dataset.level) || 90;
+    
+    if (fill && counter) {
+      gsap.to(fill, { width: target + '%', duration: 1.2, ease: "power3.out" });
+      gsap.to({ val: 0 }, {
+        val: target,
+        duration: 1.2,
+        ease: "power3.out",
+        onUpdate: function() {
+          counter.textContent = Math.round(this.targets()[0].val) + '%';
+        }
+      });
+    }
+  };
 
-  // Initial stacking position
-  gsap.set(card, {
-    zIndex: totalCards - index,
-    scale: 1 - (index * 0.05),
-    y: index * 20,
-    opacity: 1
+  const resetGauge = (card) => {
+    const fill = card.querySelector('.bar-fill');
+    const counter = card.querySelector('.counter');
+    if (fill && counter) {
+      gsap.to(fill, { width: '0%', duration: 0.5 });
+      gsap.to({ val: parseInt(counter.textContent) || 0 }, {
+        val: 0,
+        duration: 0.5,
+        onUpdate: function() {
+          counter.textContent = Math.round(this.targets()[0].val) + '%';
+        }
+      });
+    }
+  };
+
+  // Initial Setup:
+  // Card 0 active in front, others below screen
+  Scards.forEach((card, index) => {
+    if (index === 0) {
+      gsap.set(card, { y: 0, scale: 1, opacity: 1, zIndex: 10 });
+    } else {
+      gsap.set(card, { y: window.innerHeight + 100, scale: 0.9, opacity: 0, zIndex: 10 + index });
+    }
   });
 
-  if (!isLast) {
-    ScrollTrigger.create({
+  const skillsTl = gsap.timeline({
+    scrollTrigger: {
       trigger: '.skills-section',
-      start: () => `top+=${index * (100 / totalCards)}% top`,
-      end: () => `top+=${(index + 1) * (100 / totalCards)}% top`,
+      start: 'top top',
+      end: 'bottom bottom',
       scrub: 1,
-      onUpdate: (self) => {
-        const progress = self.progress;
+      onEnter: () => animateGauge(Scards[0])
+    }
+  });
 
-        // Card slides up and to the left
-        gsap.to(card, {
-          y: -progress * 800,
-          x: -progress * 400,
-          rotation: -progress * 15,
-          opacity: 1 - progress,
-          scale: 1 - (progress * 0.3),
-          duration: 0.1
-        });
+  // Build cascading timeline
+  Scards.forEach((card, index) => {
+    if (index === 0) return;
 
-        // Bring next card forward
-        if (Scards[index + 1]) {
-          gsap.to(Scards[index + 1], {
-            scale: 1 - ((1 - progress) * 0.05),
-            y: (1 - progress) * 20,
-            duration: 0.1
-          });
-        }
-      }
+    const prevCards = Scards.slice(0, index);
+
+    // Incoming card slides up into stack position
+    skillsTl.to(card, {
+      y: index * 20, // 20px step down for each stacked tab
+      scale: 1,
+      opacity: 1,
+      duration: 1,
+      ease: "power2.out",
+      onStart: () => animateGauge(card),
+      onReverseComplete: () => resetGauge(card)
+    }, (index - 1) * 1);
+
+    // Simultaneously, all previous cards scale down and shift back into depth
+    prevCards.forEach((pCard, pIndex) => {
+      skillsTl.to(pCard, {
+        scale: 1 - ((index - pIndex) * 0.035),
+        y: pIndex * 20 - ((index - pIndex) * 15),
+        opacity: Math.max(0.2, 1 - ((index - pIndex) * 0.2)),
+        duration: 1,
+        ease: "power2.out"
+      }, "<");
     });
-  }
-});
+  });
+}
 
 // Ticker script Section:
 document.addEventListener('DOMContentLoaded', () => {

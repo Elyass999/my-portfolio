@@ -57,6 +57,8 @@ body {
   width: 1px;
   height: 100px;
   background: rgba(255, 255, 255, 0.3);
+  transform: scaleY(0);
+  transform-origin: top;
 }
 
 .social-links {
@@ -76,6 +78,8 @@ body {
   justify-content: center;
   transition: color 0.3s ease;
   position: relative;
+  opacity: 0;
+  transform: translateY(-20px);
 }
 
 .social-icon:hover {
@@ -306,6 +310,19 @@ h1 {
   z-index: 2100;
   transition: all 0.4s cubic-bezier(0.7, 0, 0.3, 1);
   overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (max-width: 1024px) {
+  .menu-btn {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .proj-pic .proj-img-container {
+    height: auto !important;
+  }
 }
 
 .menu-btn::before {
@@ -386,6 +403,8 @@ h1 {
   padding: 2rem;
   z-index: 1000;
   background: #000;
+  opacity: 0;
+  filter: blur(20px);
 }
 
 .main-nav-list {
@@ -741,6 +760,13 @@ section.hero {
   flex-direction: column;
   align-items: center;
   gap: 2.5rem;
+  opacity: 0;
+  filter: blur(20px);
+}
+
+.hero2 h1,
+.hero2 .magnetic-btn {
+  opacity: 0;
 }
 
 /* Magnetic Button Styles */
@@ -1272,7 +1298,7 @@ body {
 
 
 .skills-section {
-  min-height: 400vh;
+  height: 350vh;
   position: relative;
   background: #000;
 }
@@ -1335,120 +1361,174 @@ body {
 .cards-container {
   position: sticky;
   top: 0;
-  height: 50vh;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   perspective: 1000px;
+  padding: 0 20px;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .cards-stack {
   position: relative;
   width: 100%;
-  max-width: 500px;
-  height: 600px;
+  max-width: 680px;
+  height: 420px;
 }
 
 .skill-card {
   position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(1.2);
-  width: 240%;
-  max-width: 2200px;
-  background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
-  border: 1px solid #222;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #0d0d0d;
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 20px;
-  padding: 70px 60px;
-  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.6);
+  padding: 40px 45px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  will-change: transform, opacity;
+  box-shadow: none !important;
+  transition: border-color 0.4s ease;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
-
+.card-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 15px;
+  font-family: "Fira Code", monospace;
+  font-size: 0.95rem;
+  color: #888;
+}
 
 .skill-category {
-  font-size: 0.85rem;
-  color: #888;
-  text-transform: uppercase;
   letter-spacing: 2px;
-  margin-bottom: 20px;
+  text-transform: uppercase;
   font-weight: 600;
+  color: #FFEA00;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  flex-grow: 1;
+  padding-top: 25px;
 }
 
 .skill-name {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 30px;
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 800;
   color: #fff;
+  margin-bottom: 30px;
+  line-height: 1.1;
+  letter-spacing: -1px;
+}
+
+.skill-details {
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  gap: 30px;
+  align-items: flex-end;
 }
 
 .skill-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 30px;
+  gap: 8px;
 }
 
 .skill-tag {
-  padding: 10px 20px;
-  background: #1a1a1a;
-  border: 1px solid #333;
-  border-radius: 20px;
-  font-size: 0.9rem;
-  color: #aaa;
+  padding: 8px 16px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-family: "Fira Code", monospace;
+  color: #ccc;
+  transition: all 0.3s ease;
+  box-shadow: none !important;
 }
 
-.expertise-bar {
-  margin-top: 30px;
+.skill-tag:hover {
+  background: #FFEA00;
+  color: #000;
+  border-color: #FFEA00;
+  transform: translateY(-2px);
+}
+
+.expertise-box {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .expertise-label {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
-  font-size: 0.9rem;
+  font-family: "Fira Code", monospace;
+  font-size: 0.85rem;
   color: #888;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.expertise-label .label-text {
+  font-weight: 600;
+}
+
+.counter {
+  color: #FFEA00;
+  font-weight: 700;
+  font-size: 1rem;
 }
 
 .bar-bg {
   width: 100%;
-  height: 8px;
-  background: #1a1a1a;
-  border-radius: 10px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
   overflow: hidden;
 }
 
 .bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, #ffeb3b, #ffd700);
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(255, 235, 59, 0.6);
-}
-
-.card-number {
-  position: absolute;
-  top: 20px;
-  right: 30px;
-  font-size: 1rem;
-  color: #444;
-  font-weight: 700;
+  background: #FFEA00;
+  width: 0%;
+  box-shadow: none !important;
 }
 
 @media (max-width: 768px) {
   .cards-stack {
-    height: 500px;
+    height: 400px;
   }
 
   .skill-card {
-    padding: 40px 30px;
-    max-width: 350px;
+    padding: 30px 25px;
   }
 
   .skill-name {
     font-size: 2rem;
+    margin-bottom: 20px;
   }
 
-  .section-header {
-    padding: 60px 20px 30px;
+  .skill-details {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .skill-tag {
+    padding: 6px 12px;
+    font-size: 0.8rem;
   }
 }
 
@@ -2253,8 +2333,7 @@ textarea::placeholder {
   }
 
   .skill-card {
-    padding: 50px 40px;
-    max-width: 450px;
+    padding: 40px 45px;
   }
 
   .skill-name {
@@ -2350,9 +2429,7 @@ textarea::placeholder {
   }
 
   .skill-card {
-    width: 100%;
-    max-width: 90vw;
-    padding: 40px 30px;
+    padding: 35px 30px;
   }
 
   .skill-name {
@@ -2477,14 +2554,11 @@ textarea::placeholder {
   }
 
   .skills-section {
-    min-height: 300vh;
+    height: 300vh;
   }
 
   .skill-card {
-    width: 180%;
-    transform: translate(-50%, -50%) scale(1);
-    padding: 40px 30px;
-    max-width: 100%;
+    padding: 30px 25px;
   }
 
   .skill-name {
@@ -2680,7 +2754,7 @@ textarea::placeholder {
   }
 
   .skills-section {
-    min-height: 250vh;
+    height: 250vh;
   }
 
   .skills-wrapper .ticker-section {
@@ -3025,13 +3099,11 @@ textarea::placeholder {
 
   .cards-container {
     .cards-stack {
-      height: 400px;
-      max-width: 90vw;
+      height: 480px;
+      max-width: 95vw;
     }
 
     .skill-card {
-      width: 100%;
-      transform: translate(-50%, -50%) scale(1);
       padding: 25px 20px;
       border-radius: 15px;
     }
@@ -3276,8 +3348,7 @@ textarea::placeholder {
   }
 
   .skill-card {
-    width: 140%;
-    padding: 25px 15px;
+    padding: 25px 20px;
   }
 
   .skill-name {
@@ -3372,8 +3443,7 @@ textarea::placeholder {
   }
 
   .skill-card {
-    width: 130%;
-    padding: 20px 12px;
+    padding: 20px 15px;
   }
 
   .skill-name {
