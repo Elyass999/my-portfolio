@@ -512,6 +512,122 @@
 }
 
 /* Responsive Fixes */
+
+/* Large Laptops (1400px and below) */
+@media (max-width: 1400px) {
+    .about-page .container {
+        max-width: 1200px;
+        padding: 0 4vw;
+    }
+
+    .personal-grid {
+        gap: clamp(3rem, 6vw, 10rem);
+    }
+
+    .expertise-list {
+        gap: 10rem;
+    }
+
+    .expertise-content h3 {
+        font-size: clamp(2rem, 4vw, 3.5rem);
+    }
+
+    .expertise-content p {
+        font-size: 1.1rem;
+    }
+
+    .skills-bento {
+        gap: 1.2rem;
+    }
+
+    .cta-content h2 {
+        font-size: clamp(2.5rem, 6vw, 6rem);
+    }
+
+    .cta-content p {
+        font-size: 1.2rem;
+    }
+}
+
+/* Small Laptops (1200px and below) */
+@media (max-width: 1200px) {
+    .about-page .container {
+        max-width: 1000px;
+    }
+
+    .personal-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(2.5rem, 5vw, 6rem);
+    }
+
+    .personal-content p {
+        font-size: 1rem;
+    }
+
+    .fun-facts {
+        gap: 1.5rem;
+        margin-top: 3rem;
+    }
+
+    .fact span {
+        font-size: 2.5rem;
+    }
+
+    .expertise-list {
+        gap: 8rem;
+        margin-top: 5rem;
+    }
+
+    .expertise-row {
+        gap: 5vw;
+    }
+
+    .expertise-content h3 {
+        font-size: clamp(2rem, 3.5vw, 3rem);
+    }
+
+    .expertise-content p {
+        font-size: 1rem;
+        max-width: 400px;
+        margin-bottom: 2rem;
+    }
+
+    .skills-bento {
+        grid-template-columns: 1.2fr 1fr;
+        gap: 1rem;
+        margin-top: 3rem;
+    }
+
+    .bento-item {
+        padding: clamp(1.5rem, 3vw, 2.5rem);
+        border-radius: 24px;
+    }
+
+    .bento-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+    }
+
+    .skill-pill {
+        padding: 8px 14px;
+    }
+
+    .skill-pill span {
+        font-size: 0.8rem;
+    }
+
+    .cta-content {
+        padding: clamp(3rem, 6vw, 7rem) 2rem;
+        border-radius: 30px;
+    }
+
+    .about-ticker-container {
+        margin: 5rem 0;
+        padding: 2rem 0;
+    }
+}
+
 @media (max-width: 1024px) {
 
     .personal-grid,
