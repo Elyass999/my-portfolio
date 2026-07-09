@@ -1084,7 +1084,7 @@ body {
   background: rgba(216, 216, 216, 0.6);
 }
 
-/* card â€“ glassmorphism + 3-D lift */
+/* card – glassmorphism + 3-D lift */
 .proj-pic {
   flex: 0 0 clamp(280px, 60vw, 800px);
   background: rgba(17, 17, 17, 0.6);
@@ -1097,14 +1097,17 @@ body {
   transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
     box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   will-change: transform, box-shadow;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
 .proj-pic:hover {
-  transform: translateY(-8px) scale(1.015);
+  transform: translate3d(0, -8px, 0) scale(1.015);
   box-shadow: 0 20px 50px -10px rgba(255, 255, 255, 0.08);
 }
 
-/* image wrapper â€“ zoom on hover */
+/* image wrapper – zoom on hover */
 .proj-img-container {
   position: relative;
   width: 100%;
@@ -1121,11 +1124,14 @@ body {
   display: block;
   aspect-ratio: 16 / 9;
   transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
 }
 
 
 .proj-pic:hover img {
-  transform: scale(1.1);
+  transform: translate3d(0, 0, 0) scale(1.1);
 }
 
 

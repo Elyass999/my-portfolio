@@ -94,12 +94,14 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.1s ease;
-            transform: scale(1.1);
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            will-change: transform;
+            transform: translate3d(0, 0, 0) scale(1.1);
+            backface-visibility: hidden;
         }
 
         .work-img-wrapper:hover img {
-            transform: scale(1.15);
+            transform: translate3d(0, 0, 0) scale(1.15);
         }
 
         .work-info {
@@ -113,6 +115,9 @@
             bottom: -50px;
             right: 0;
             z-index: 2;
+            will-change: transform, opacity;
+            transform: translate3d(0, 0, 0);
+            backface-visibility: hidden;
         }
 
         .work-item:nth-child(even) .work-info {
@@ -386,7 +391,7 @@
         <!-- Project: AURIOX -->
         <div class="work-item">
             <div class="work-img-wrapper" data-cursor="View">
-                <img src="Projects Pics/Auriox-Project.jpeg" alt="Auriox">
+                <img src="Projects Pics/Auriox-Project.webp" alt="Auriox">
             </div>
             <div class="work-info">
                 <div class="work-category">AI Platform / 2026</div>
@@ -411,7 +416,7 @@
         <!-- Project 1 -->
         <div class="work-item">
             <div class="work-img-wrapper" data-cursor="View">
-                <img src="Projects Pics/Golden-Hands-Mockup.png" alt="Golden Hands">
+                <img src="Projects Pics/Golden-Hands-Mockup.webp" alt="Golden Hands">
             </div>
             <div class="work-info">
                 <div class="work-category">Web Development / 2026</div>
@@ -435,7 +440,7 @@
         <div class="work-item">
             <div class="work-img-wrapper" data-cursor="View">
                 <a href="https://oriz-restaurant.vercel.app/" target="_blank">
-                    <img src="Projects Pics/project-oriz-mockup.png" alt="Project Oriz">
+                    <img src="Projects Pics/project-oriz-mockup.webp" alt="Project Oriz">
                 </a>
             </div>
             <div class="work-info">
@@ -457,7 +462,7 @@
         <!-- Project 4 -->
         <div class="work-item">
             <div class="work-img-wrapper" data-cursor="View">
-                <img src="Projects Pics/Parfemrie-Mockup.png" alt="Parfemrie">
+                <img src="Projects Pics/Parfemrie-Mockup.webp" alt="Parfemrie">
             </div>
             <div class="work-info">
                 <div class="work-category">Luxury Branding / 2023</div>

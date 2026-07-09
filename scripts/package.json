@@ -1,0 +1,9 @@
+{
+  "name": "portfolio-optimize-scripts",
+  "version": "1.0.0",
+  "description": "Image optimization and performance scripts",
+  "main": "optimize.js",
+  "dependencies": {
+    "sharp": "^0.33.0"
+  }
+}

@@ -1,22 +1,28 @@
-// Initialize Lenis for smooth scrolling
-const lenis = new Lenis({
-  duration: 1.2,
-  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-  direction: 'vertical',
-  gestureDirection: 'vertical',
-  smoothWheel: true,
-  wheelMultiplier: 1,
-  touchMultiplier: 2,
-  infinite: false,
-});
+// Initialize Lenis for smooth scrolling on desktop devices
+let lenis = null;
+const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.innerWidth <= 1024;
 
-lenis.on('scroll', ScrollTrigger.update);
+if (!isTouchDevice && typeof Lenis !== 'undefined') {
+  lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    direction: 'vertical',
+    gestureDirection: 'vertical',
+    smoothWheel: true,
+    wheelMultiplier: 1,
+    touchMultiplier: 2,
+    infinite: false,
+  });
 
-gsap.ticker.add((time) => {
-  lenis.raf(time * 1000);
-});
+  lenis.on('scroll', ScrollTrigger.update);
 
-gsap.ticker.lagSmoothing(0);
+  gsap.ticker.add((time) => {
+    lenis.raf(time * 1000);
+  });
+}
+
+// Enable lag smoothing to handle frame drops gracefully (prevents jumpy animations)
+gsap.ticker.lagSmoothing(500, 33);
 gsap.config({ 
   force3D: true, 
   nullTargetWarn: false,
@@ -36,7 +42,7 @@ document.addEventListener('click', (e) => {
     
     e.preventDefault();
     const targetElement = document.querySelector(href);
-    if (targetElement && typeof lenis !== 'undefined') {
+    if (targetElement && lenis) {
       lenis.scrollTo(targetElement, { offset: -50, duration: 1.2 });
     }
   }
@@ -46,7 +52,7 @@ document.addEventListener('click', (e) => {
 window.addEventListener('load', () => {
   if (window.location.hash) {
     const targetElement = document.querySelector(window.location.hash);
-    if (targetElement && typeof lenis !== 'undefined') {
+    if (targetElement && lenis) {
       // Small timeout to ensure everything is rendered
       setTimeout(() => {
         lenis.scrollTo(targetElement, { offset: -50, duration: 1.5 });
@@ -338,32 +344,45 @@ gsap.set(".social-icon", {
   opacity: 0
 });
 
+let menuVisible = false;
 window.addEventListener('scroll', () => {
   if (window.innerWidth <= 1024) {
-    gsap.to(MenuNav, {
-      opacity: 1,
-      pointerEvents: "auto",
-      duration: 0.3
-    });
+    if (!menuVisible) {
+      menuVisible = true;
+      gsap.to(MenuNav, {
+        opacity: 1,
+        pointerEvents: "auto",
+        duration: 0.3,
+        overwrite: "auto"
+      });
+    }
     return;
   }
 
   const currentScroll = window.pageYOffset;
 
   if (currentScroll > 200) {
-    gsap.to(MenuNav, {
-      opacity: 1,
-      pointerEvents: "auto",
-      duration: 0.3,
-      ease: "power2.out"
-    });
+    if (!menuVisible) {
+      menuVisible = true;
+      gsap.to(MenuNav, {
+        opacity: 1,
+        pointerEvents: "auto",
+        duration: 0.3,
+        ease: "power2.out",
+        overwrite: "auto"
+      });
+    }
   } else {
-    gsap.to(MenuNav, {
-      opacity: 0,
-      pointerEvents: "none",
-      duration: 0.3,
-      ease: "power2.in"
-    });
+    if (menuVisible) {
+      menuVisible = false;
+      gsap.to(MenuNav, {
+        opacity: 0,
+        pointerEvents: "none",
+        duration: 0.3,
+        ease: "power2.in",
+        overwrite: "auto"
+      });
+    }
   }
 }, { passive: true });
 
@@ -920,91 +939,139 @@ if (neonDrawingPath) {
 
 // Generic Magnetic Button Effect for all .magnetic-btn elements
 const magneticBtns = document.querySelectorAll(".magnetic-btn");
+
 magneticBtns.forEach(btn => {
-  btn.addEventListener("mousemove", (e) => {
-    const rect = btn.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
+  const btnFill = btn.querySelector(".btn-fill");
+  const btnText = btn.querySelector(".btn-text");
 
-    // Pull the button
-    gsap.to(btn, {
-      x: x * 0.4,
-      y: y * 0.4,
-      duration: 0.8,
-      ease: "power3.out"
+  // Only apply hover/magnetic effect on non-touch devices
+  if (!('ontouchstart' in window)) {
+    btn.addEventListener("mousemove", (e) => {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      // Magnetic effect (move button towards cursor)
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const deltaX = (x - centerX) * 0.35; // Sensitivity
+      const deltaY = (y - centerY) * 0.35;
+
+      gsap.to(btn, {
+        x: deltaX,
+        y: deltaY,
+        duration: 0.3,
+        ease: "power2.out",
+        overwrite: "auto"
+      });
+
+      if (btnText) {
+        gsap.to(btnText, {
+          x: deltaX * 0.5,
+          y: deltaY * 0.5,
+          duration: 0.3,
+          ease: "power2.out",
+          overwrite: "auto"
+        });
+      }
     });
 
-    // Pull the text/inner elements slightly less for parallax feel
-    const children = btn.querySelectorAll(".btn-text, .btn-fill");
-    if (children.length > 0) {
-      gsap.to(children, {
-        x: x * 0.2,
-        y: y * 0.2,
-        duration: 0.8,
-        ease: "power3.out"
-      });
-    }
-  });
+    btn.addEventListener("mouseenter", (e) => {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
 
-  btn.addEventListener("mouseenter", (e) => {
-    const rect = btn.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+      if (btnFill) {
+        // Set fill position to entry point and scale to 0
+        gsap.set(btnFill, {
+          left: x,
+          top: y,
+          scale: 0
+        });
 
-    const fill = btn.querySelector(".btn-fill");
-    if (fill) {
-      // Ensure fill is a square large enough to cover the button from any entry point
-      const size = Math.max(rect.width, rect.height) * 4;
-      gsap.set(fill, { width: size, height: size, left: x, top: y, xPercent: -50, yPercent: -50 });
+        // Animate fill expansion, centering and scaling up smoothly
+        gsap.to(btnFill, {
+          left: "50%",
+          top: "50%",
+          scale: 1.2,
+          duration: 0.5,
+          ease: "power2.out",
+          overwrite: "auto"
+        });
+      }
 
-      gsap.to(fill, {
-        scale: 2.5,
-        duration: 1.2,
-        ease: "expo.out"
-      });
-      gsap.to(btn.querySelector(".btn-text"), {
-        color: "#000",
-        duration: 0.6
-      });
-    }
-  });
-
-  btn.addEventListener("mouseleave", (e) => {
-    const rect = btn.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    // Reset positions with elastic bounce
-    gsap.to(btn, {
-      x: 0,
-      y: 0,
-      duration: 1.2,
-      ease: "power4.out"
+      if (btnText) {
+        gsap.to(btnText, {
+          color: "#000",
+          duration: 0.3,
+          overwrite: "auto"
+        });
+      }
     });
 
-    const children = btn.querySelectorAll(".btn-text, .btn-fill");
-    if (children.length > 0) {
-      gsap.to(children, {
+    btn.addEventListener("mouseleave", (e) => {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      if (btnFill) {
+        // Animate fill contraction towards exit point
+        gsap.to(btnFill, {
+          left: x,
+          top: y,
+          scale: 0,
+          duration: 0.4,
+          overwrite: "auto"
+        });
+      }
+
+      // Reset button position
+      gsap.to(btn, {
         x: 0,
         y: 0,
-        duration: 1.2,
-        ease: "power4.out"
+        duration: 0.7,
+        ease: "elastic.out(1.1, 0.4)",
+        overwrite: "auto"
+      });
+
+      if (btnText) {
+        gsap.to(btnText, {
+          x: 0,
+          y: 0,
+          color: "#fff",
+          duration: 0.5,
+          ease: "elastic.out(1.1, 0.4)",
+          overwrite: "auto"
+        });
+      }
+    });
+  }
+
+  // Click Feedback Reaction (Active for all devices)
+  btn.addEventListener("mousedown", () => {
+    gsap.to(btn, {
+      scale: 0.92,
+      duration: 0.1,
+      ease: "power2.out"
+    });
+    if (btnFill) {
+      gsap.to(btnFill, {
+        backgroundColor: "#e0e0e0",
+        duration: 0.1
       });
     }
+  });
 
-    const fill = btn.querySelector(".btn-fill");
-    if (fill) {
-      // Exit towards the point where the mouse left
-      gsap.to(fill, {
-        left: x,
-        top: y,
-        scale: 0,
-        duration: 0.8,
-        ease: "expo.inOut"
-      });
-      gsap.to(btn.querySelector(".btn-text"), {
-        color: "#fff",
-        duration: 0.6
+  btn.addEventListener("mouseup", () => {
+    gsap.to(btn, {
+      scale: 1,
+      duration: 0.6,
+      ease: "elastic.out(1.1, 0.4)"
+    });
+    if (btnFill) {
+      gsap.to(btnFill, {
+        backgroundColor: "#fff",
+        duration: 0.2
       });
     }
   });
@@ -1796,128 +1863,7 @@ aboutTitles.forEach((aboutTitle) => {
 
 
 
-// Magnetic Button Logic
-const magneticBtn = document.querySelector('.magnetic-btn');
-
-if (magneticBtn && !('ontouchstart' in window)) {
-  const btnFill = magneticBtn.querySelector('.btn-fill');
-  const btnText = magneticBtn.querySelector('.btn-text');
-
-  magneticBtn.addEventListener('mousemove', (e) => {
-    const rect = magneticBtn.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    // Magnetic effect (move button towards cursor)
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    const deltaX = (x - centerX) * 0.35; // Sensitivity
-    const deltaY = (y - centerY) * 0.35;
-
-    gsap.to(magneticBtn, {
-      x: deltaX,
-      y: deltaY,
-      duration: 0.3,
-      ease: "power2.out"
-    });
-
-    gsap.to(btnText, {
-      x: deltaX * 0.5,
-      y: deltaY * 0.5,
-      duration: 0.3,
-      ease: "power2.out"
-    });
-  });
-
-  magneticBtn.addEventListener('mouseenter', (e) => {
-    const rect = magneticBtn.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    // Set fill position to entry point
-    gsap.set(btnFill, {
-      left: x,
-      top: y,
-      scale: 0
-    });
-
-    // Animate fill expansion
-    gsap.to(btnFill, {
-      scale: 1.5, // Large enough to cover the button
-      duration: 0.6,
-      ease: "power2.out"
-    });
-
-    gsap.to(btnText, {
-      color: "#000",
-      duration: 0.3
-    });
-  });
-
-  magneticBtn.addEventListener('mouseleave', (e) => {
-    const rect = magneticBtn.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    // Animate fill contraction towards exit point
-    gsap.to(btnFill, {
-      left: x,
-      top: y,
-      scale: 0,
-      duration: 0.4,
-      ease: "power2.in",
-      overwrite: "auto"
-    });
-
-    // Reset button and text position
-    gsap.to([magneticBtn, btnText], {
-      x: 0,
-      y: 0,
-      duration: 0.7,
-      ease: "elastic.out(1, 0.3)",
-      overwrite: "auto"
-    });
-
-    // Fade text color back to white
-    gsap.to(btnText, {
-      color: "#fff",
-      duration: 0.3,
-      delay: 0.1
-    });
-  });
-}
-
-if (magneticBtn) {
-  const btnFill = magneticBtn.querySelector('.btn-fill');
-  // Click Reaction (Always active for feedback)
-  magneticBtn.addEventListener('mousedown', () => {
-    gsap.to(magneticBtn, {
-      scale: 0.85,
-      duration: 0.1,
-      ease: "power2.out"
-    });
-    if (btnFill) {
-      gsap.to(btnFill, {
-        backgroundColor: "#e0e0e0",
-        duration: 0.1
-      });
-    }
-  });
-
-  magneticBtn.addEventListener('mouseup', () => {
-    gsap.to(magneticBtn, {
-      scale: 1,
-      duration: 0.6,
-      ease: "elastic.out(1, 0.3)"
-    });
-    if (btnFill) {
-      gsap.to(btnFill, {
-        backgroundColor: "#fff",
-        duration: 0.2
-      });
-    }
-  });
-}
+// Note: Duplicate Magnetic Button Logic was removed and consolidated in the unified handler above.
 
 // Project Card Wavy Text Hover Effect
 const projectCards = document.querySelectorAll('.proj-pic');
